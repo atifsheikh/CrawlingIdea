@@ -1,0 +1,116 @@
+﻿<polymer-element name="Forum-Configuration-Detail" attributes="open forum">
+    <template bind="forum">
+        <div id="content" on-click="{{onClick}}" layout vertical>
+            <div class="forum-class">
+                <template bind="{{forum}}">
+                    <template if="{{forum.Name}}">
+                        <h3>Forum Name {{forum.Name}}</h3>
+                    </template>
+                    <template if="{{!forum.Name}}">
+                        <h3>Add new Forum</h3>
+                    </template>
+
+                    <div class="subtitle">
+                        <label>Forum Name</label>
+                        <!-- Display Name$ and bind it for editing -->
+                        <input type="text" value="{{forum.Name$}}" />
+                    </div>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                            </tr>
+                        </thead>
+                    </table>
+
+                    <!-- Trigger button handlers on click -->
+                    <button onclick="getModel(this).AddRow$++">Add row</button>
+                    <button onclick="getModel(this).Save$++">Save changes</button>
+                    <button onclick="getModel(this).Cancel$++">Cancel changes</button>
+                    <button onclick="getModel(this).Delete$++">Delete invoice</button>
+                </template>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!--<div class="filter-content" layout horizontal>
+                <div flex five>
+                    <adfenix-form-group vertical
+                                        disabled="disabled"
+                                        label="Domain"
+                                        value="{{filter.Domain$}}"></adfenix-form-group>
+
+                    <adfenix-form-group vertical
+                                        label="Url Keyword"
+                                        value="{{filter.UrlKeywords$}}"></adfenix-form-group>
+
+                    <adfenix-form-group vertical
+                                        label="City"
+                                        value="{{filter.City$}}"></adfenix-form-group>
+
+                    <adfenix-form-group vertical
+                                        label="Seller"
+                                        value="{{filter.Seller$}}"></adfenix-form-group>
+
+                    <adfenix-form-group vertical
+                                        label="Head Category"
+                                        value="{{filter.HeadCategory$}}"></adfenix-form-group>
+
+                    <adfenix-form-group vertical
+                                        label="Sub Category"
+                                        value="{{filter.SubCategory$}}"></adfenix-form-group>
+
+                    <adfenix-form-group vertical
+                                        label="Product Category"
+                                        value="{{filter.ProductCategory$}}"></adfenix-form-group>
+
+
+
+
+                </div>
+                <div flex seven>
+                    <adfenix-range label="Price" min="{{filter.MinPrice$}}" max="{{filter.MaxPrice$}}"></adfenix-range>
+                    <!--adfenix-range label="Age" min="{{filter.AgeMinimum$}}" max="{{filter.AgeMaximum$}}"></!--adfenix-range>
+                    <adfenix-range label="Popularity" min="{{filter.PopularityMinimum$}}" max="{{filter.PopularityMaximim$}}"></adfenix-range>
+                </div>
+            </div>-->
+            <div class="filter-footer">
+                <button id="search" is="adfenix-button">Get matching classified listings</button>
+            </div>
+
+        </div>
+    </template>
+    <script>
+        Polymer('Forum-Configuration-Detail', {
+
+            publish: {
+                open: { value: false, reflect: true }
+            },
+            openPanel: function () {
+                this.open = true;
+            },
+            closePanel: function () {
+                this.open = false;
+            },
+            toggle: function () {
+                this.open = !this.open;
+            },
+            domReady: function () {
+                this.$.search.addEventListener('click', this.search.bind(this));
+            }
+        });
+    </script>
+</polymer-element>

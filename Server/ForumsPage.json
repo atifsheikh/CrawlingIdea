@@ -1,0 +1,13 @@
+{
+  "Html":"",
+  "$": { "Namespace": "OneKey.Server" },
+  "$Forums$": { "Bind": "ForumList_" },
+  "Forums$": [
+	{
+		"ObId": "",
+		"Name": "adfenix",
+		"ForumType$": "Forum"
+	}
+  ],
+  "Forum": {}
+}

@@ -1,0 +1,25 @@
+﻿<template id="onekey" bind="{{OneKey}}">
+asd
+    <section class="list">
+        <h3>Web Publications</h3>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <template repeat="{{ WebPublications }}">
+                    <!-- iterate over WebPublication array elements to render the list of WebPublications -->
+                    <tr>
+                        <td><a href="/OneKeyDemo/WebPublication/{{Name$}}">{{Name$}}</a></td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+        <!-- Trigger button handlers on click -->
+        <a href="/AddWebPublication" onclick="getModel(this).AddWebSite$++">Add Web Publication</a>
+    </section>
+</template>

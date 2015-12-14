@@ -1,0 +1,22 @@
+{
+	"Html":"",
+	"MenuItem$" : [{
+		"Name$":"Start"
+	}],
+	"Interests$" : [{
+		"Name$":"Region or Vertical or New ad Listings",
+		"SubInterests$" : [{
+			"Name$" : "Value or Trend or Critical Mass",
+			"Statistics$" : [{
+				"Value$": "72 Hours",
+				"Order$" : "An Integer, can be used for Sorting Orders of Statistic values in Data-Grid",
+				"StatusColor$" : 5
+			}],
+		}],
+	}],
+	"NewInterest$" : "Average Time until sold",
+	"CreateInterest$" : 0,
+	"RegionGroupBy$" : false,
+	"VerticalGroupBy$" : false,
+	"TimeSpan$":"24 Hours"
+}

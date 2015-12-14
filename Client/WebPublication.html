@@ -1,0 +1,43 @@
+﻿<section class="WebPublicationDetail">
+    <template if="{{Name}}">
+        <h3>WebPublication Name : "{{Name}}</h3>
+    </template>
+    <template if="{{!Name}}">
+        <h3>Add new Web-Publication</h3>
+    </template>
+    <div class="subtitle">
+        <label>Website Name (Step asdf 1: Enter a Unique website name here)</label>
+        <!-- Display Name$ and bind it for editing -->
+        <input type="text" value="{{Name$}}" />
+    </div>
+
+    <label>Website Variables (Step 2:)</label>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <template repeat="{{ WebPublicationVariableSingle in WebPublicationVariables }}">
+                <!-- Iterate over WebPublication.Items array elements to render the WebPublication rows -->
+                <tr>
+                    <!-- Display item properties and bind them for editing -->
+                    <td><input type="text" value="{{WebPublicationVariableSingle.Name$}}" /></td>
+                    <td><input type="text" value="{{WebPublicationVariableSingle.Value$}}" /></td>
+                </tr>
+            </template>
+        </tbody>
+
+        <tfoot>
+            <tr>
+                <td colspan="2"></td>
+            </tr>
+        </tfoot>
+    </table>
+    <button onclick="getModel(this).AddVariables$++">Add Variables</button>
+    <button onclick="getModel(this).SaveVariables$++">Save Variable Changes</button>
+</section>

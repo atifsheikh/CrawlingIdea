@@ -1,0 +1,37 @@
+﻿<section class="WebPublicationFeatureActions">
+    <div>
+
+        <label>Website Feature Actions</label>
+        <table>
+            <caption>Feature Actions </caption>
+            <colgroup span="4" />
+            <thead>
+                <tr>
+                    <th colspan="4" id="Action">Feature Actions</th>
+                </tr>
+                <tr>
+                    <th>Url</th>
+                    <th>HttpBody</th>
+                    <th>HttpBody</th>
+                    <th>OrderInFeature</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <!-- Iterate over WebPublication.Items array elements to render the WebPublication rows -->
+                <template repeat="{{ Action in WebPublicationFeatureActions }}">
+                    <tr>
+                        <!-- Display item properties and bind them for editing -->
+                        <td><input type="text" value="{{Action.ActionUrl$}}" /></td>
+                        <td><input type="text" value="{{Action.HttpBody$}}" /></td>
+                        <td><input type="text" value="{{Action.HttpType$}}" /></td>
+                        <td><input type="text" value="{{Action.OrderInFeature$}}" /></td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+        <button onclick="getModel(this).AddFeatureAction$++">Add Feature Action</button>
+        <button onclick="getModel(this).SaveFeatureAction$++">Save Feature Action Changes</button>
+    </div>
+
+</section>

@@ -1,0 +1,49 @@
+﻿<!doctype html>
+<head>
+    <title>Launcher</title>
+
+    <!-- Import Polymer platform -->
+    <script src="/sys/webcomponentsjs/webcomponents.js"></script>
+    <link rel="import" href="/sys/polymer/polymer.html">
+    <link rel="import" href="/sys/starcounter-debug-aid/src/starcounter-debug-aid.html">
+
+    <script src="platform.js"></script>
+    <script src="puppet.js"></script>
+</head>
+<body>
+    <!-- start left pane of the UI -->
+    <div class="list">
+        <h3>Forums</h3>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <template bind="Forums">
+                    <template repeat="{{ forum in Forums }}">
+                        <div class="filter-content" layout horizontal>
+                            <div flex five>
+                                <adfenix-form-group vertical
+                                                    disabled="disabled"
+                                                    label="Domain"
+                                                    value="{{filter.Domain$}}"></adfenix-form-group>
+                            </div>
+                        </div>
+                    </template>
+                </template>
+            </tbody>
+        </table>
+
+        <a href="/">Add forum</a>
+    </div>
+
+    <!--<forum-configuration-detail id="forumconfigurationdetail" forum="{{Forum}}"></forum-configuration-detail>-->
+
+    <!-- Plug in client-server sync -->
+    <puppet-client ref="root" localversionpath=""></puppet-client>
+    <starcounter-debug-aid></starcounter-debug-aid>
+</body>

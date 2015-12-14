@@ -1,0 +1,127 @@
+{
+    "Html": "",
+    "$WebPublications$": { "Bind": "WebPublications_" },
+    "WebPublications$": [
+        {
+            "Name$": ""
+        }
+    ],
+    "SelectedWebPublicationID$": "",
+
+    "SelectedWebPublication$": {
+        "Name$": "Facebook.com",
+		"Url$": "www.facebook.com",
+		"Description$" :"DescriptionDescription",
+        "Features$": [
+            {
+				"$WebPublicationName$" : {"Bind":"SelectedWebPublicationName_"},
+				"WebPublicationName$" : "",
+                "Name$": ""
+            }
+        ],
+        "SelectedFeatureID$": "",
+        "SelectedFeature$": {
+            "Name$": "",
+            "Actions$": [
+                {
+					"$WebPublicationName$" : {"Bind":"SelectedWebPublicationName_"},
+					"WebPublicationName$" : "",
+					"$FeatureName$" : {"Bind":"SelectedFeatureName_"},
+					"FeatureName$" : "",
+                    "Name$": "",
+                    "ActionUrl$": "",
+                    "HttpBody$": "",
+                    "HttpType$": "",
+                    "OrderInFeature$": 0
+                }
+            ],
+
+			"SelectedActionID$":"",
+			"SelectedAction$":
+			{
+				"Name$":"",
+				"ActionUrl$": "",
+				"HttpBody$": "",
+				"HttpType$": "",
+				"OrderInFeature$": 0,
+				"Pagging$" :false,
+				"PaggingUrlParameters$" :"",
+				"Variables$": [
+					{
+						"$WebPublicationName$" : {"Bind" : "SelectedWebPublicationName_"},
+						"WebPublicationName$" : "",
+						"$FeatureName$" : {"Bind" : "SelectedFeatureName_"},
+						"FeatureName$" : "",
+						"$ActionName$" : {"Bind" : "SelectedActionName_"},
+						"ActionName$" : "",
+
+						"Name$": "",
+						"VariableType$": "",
+						"Regex$": "",
+						"VariableValue$": ""
+					}
+				],
+				"SelectedVariableId$" : "",
+				"SelectedVariable$" : 
+				{
+					"Name$": "",
+					"VariableType$": "",
+					"Regex$": "",
+					"VariableValue$": ""					
+				},
+			},
+        },
+    },
+
+	"$FeatureNameList$" : {"Bind" : "NewFeatureNameList_"},
+	"FeatureNameList$" : [{
+		"Name$" : "", 
+	}],
+
+	"$ActionNameList$" : {"Bind" : "NewActionNameList_"},
+	"ActionNameList$" : [{
+		"Name$" : "", 
+	}],
+
+	"$VariableNameList$" : {"Bind" : "NewVariableNameList_"},
+	"VariableNameList$" : [{
+		"Name$" : "", 
+	}],
+
+	"$VariableTypeList$" : {"Bind" : "NewVariableTypeList_"},
+	"VariableTypeList$" : [{
+		"VariableType$" : "", 
+	}],
+
+	"NewWebPublicationName$" : "",
+	"NewWebPublicationUrl$" : "",
+	"NewWebPublicationDescription$" : "",
+	"NewFeatureNameOther$": "",
+    "NewFeatureName$": "",
+	"NewActionNameOther$" : "",
+	"Pagging$" :false,
+	"PaggingUrlParameters$" :"",
+	"NewActionName$" : "",
+	"NewActionUrl$" : "",
+	"NewActionHttpType$" : "",
+	"NewActionHttpBody$" : "",
+	"NewActionOrderInFeature$": 0,
+    "NewVariableValue$": "",
+	"NewVariableNameOther$" : "",
+	"NewVariableName$" : "",
+	"NewVariableTypeOther$":"",
+	"NewVariableType$":"",
+	"NewVariableRegex$":"",
+    "AddWebSite$": 0,
+	"DeleteWebSite$": 0,
+	"UpdateWebSite$": 0,
+    "AddFeature$": 0,
+	"DeleteFeature$": 0,
+	"UpdateFeature$": 0,
+	"AddAction$": 0,
+	"DeleteAction$": 0,
+	"UpdateAction$": 0,
+	"AddVariable$": 0,
+	"DeleteVariable$": 0,
+	"UpdateVariable$": 0
+}

@@ -1,0 +1,20 @@
+﻿<section class="WebPublicationFeatures">
+    <h3>Web Publication Features</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <template repeat="{{ WebPublicationFeatures }}">
+                <!-- iterate over WebPublication array elements to render the list of WebPublications -->
+                <tr>
+                    <td><a href="/OneKeyDemo/WebPublication/{{WebPublication.Name$}}/WebPublicationFeatures/{{Name}}">{{Name$}}</a></td>
+                </tr>
+            </template>
+        </tbody>
+    </table>
+    <!-- Trigger button handlers on click -->
+    <a href="/AddWebPublicationFeature" onclick="getModel(this).AddFeature$++">Add Feature</a>
+</section>

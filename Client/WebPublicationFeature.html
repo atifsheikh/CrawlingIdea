@@ -1,0 +1,31 @@
+﻿<label>Website Feature Variables (Step 3:)</label>
+<table>
+    <caption>Features </caption>
+    <colgroup span="2" />
+    <thead>
+        <tr>
+            <th colspan="2" id="Variables">Feature Variables</th>
+        </tr>
+        <tr>
+            <th>Variable Name</th>
+            <th>Variable Value</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <template repeat="{{ WebPublicationFeature in WebPublicationFeatures }}">
+            <tr>
+                <td><input type="text" value="{{WebPublicationFeature.Name$}}" /></td>
+                <td><input type="text" value="{{WebPublicationFeature.Value$}}" /></td>
+            </tr>
+        </template>
+    </tbody>
+
+    <tfoot>
+        <tr>
+            <td colspan="2"></td>
+        </tr>
+    </tfoot>
+</table>
+<button onclick="getModel(this).AddFeatureAction$++">Add Feature Action</button>
+<button onclick="getModel(this).SaveFeatureAction$++">Save Feature Action Changes</button>

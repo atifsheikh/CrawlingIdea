@@ -1,0 +1,16 @@
+{
+	"Html":"",
+	"Name$":"",
+	"WebPublicationFeatureActions": [{
+		"Name$": ""
+	}],
+	"AddFeatureAction$":0,
+	"SaveFeatureAction$":0,
+	"WebPublicationFeatureActionView" : {},
+	"WebPublicationFeatureVariables": [{
+		"Name$": "",
+		"Value$": ""
+	}],
+	"AddFeatureVariables$": 0,
+	"SaveFeatureVariables$": 0
+}

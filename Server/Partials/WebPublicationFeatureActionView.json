@@ -1,0 +1,12 @@
+{
+	"Name$":"",
+	"WebPublicationFeatureActions": [{
+		"Name$": "",
+		"ActionUrl$": "",
+		"ActionType$": "",
+		"ActionBody$":"",
+		"ActionOrder$":""
+	}],
+	"AddFeatureAction$":0,
+	"SaveFeatureAction$":0,
+}
