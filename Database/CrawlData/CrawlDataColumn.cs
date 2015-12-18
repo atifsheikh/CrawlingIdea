@@ -2,8 +2,9 @@
 {
     public class CrawlDataColumn : Concept
     {
+        public string PageUrl;
         public string dealer;
-        public string vehicles_url;
+        public string listing_url;
         public string vehicles_year;
         public string vehicles_make;
         public string vehicles_model;

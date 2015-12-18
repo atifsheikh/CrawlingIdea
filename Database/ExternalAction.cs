@@ -211,11 +211,13 @@ namespace OneKey.Database
                 using (var reader = new System.IO.StreamReader(response.GetResponseStream(), encoding))
                 {
                     string responseText = reader.ReadToEnd();
+                    List<string> Listing_Url = new List<string>();
                     foreach (var actionVariable in this.Variables)
                     {
                         System.Text.RegularExpressions.MatchCollection RegexResultCollection = CommonHelper.GetAllMatches(responseText, actionVariable.Regex);
-                        foreach (System.Text.RegularExpressions.Match RegexResult in RegexResultCollection)
+                        for (int loop = 0 ; loop < RegexResultCollection.Count ; loop++)
                         {
+                            System.Text.RegularExpressions.Match RegexResult = RegexResultCollection[loop];
                             string ResultValue = RegexResult.Groups[1].Value;
                             if (ResultValue != null && ResultValue != "")
                             {
@@ -229,7 +231,7 @@ namespace OneKey.Database
                                 }
                                 else if (actionVariable.VariableType == "Content")
                                 {
-                                    if (actionVariable.Name == "<<WebResource>>")
+                                    if (actionVariable.Name == "<<WebResource>>" || actionVariable.Name == "listing_url")
                                     {
                                         if (!ResultValue.Contains(this.Feature.Site.Name))
                                         {
@@ -238,8 +240,19 @@ namespace OneKey.Database
                                                 ResultValue = "/" + ResultValue;
                                             }
                                             ResultValue = this.Feature.Site.Url + ResultValue;
+                                            if (actionVariable.Name == "listing_url")
+                                            {
+                                                Listing_Url.Add(ResultValue);
+                                            }
                                         }
-
+                                    }
+                                    else if (RegexResultCollection.Count != Listing_Url.Count)
+                                    {
+                                        return null;// "Regex Count Invalid... Please Contact Admin to recheck the regex for " + actionVariable.Name;
+                                    }
+                                    
+                                    if (actionVariable.Name == "<<WebResource>>")
+                                    {
                                         WebResource w = Db.SQL<WebResource>("SELECT W FROM WebResource W WHERE Url=?", ResultValue).First;
                                         if (w == null)
                                         {
@@ -251,69 +264,66 @@ namespace OneKey.Database
                                     }
                                     else if (!string.IsNullOrEmpty(ResultValue))
                                     {
-                                        CrawlDataColumn asdf = Db.SQL<CrawlDataColumn>("SELECT w FROM CrawlDataColumn w WHERE vehicles_url = ?", ConcatenatedActionUrl).First;
+                                        CrawlDataColumn crawlDataColumn = Db.SQL<CrawlDataColumn>("SELECT w FROM CrawlDataColumn w WHERE listing_url = ?", Listing_Url[loop]).First;
                                         Db.Transact(() =>
                                         {
-                                            if (asdf == null)
+                                            if (crawlDataColumn == null)
                                             {
-                                                asdf = new CrawlDataColumn();
-                                                asdf.vehicles_url = ConcatenatedActionUrl;
+                                                crawlDataColumn = new CrawlDataColumn();
+                                                crawlDataColumn.listing_url = Listing_Url[loop];
                                             }
                                             switch (actionVariable.Name)
                                             {
                                                 case "dealer":
-                                                    asdf.dealer = ResultValue;
-                                                    break;
-                                                case "vehicles_url":
-                                                    asdf.vehicles_url = ResultValue;
+                                                    crawlDataColumn.dealer = ResultValue;
                                                     break;
                                                 case "vehicles_year":
-                                                    asdf.vehicles_year = ResultValue;
+                                                    crawlDataColumn.vehicles_year = ResultValue;
                                                     break;
                                                 case "vehicles_make":
-                                                    asdf.vehicles_make = ResultValue;
+                                                    crawlDataColumn.vehicles_make = ResultValue;
                                                     break;
                                                 case "vehicles_model":
-                                                    asdf.vehicles_model = ResultValue;
+                                                    crawlDataColumn.vehicles_model = ResultValue;
                                                     break;
                                                 case "vehicles_trim":
-                                                    asdf.vehicles_trim = ResultValue;
+                                                    crawlDataColumn.vehicles_trim = ResultValue;
                                                     break;
                                                 case "vehicles_msrp":
-                                                    asdf.vehicles_msrp = ResultValue;
+                                                    crawlDataColumn.vehicles_msrp = ResultValue;
                                                     break;
                                                 case "vehicles_drive":
-                                                    asdf.vehicles_drive = ResultValue;
+                                                    crawlDataColumn.vehicles_drive = ResultValue;
                                                     break;
                                                 case "vehicles_mpg":
-                                                    asdf.vehicles_mpg = ResultValue;
+                                                    crawlDataColumn.vehicles_mpg = ResultValue;
                                                     break;
                                                 case "vehicles_features":
-                                                    asdf.vehicles_features = ResultValue;
+                                                    crawlDataColumn.vehicles_features = ResultValue;
                                                     break;
                                                 case "vehicles_miles":
-                                                    asdf.vehicles_miles = ResultValue;
+                                                    crawlDataColumn.vehicles_miles = ResultValue;
                                                     break;
                                                 case "vehicles_intcolor":
-                                                    asdf.vehicles_intcolor = ResultValue;
+                                                    crawlDataColumn.vehicles_intcolor = ResultValue;
                                                     break;
                                                 case "vehicles_extcolor":
-                                                    asdf.vehicles_extcolor = ResultValue;
+                                                    crawlDataColumn.vehicles_extcolor = ResultValue;
                                                     break;
                                                 case "Vehicles_VIN":
-                                                    asdf.Vehicles_VIN = ResultValue;
+                                                    crawlDataColumn.Vehicles_VIN = ResultValue;
                                                     break;
                                                 case "vehicles_engine":
-                                                    asdf.vehicles_engine = ResultValue;
+                                                    crawlDataColumn.vehicles_engine = ResultValue;
                                                     break;
                                                 case "vehicles_price":
-                                                    asdf.vehicles_price = ResultValue;
+                                                    crawlDataColumn.vehicles_price = ResultValue;
                                                     break;
                                                 case "vehicles_image_url":
-                                                    asdf.vehicles_image_url = ResultValue;
+                                                    crawlDataColumn.vehicles_image_url = ResultValue;
                                                     break;
                                                 case "vehicles_comments":
-                                                    asdf.vehicles_comments = ResultValue;
+                                                    crawlDataColumn.vehicles_comments = ResultValue;
                                                     break;
                                             }
                                         });
