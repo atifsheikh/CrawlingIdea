@@ -6,3 +6,4 @@ E:\Development\CyberKryptos\CrawlingIdea\bin\Debug\OneKey.exe
 E:\Development\CyberKryptos\CrawlingIdea\bin\Debug\OneKey.pdb
 E:\Development\CyberKryptos\CrawlingIdea\obj\x64\Debug\OneKey.exe
 E:\Development\CyberKryptos\CrawlingIdea\obj\x64\Debug\OneKey.pdb
+E:\Development\CyberKryptos\CrawlingIdea\obj\x64\Debug\OneKey.csprojResolveAssemblyReference.cache

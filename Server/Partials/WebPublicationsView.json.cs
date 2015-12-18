@@ -162,7 +162,14 @@ namespace OneKey.Server.Partials
                 {
                     Db.Transact(() =>
                     {
-                        ef.Name = this.NewFeatureName;
+                        if (!string.IsNullOrEmpty(this.NewFeatureNameOther))
+                        {
+                            ef.Name = this.NewFeatureNameOther.Replace(" ", "");
+                        }
+                        else if (!string.IsNullOrEmpty(this.NewFeatureName))
+                        {
+                            ef.Name = this.NewFeatureName;
+                        }
                     });
                 }
                 //this.NewFeatureName = "";
@@ -228,7 +235,14 @@ namespace OneKey.Server.Partials
                 {
                     Db.Transact(() =>
                     {
-                        EAResult.Name = page.NewActionName;
+                        if (!string.IsNullOrEmpty(page.NewActionNameOther))
+                        {
+                            EAResult.Name = page.NewActionNameOther;
+                        }
+                        else
+                        {
+                            EAResult.Name = page.NewActionName;
+                        }
                         EAResult.ActionUrl = page.NewActionUrl;
                         EAResult.HttpType = page.NewActionHttpType;
                         EAResult.HttpBody = page.NewActionHttpBody;
@@ -313,8 +327,23 @@ namespace OneKey.Server.Partials
                 {
                     Db.Transact(() =>
                     {
-                        EVResult.Name = page.NewVariableName;
-                        EVResult.VariableType = page.NewVariableType;
+                        if (!string.IsNullOrEmpty(page.NewVariableNameOther))
+                        {
+                            EVResult.Name = page.NewVariableNameOther;
+                        }
+                        else
+                        {
+                            EVResult.Name = page.NewVariableName;
+                        }
+
+                        if (!string.IsNullOrEmpty(page.NewVariableNameOther))
+                        {
+                            EVResult.VariableType = page.NewVariableTypeOther;
+                        }
+                        else
+                        {
+                            EVResult.VariableType = page.NewVariableType;
+                        }
                         EVResult.Regex = page.NewVariableRegex;
                         EVResult.VariableValue = page.NewVariableValue;
                     });

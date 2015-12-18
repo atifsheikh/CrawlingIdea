@@ -6,6 +6,7 @@ using System.Web.Script.Serialization;
 using System.IO;
 using System.Text;
 using OneKey.Helpers;
+using OneKey.Database.CrawlData;
 
 namespace OneKey.Database
 {
@@ -26,8 +27,12 @@ namespace OneKey.Database
             }
         }
 
-        public static HttpWebRequest GetNewRequest(ref CookieContainer SessionCookieContainer, string targetUrl, string HttpMethod,string HttpBody)
+        public static HttpWebRequest GetNewRequest(ref CookieContainer SessionCookieContainer, string targetUrl, string HttpMethod, string HttpBody)
         {
+            if (!targetUrl.StartsWith("http"))
+            {
+                targetUrl = "http://" + targetUrl;
+            }
             HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(targetUrl);
             request.CookieContainer = SessionCookieContainer;
             request.ContentType = "application/x-www-form-urlencoded";
@@ -53,26 +58,43 @@ namespace OneKey.Database
         {
             try
             {
-                //Update Url
-                string ConcatenatedActionUrl = this.ActionUrl;
-                //Update HttpBody
-                string ConcatenatedHttpBody = this.HttpBody;
-
-                //Concatinate Variables in Url
-                ConcatenatedActionUrl = ConcatenateVariables(ref SessionVariableContainer, ref ReceivedHttpBody, ConcatenatedActionUrl);
-                //Concatinate Variables in HttpBody
-                ConcatenatedHttpBody = ConcatenateVariables(ref SessionVariableContainer, ref ReceivedHttpBody, ConcatenatedHttpBody);
-
-                //for getting Redirect pages data and cookies
-                HttpWebResponse response = GetParseRequest(ref SessionVariableContainer, ref SessionCookieContainer, ConcatenatedActionUrl, ConcatenatedHttpBody);
-                while (response.StatusCode != HttpStatusCode.OK)
+                bool Pagination = this.Pagging;
+                int PaginationCount = 0;
+                do
                 {
-                    response.Close();
-                    foreach (System.Net.Cookie c in response.Cookies)
-                        SessionCookieContainer.Add(c);
-                    response = GetParseRequest(ref SessionVariableContainer, ref SessionCookieContainer, response.Headers["Location"], ConcatenatedHttpBody);
-                }
+                    //Update Pagging Url
+                    string ConcatenatedActionUrl = this.ActionUrl;
+                    if (Pagination)
+                    {
+                        PaginationCount++;
+                        ConcatenatedActionUrl += this.PaggingUrlParameters;
+                        ConcatenatedActionUrl = string.Format(ConcatenatedActionUrl, PaginationCount);
+                    }
 
+                    //Update HttpBody
+                    string ConcatenatedHttpBody = this.HttpBody;
+
+                    //Concatinate Variables in Url
+                    ConcatenatedActionUrl = ConcatenateVariables(ref SessionVariableContainer, ref ReceivedHttpBody, ConcatenatedActionUrl);
+                    //Concatinate Variables in HttpBody
+                    ConcatenatedHttpBody = ConcatenateVariables(ref SessionVariableContainer, ref ReceivedHttpBody, ConcatenatedHttpBody);
+
+                    //for getting Redirect pages data and cookies
+                    HttpWebResponse response = GetParseRequest(ref SessionVariableContainer, ref SessionCookieContainer, ConcatenatedActionUrl, ConcatenatedHttpBody);
+                    if (response == null ||(response.StatusCode != HttpStatusCode.OK && Pagination == true))
+                    {
+                        Pagination = false;
+                        break;
+                    }
+                    while (response != null && response.StatusCode != HttpStatusCode.OK)
+                    {
+                        response.Close();
+                        foreach (System.Net.Cookie c in response.Cookies)
+                            SessionCookieContainer.Add(c);
+                        response = GetParseRequest(ref SessionVariableContainer, ref SessionCookieContainer, response.Headers["Location"], ConcatenatedHttpBody);
+                    }
+                }
+                while (Pagination);
                 return true;
             }
             catch (Exception e)
@@ -157,62 +179,152 @@ namespace OneKey.Database
 
             return VariableConcatenatedString;
         }
-        private string ParseRequestBodyVariables(string ConcatenatedHttpBody, string ReceivedHttpBody)
-        {
-            throw new NotImplementedException();
-        }
 
-        private HttpWebResponse GetParseRequest(ref Dictionary<string, string> SessionVariableContainer, ref CookieContainer SessionCookieContainer, string ConcatenatedActionUrl, string ConcatenatedHttpBody)
+        public HttpWebResponse GetParseRequest(ref Dictionary<string, string> SessionVariableContainer, ref CookieContainer SessionCookieContainer, string ConcatenatedActionUrl, string ConcatenatedHttpBody)
         {
-            HttpWebRequest request = GetNewRequest(ref SessionCookieContainer, ConcatenatedActionUrl, this.HttpType, ConcatenatedHttpBody);
-            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-            var encoding = ASCIIEncoding.ASCII;
-            using (var reader = new System.IO.StreamReader(response.GetResponseStream(), encoding))
+            HttpWebResponse response = null;
+            QueryResultRows<Database.DownloadQueue> downloadQueueObject = null;
+            List<Database.DownloadQueue> downloadQueue = new List<DownloadQueue>();
+            if (ConcatenatedActionUrl == "<<DownloadQueue>>")
             {
-                string responseText = reader.ReadToEnd();
-                foreach (var actionVariable in this.Variables)
+                downloadQueueObject = Db.SQL<Database.DownloadQueue>("SELECT dq FROM OneKey.Database.DownloadQueue dq WHERE Action.Feature = ?", this.Feature);
+                foreach (Database.DownloadQueue dq in downloadQueueObject)
                 {
-                    System.Text.RegularExpressions.MatchCollection RegexResultCollection = CommonHelper.GetAllMatches(responseText, actionVariable.Regex);
-                    foreach (System.Text.RegularExpressions.Match RegexResult in RegexResultCollection)
-                    {
-                        string ResultValue = RegexResult.Groups[1].Value;
-                        if (ResultValue != null && ResultValue != "")
-                        {
-                            if (actionVariable.VariableType == "Session")
-                            {
-                                if (SessionVariableContainer.ContainsKey(actionVariable.Name))
-                                {
-                                    SessionVariableContainer.Remove(actionVariable.Name);//, ResultValue);
-                                }
-                                SessionVariableContainer.Add(actionVariable.Name, ResultValue);
-                            }
-                            else if (actionVariable.VariableType == "Content")
-                            {
-                                if (actionVariable.Name == "<<WebResource>>")
-                                {
-                                    if (!ResultValue.Contains(this.Feature.Site.Name))
-                                    {
-                                        if (!ResultValue.StartsWith("/"))
-                                        {
-                                            ResultValue = "/" + ResultValue;
-                                        }
-                                        ResultValue = this.Feature.Site.Url + ResultValue;
-                                    }
+                    downloadQueue.Add(dq);
+                }
+            }
 
-                                    WebResource w = Db.SQL<WebResource>("SELECT W FROM WebResource W WHERE Url=?", ResultValue).First;
-                                    if (w == null)
+            do
+            {
+                if (downloadQueue != null && downloadQueue.Count > 0)
+                {
+                    ConcatenatedActionUrl = downloadQueue[0].Url;
+                    downloadQueue.RemoveAt(0);
+                }
+                else if (ConcatenatedActionUrl == null || !ConcatenatedActionUrl.Contains("http"))
+                {
+                    break;
+                }
+                HttpWebRequest request = GetNewRequest(ref SessionCookieContainer, ConcatenatedActionUrl, this.HttpType, ConcatenatedHttpBody);
+                response = (HttpWebResponse)request.GetResponse();
+                var encoding = ASCIIEncoding.ASCII;
+                using (var reader = new System.IO.StreamReader(response.GetResponseStream(), encoding))
+                {
+                    string responseText = reader.ReadToEnd();
+                    foreach (var actionVariable in this.Variables)
+                    {
+                        System.Text.RegularExpressions.MatchCollection RegexResultCollection = CommonHelper.GetAllMatches(responseText, actionVariable.Regex);
+                        foreach (System.Text.RegularExpressions.Match RegexResult in RegexResultCollection)
+                        {
+                            string ResultValue = RegexResult.Groups[1].Value;
+                            if (ResultValue != null && ResultValue != "")
+                            {
+                                if (actionVariable.VariableType == "Session")
+                                {
+                                    if (SessionVariableContainer.ContainsKey(actionVariable.Name))
                                     {
+                                        SessionVariableContainer.Remove(actionVariable.Name);//, ResultValue);
+                                    }
+                                    SessionVariableContainer.Add(actionVariable.Name, ResultValue);
+                                }
+                                else if (actionVariable.VariableType == "Content")
+                                {
+                                    if (actionVariable.Name == "<<WebResource>>")
+                                    {
+                                        if (!ResultValue.Contains(this.Feature.Site.Name))
+                                        {
+                                            if (!ResultValue.StartsWith("/"))
+                                            {
+                                                ResultValue = "/" + ResultValue;
+                                            }
+                                            ResultValue = this.Feature.Site.Url + ResultValue;
+                                        }
+
+                                        WebResource w = Db.SQL<WebResource>("SELECT W FROM WebResource W WHERE Url=?", ResultValue).First;
+                                        if (w == null)
+                                        {
+                                            Db.Transact(() =>
+                                            {
+                                                w = new WebResource(ResultValue, DateTime.Now, this);
+                                            });
+                                        }
+                                    }
+                                    else if (!string.IsNullOrEmpty(ResultValue))
+                                    {
+                                        CrawlDataColumn asdf = Db.SQL<CrawlDataColumn>("SELECT w FROM CrawlDataColumn w WHERE vehicles_url = ?", ConcatenatedActionUrl).First;
                                         Db.Transact(() =>
                                         {
-                                            w = new WebResource(ResultValue, DateTime.Now, this);
+                                            if (asdf == null)
+                                            {
+                                                asdf = new CrawlDataColumn();
+                                                asdf.vehicles_url = ConcatenatedActionUrl;
+                                            }
+                                            switch (actionVariable.Name)
+                                            {
+                                                case "dealer":
+                                                    asdf.dealer = ResultValue;
+                                                    break;
+                                                case "vehicles_url":
+                                                    asdf.vehicles_url = ResultValue;
+                                                    break;
+                                                case "vehicles_year":
+                                                    asdf.vehicles_year = ResultValue;
+                                                    break;
+                                                case "vehicles_make":
+                                                    asdf.vehicles_make = ResultValue;
+                                                    break;
+                                                case "vehicles_model":
+                                                    asdf.vehicles_model = ResultValue;
+                                                    break;
+                                                case "vehicles_trim":
+                                                    asdf.vehicles_trim = ResultValue;
+                                                    break;
+                                                case "vehicles_msrp":
+                                                    asdf.vehicles_msrp = ResultValue;
+                                                    break;
+                                                case "vehicles_drive":
+                                                    asdf.vehicles_drive = ResultValue;
+                                                    break;
+                                                case "vehicles_mpg":
+                                                    asdf.vehicles_mpg = ResultValue;
+                                                    break;
+                                                case "vehicles_features":
+                                                    asdf.vehicles_features = ResultValue;
+                                                    break;
+                                                case "vehicles_miles":
+                                                    asdf.vehicles_miles = ResultValue;
+                                                    break;
+                                                case "vehicles_intcolor":
+                                                    asdf.vehicles_intcolor = ResultValue;
+                                                    break;
+                                                case "vehicles_extcolor":
+                                                    asdf.vehicles_extcolor = ResultValue;
+                                                    break;
+                                                case "Vehicles_VIN":
+                                                    asdf.Vehicles_VIN = ResultValue;
+                                                    break;
+                                                case "vehicles_engine":
+                                                    asdf.vehicles_engine = ResultValue;
+                                                    break;
+                                                case "vehicles_price":
+                                                    asdf.vehicles_price = ResultValue;
+                                                    break;
+                                                case "vehicles_image_url":
+                                                    asdf.vehicles_image_url = ResultValue;
+                                                    break;
+                                                case "vehicles_comments":
+                                                    asdf.vehicles_comments = ResultValue;
+                                                    break;
+                                            }
                                         });
                                     }
+
                                 }
                             }
                         }
                     }
                 }
-            }
+            } while (downloadQueue != null && downloadQueue.Count > 0);
             return response;
         }
     }

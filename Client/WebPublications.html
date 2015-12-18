@@ -25,7 +25,6 @@
         <div class="AddWebSite" style="border: 0px solid; border-color: black; display: block; padding: 5px 5px 0px 5px; ">
             <h3>WebSite Details</h3>
             <div class="AddWebsite" style="border: 1px solid; border-color: black; display: block; padding: 5px 5px 5px 5px; ">
-                <label>Name : </label>
                 <!-- Display Name$ and bind it for editing -->
                 <label>Name : </label>
                 <input type="text" value="{{ NewWebPublicationName$ }}" />
@@ -53,6 +52,9 @@
                                 <template repeat="{{ SelectedWebPublication$.Features$ }}">
                                     <tr>
                                         <td><a href="/OneKeyDemo/{{WebPublicationName$}}/{{Name$}}">{{Name$}}</a></td>
+                                        <td>
+                                            <button href="/OneKeyDemo/Get/{{WebPublicationName$}}/{{Name$}}">Perform Feature</button>
+                                        </td>
                                     </tr>
                                 </template>
                             </tbody>
