@@ -125,6 +125,9 @@ namespace OneKey.Server.Partials
                 {
                     Db.Transact(() =>
                     {
+                        Db.SlowSQL("DELETE FROM OneKey.Database.ExternalVariable WHERE Action.Feature.Site.Obid=?", this.SelectedWebPublicationID);
+                        Db.SlowSQL("DELETE FROM OneKey.Database.ExternalAction WHERE Feature.Site.Obid=?", this.SelectedWebPublicationID);
+                        Db.SlowSQL("DELETE FROM OneKey.Database.ExternalFeature WHERE Site.Obid=?", this.SelectedWebPublicationID);
                         Db.SlowSQL("DELETE FROM OneKey.Database.WebPublication WHERE Obid=?", this.SelectedWebPublicationID);
                     });
                 }
@@ -188,6 +191,8 @@ namespace OneKey.Server.Partials
                 {
                     Db.Transact(() =>
                     {
+                        Db.SlowSQL("DELETE FROM OneKey.Database.ExternalVariable WHERE Action.Feature.Obid=?", this.SelectedWebPublication.SelectedFeatureID);
+                        Db.SlowSQL("DELETE FROM OneKey.Database.ExternalAction WHERE Feature.Obid=?", this.SelectedWebPublication.SelectedFeatureID);
                         Db.SlowSQL("DELETE FROM OneKey.Database.ExternalFeature WHERE Obid=?", this.SelectedWebPublication.SelectedFeatureID);
                     });
                 }
@@ -270,6 +275,7 @@ namespace OneKey.Server.Partials
                 {
                     Db.Transact(() =>
                     {
+                        Db.SlowSQL("DELETE FROM OneKey.Database.ExternalVariable WHERE Action.Obid=?", this.SelectedWebPublication.SelectedFeature.SelectedActionID);
                         Db.SlowSQL("DELETE FROM OneKey.Database.ExternalAction WHERE Obid=?", this.SelectedWebPublication.SelectedFeature.SelectedActionID);
                     });
                 }

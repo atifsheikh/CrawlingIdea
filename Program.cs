@@ -18,6 +18,7 @@ namespace OneKey
         {
             FeatureHooks.Init();
             InitHooks.Init();
+            DemoHooks.Init();
         }
     }
 }
