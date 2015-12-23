@@ -128,8 +128,8 @@
                                             Name : 
                                             <input type="text" value="{{ NewActionNameOther$ }}" />
                                         </template>
-                                        <br>Url :
-                                        <input style="width:85%" type="text" value="{{NewActionUrl$}}" />
+                                        Url :
+                                        <input style="float: right; width: 60%; " type="text" value="{{NewActionUrl$}}" />
                                         <br>Http Body :
                                         <input type="text" value="{{NewActionHttpBody$}}" />
 
@@ -140,7 +140,7 @@
                                             <option value="GET">GET</option>
                                         </select>
 
-                                        <br>Action Order
+                                        Action Order
                                         <select value="{{NewActionOrderInFeature$}}" style="width:30px">
                                             <option value="0">0</option>
                                             <option value="1">1</option>
@@ -148,7 +148,6 @@
                                             <option value="3">3</option>
                                         </select>
 
-                                        <br>
                                         Pagging <input id="Pagging$" type='checkbox' checked='{{Pagging$}}' />
                                         <template if="{{Pagging$}}">
                                             <br>
@@ -200,10 +199,8 @@
                                                         <input type="text" value="{{ NewVariableNameOther$}}" />
                                                     </template>
 
-                                                    <br>Type : <select value="{{NewVariableType$}}">
+                                                    Type : <select value="{{NewVariableType$}}">
                                                         <option value="0">Select a Variable Type...</option>
-                                                        <option value="Session">Session</option>
-                                                        <option value="Content">Content</option>
                                                         <template repeat="{{VariableTypeList$}}">
                                                             <option value="{{VariableType$}}">{{VariableType$}}</option>
                                                         </template>

@@ -13,6 +13,7 @@ using s=Starcounter;
 using _GEN1_=System.Diagnostics.DebuggerNonUserCodeAttribute;
 using _GEN2_=System.CodeDom.Compiler.GeneratedCodeAttribute;
 using _ScTemplate_=Starcounter.Templates.Template;
+using System.Linq;
 using OneKey.Database;
 #pragma warning disable 0108
 #pragma warning disable 1591

@@ -1,3 +1,4 @@
+using System.Linq;
 using OneKey.Database;
 using Starcounter;
 using System;
@@ -14,7 +15,7 @@ namespace OneKey.Server.Partials
         {
             get
             {
-                return Db.SQL<OneKey.Database.WebPublication>("SELECT i FROM OneKey.Database.WebPublication i");
+                return Db.SQL<OneKey.Database.WebPublication>("SELECT i FROM OneKey.Database.WebPublication i ORDER BY i.Name");
             }
         }
 
@@ -24,7 +25,7 @@ namespace OneKey.Server.Partials
             {
                 try
                 {
-                    return Db.SQL<ExternalFeature>("SELECT ef FROM ExternalFeature ef ORDER BY ef.Name");
+                    return Db.SQL<ExternalFeature>("SELECT ef FROM ExternalFeature ef").GroupBy(x => x.Name).Select(x => x.First());
                 }
                 catch
                 {
@@ -39,7 +40,7 @@ namespace OneKey.Server.Partials
             {
                 try
                 {
-                    return Db.SQL<ExternalAction>("SELECT ea FROM ExternalAction ea ORDER BY ea.Name");
+                    return Db.SQL<ExternalAction>("SELECT ea FROM ExternalAction ea ORDER BY ea.Name").GroupBy(x => x.Name).Select(x => x.First());
                 }
                 catch
                 {
@@ -54,7 +55,7 @@ namespace OneKey.Server.Partials
             {
                 try
                 {
-                    return Db.SQL<ExternalVariable>("SELECT ev FROM ExternalVariable ev ORDER BY ev.Name");
+                    return Db.SQL<ExternalVariable>("SELECT ev FROM ExternalVariable ev ORDER BY ev.Name").GroupBy(x => x.Name).Select(x => x.First());
                 }
                 catch
                 {
@@ -69,7 +70,8 @@ namespace OneKey.Server.Partials
             {
                 try
                 {
-                    return Db.SQL<ExternalVariable>("SELECT ev FROM ExternalVariable ev ORDER BY ev.VariableType");
+                    var asdf =  Db.SQL<ExternalVariable>("SELECT ev FROM ExternalVariable ev ORDER BY ev.VariableType").GroupBy(x => x.VariableType).Select(x => x.First());
+                    return asdf;
                 }
                 catch
                 {
@@ -336,7 +338,7 @@ namespace OneKey.Server.Partials
                             EVResult.Name = page.NewVariableName;
                         }
 
-                        if (!string.IsNullOrEmpty(page.NewVariableNameOther))
+                        if (!string.IsNullOrEmpty(page.NewVariableTypeOther))
                         {
                             EVResult.VariableType = page.NewVariableTypeOther;
                         }
