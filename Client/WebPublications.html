@@ -16,7 +16,7 @@
                         <!-- iterate over WebPublication array elements to render the list of WebPublications -->
                         <tr>
                             <!-- Display item properties and bind them for editing -->
-                            <td><a href="/OneKeyDemo/{{Name$}}">{{Name$}}</a></td>
+                            <td><a href="/OneKey/{{Name$}}">{{Name$}}</a></td>
                         </tr>
                     </template>
                 </tbody>
@@ -51,9 +51,9 @@
                             <tbody>
                                 <template repeat="{{ SelectedWebPublication$.Features$ }}">
                                     <tr>
-                                        <td><a href="/OneKeyDemo/{{WebPublicationName$}}/{{Name$}}">{{Name$}}</a></td>
+                                        <td><a href="/OneKey/{{WebPublicationName$}}/{{Name$}}">{{Name$}}</a></td>
                                         <td>
-                                            <button href="/OneKeyDemo/Get/{{WebPublicationName$}}/{{Name$}}">Perform Feature</button>
+                                            <button href="/OneKey/Get/{{WebPublicationName$}}/{{Name$}}">Perform Feature</button>
                                         </td>
                                     </tr>
                                 </template>
@@ -103,7 +103,7 @@
                                         <tbody>
                                             <template repeat="{{ SelectedWebPublication$.SelectedFeature$.Actions$ }}">
                                                 <tr>
-                                                    <td><a href="/OneKeyDemo/{{WebPublicationName$}}/{{FeatureName$}}/{{Name$}}">{{Name$}}</a></td>
+                                                    <td><a href="/OneKey/{{WebPublicationName$}}/{{FeatureName$}}/{{Name$}}">{{Name$}}</a></td>
                                                     <!--<td>{{ActionUrl$}}</td>
                                 <td>{{HttpBody$}}</td>
                                 <td>{{HttpType$}}</td>
@@ -176,7 +176,7 @@
                                                     <tbody>
                                                         <template repeat="{{SelectedWebPublication$.SelectedFeature$.SelectedAction$.Variables$}}">
                                                             <tr>
-                                                                <td><a href="/OneKeyDemo/{{WebPublicationName$}}/{{FeatureName$}}/{{ActionName$}}/{{Name$}}">{{Name$}}</a></td>
+                                                                <td><a href="/OneKey/{{WebPublicationName$}}/{{FeatureName$}}/{{ActionName$}}/{{Name$}}">{{Name$}}</a></td>
                                                             </tr>
                                                         </template>
                                                     </tbody>

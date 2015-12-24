@@ -13,7 +13,7 @@ namespace OneKey.Server.Handlers
         internal static void Init()
         {
             //Execute a Feature
-            Handle.GET("/OneKeyDemo/Set/{?}/{?}/{?}", (string WebPublicationName, string featureName, string ReceivedHttpBody) =>
+            Handle.GET("/OneKey/Set/{?}/{?}/{?}", (string WebPublicationName, string featureName, string ReceivedHttpBody) =>
             {
                 WebPublicationName = HttpUtility.UrlDecode(WebPublicationName);
                 featureName = HttpUtility.UrlDecode(featureName);
@@ -26,7 +26,7 @@ namespace OneKey.Server.Handlers
                 return 200;
             });
 
-            Handle.GET("/OneKeyDemo/Get/{?}/{?}", (string WebPublicationName, string featureName) =>
+            Handle.GET("/OneKey/Get/{?}/{?}", (string WebPublicationName, string featureName) =>
             {
                 WebPublicationName = HttpUtility.UrlDecode(WebPublicationName);
                 featureName = HttpUtility.UrlDecode(featureName);
@@ -51,7 +51,7 @@ namespace OneKey.Server.Handlers
                 }
             }, new HandlerOptions() { SkipMiddlewareFilters = true });
 
-            Handle.GET("/OneKeyDemo/Start-DownloadQueue", () =>
+            Handle.GET("/OneKey/Start-DownloadQueue", () =>
             {
                 QueryResultRows<OneKey.Database.DownloadQueue> downloadQueueList = Db.SQL<OneKey.Database.DownloadQueue>("SELECT dq FROM OneKey.Database.DownloadQueue dq");
                 foreach (OneKey.Database.DownloadQueue downloadQueue in downloadQueueList)

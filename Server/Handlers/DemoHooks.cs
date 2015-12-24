@@ -12,7 +12,7 @@ namespace OneKey.Server.Handlers
     {
         internal static void Init()
         {
-            Handle.GET("/OneKeyDemo/AddGarbage", () => 
+            Handle.GET("/OneKey/AddGarbage", () => 
             {
                 Db.Transact(() => 
                 {
@@ -28,7 +28,7 @@ namespace OneKey.Server.Handlers
                 return "Gargabe added";
             }, new HandlerOptions() { SkipMiddlewareFilters = true });
 
-            Handle.GET("/OneKeyDemo/SetupOneKey", () =>
+            Handle.GET("/OneKey/SetupOneKey", () =>
             {
                 Db.Transact(() =>
                 {

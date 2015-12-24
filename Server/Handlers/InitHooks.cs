@@ -16,7 +16,7 @@ namespace OneKey.Server.Handlers
         {
 
             //Main Page 
-            Handle.GET("/OneKeyDemo", () =>
+            Handle.GET("/OneKey", () =>
             {
                 WebPublicationsViewNew _WebPublicationsView = new WebPublicationsViewNew()
                 {
@@ -26,7 +26,7 @@ namespace OneKey.Server.Handlers
                 return _WebPublicationsView;
             });
             //WebPublication Page
-        //    Handle.GET("/OneKeyDemo/{?}", (string WebPublicationName) =>
+        //    Handle.GET("/OneKey/{?}", (string WebPublicationName) =>
         //    {
         //        WebPublicationName = HttpUtility.UrlDecode(WebPublicationName);
 
@@ -50,7 +50,7 @@ namespace OneKey.Server.Handlers
         //    });
 
         //    //Feature Page
-        //    Handle.GET("/OneKeyDemo/{?}/{?}", (string WebPublicationName, string FeatureName) =>
+        //    Handle.GET("/OneKey/{?}/{?}", (string WebPublicationName, string FeatureName) =>
         //    {
         //        WebPublicationName = HttpUtility.UrlDecode(WebPublicationName);
         //        FeatureName = HttpUtility.UrlDecode(FeatureName);
@@ -83,7 +83,7 @@ namespace OneKey.Server.Handlers
         //    });
 
         //    //Action Page
-        //    Handle.GET("/OneKeyDemo/{?}/{?}/{?}", (string WebPublicationName, string FeatureName, string ActionName) =>
+        //    Handle.GET("/OneKey/{?}/{?}/{?}", (string WebPublicationName, string FeatureName, string ActionName) =>
         //    {
         //        WebPublicationName = HttpUtility.UrlDecode(WebPublicationName);
         //        FeatureName = HttpUtility.UrlDecode(FeatureName);
@@ -132,7 +132,7 @@ namespace OneKey.Server.Handlers
 
 
         //    //Variable Page
-        //    Handle.GET("/OneKeyDemo/{?}/{?}/{?}/{?}", (string WebPublicationName, string FeatureName, string ActionName, string VariableName) =>
+        //    Handle.GET("/OneKey/{?}/{?}/{?}/{?}", (string WebPublicationName, string FeatureName, string ActionName, string VariableName) =>
         //    {
         //        WebPublicationName = HttpUtility.UrlDecode(WebPublicationName);
         //        FeatureName = HttpUtility.UrlDecode(FeatureName);
