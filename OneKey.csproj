@@ -109,22 +109,23 @@
     <Compile Include="Server\Partials\OnlineClassifieds.json.cs">
       <DependentUpon>OnlineClassifieds.json</DependentUpon>
     </Compile>
-    <Compile Include="Server\Partials\WebPublicationsView.json.cs">
-      <DependentUpon>WebPublicationsView.json</DependentUpon>
-    </Compile>
     <Compile Include="Helpers\Variables.cs" />
+    <Compile Include="Server\Partials\WebPublicationsViewNew.json.cs">
+      <DependentUpon>WebPublicationsViewNew.json</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="Client\WebPublicationsNew.html" />
     <Content Include="Client\WebPublications.html" />
     <Content Include="Client\style.css" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <TypedJSON Include="Server\Partials\OnlineClassifieds.json">
+    <TypedJSON Include="Server\Partials\WebPublicationsViewNew.json">
       <Generator>MsBuild:Compile</Generator>
     </TypedJSON>
-    <TypedJSON Include="Server\Partials\WebPublicationsView.json">
+    <TypedJSON Include="Server\Partials\OnlineClassifieds.json">
       <Generator>MsBuild:Compile</Generator>
     </TypedJSON>
   </ItemGroup>

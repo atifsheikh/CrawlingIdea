@@ -1,0 +1,142 @@
+{
+    "Html": "",
+    "$WebPublications$": { "Bind": "WebPublications_" },
+    "WebPublications$":[
+        {
+			"Update$":0,
+            "Name$": "",
+			"ObId": "",
+			"Url$": "www.facebook.com",
+			"Description$" :"DescriptionDescription"
+        }
+    ],
+
+
+
+
+
+
+    "SelectedWebPublicationID$": "",
+    "$WebPublication$": { "Bind": "SelectedWebPublication_" },
+	"WebPublication$": 
+    {
+		"Name$": "Facebook.com",
+		"Url$": "www.facebook.com",
+		"Description$" :"DescriptionDescription",
+		"Features$": [
+			{
+				"Update$":0,
+				"Name$": "",
+				"ObId": ""
+			}
+		]
+    },
+
+    "SelectedFeatureID$": "",
+    "$Feature$": { "Bind": "SelectedFeature_" },
+	"Feature$":
+	{
+		"Name$": "",
+		"Actions$" : [
+			{
+				"Update$":0,
+				"Name$": "",
+				"ObId": "",
+				"ActionUrl$":"",
+				"HttpBody$":"",
+				"HttpType$":"",
+				"OrderInFeature$": 0,
+				"Pagging$":true,
+				"PaggingUrlParameters$":""
+			}
+		]
+	},
+    
+	"SelectedActionID$" : "",
+	"$Action$": { "Bind": "SelectedAction_" },
+	"Action$" : 
+	{
+		"Name$": "",
+		"ObId": "",
+		"ActionUrl$":"",
+		"HttpBody$":"",
+		"HttpType$":"",
+		"OrderInFeature$": 0,
+		"Pagging$":true,
+		"PaggingUrlParameters$":"",
+		"Variables$" : [
+			{
+				"Update$":0,
+				"Name$": "",
+				"ObId": "",
+				"VariableType$":"",
+				"Regex$":"",
+				"VariableValue$":""
+			}
+		]
+	},
+		
+	"SelectedVariableID$":"",
+	"$Variable$" : { "Bind" : "SelectedVariable_" },
+	"Variable$" :
+	{
+		"Name$": "",
+		"ObId": "",
+		"VariableType$":"",
+		"Regex$":"",
+		"VariableValue$":""
+	},
+
+	"$FeatureNameList$" : {"Bind" : "NewFeatureNameList_"},
+	"FeatureNameList$" : [{
+		"Name$" : "", 
+	}],
+
+	"$ActionNameList$" : {"Bind" : "NewActionNameList_"},
+	"ActionNameList$" : [{
+		"Name$" : "", 
+	}],
+
+	"$VariableNameList$" : {"Bind" : "NewVariableNameList_"},
+	"VariableNameList$" : [{
+		"Name$" : "", 
+	}],
+
+	"$VariableTypeList$" : {"Bind" : "NewVariableTypeList_"},
+	"VariableTypeList$" : [{
+		"VariableType$" : "", 
+	}],
+
+	"NewWebPublicationName$" : "",
+	"NewWebPublicationUrl$" : "",
+	"NewWebPublicationDescription$" : "",
+	"NewFeatureNameOther$": "",
+    "NewFeatureName$": "",
+	"NewActionNameOther$" : "",
+	"Pagging$" :false,
+	"PaggingUrlParameters$" :"",
+	"NewActionName$" : "",
+	"NewActionUrl$" : "",
+	"NewActionHttpType$" : "",
+	"NewActionHttpBody$" : "",
+	"NewActionOrderInFeature$": 0,
+    "NewVariableValue$": "",
+	"NewVariableNameOther$" : "",
+	"NewVariableName$" : "",
+	"NewVariableTypeOther$":"",
+	"NewVariableType$":"",
+	"NewVariableRegex$":"",
+    "AddWebSite$": 0,
+	"DeleteWebSite$": 0,
+	"UpdateWebSite$": 0,
+    "AddFeature$": 0,
+	"DeleteFeature$": 0,
+	"UpdateFeature$": 0,
+	"AddAction$": 0,
+	"DeleteAction$": 0,
+	"UpdateAction$": 0,
+	"AddVariable$": 0,
+	"DeleteVariable$": 0,
+	"UpdateVariable$": 0,
+	"FetchWebPublications$":0
+}

@@ -8,15 +8,14 @@ using System.Collections.Generic;
 namespace OneKey.Server.Partials
 {
     //Main Json webpublicaion page
-    [WebPublicationsView_json]
-    partial class WebPublicationsView : Page
+    [WebPublicationsViewNew_json]
+    partial class WebPublicationsViewNew : Page
     {
         public IEnumerable WebPublications_
         {
             get
             {
-                var asdf = Db.SQL<OneKey.Database.WebPublication>("SELECT i FROM OneKey.Database.WebPublication i ORDER BY i.Name");
-                return asdf;
+                return Db.SQL<OneKey.Database.WebPublication>("SELECT i FROM OneKey.Database.WebPublication i ORDER BY i.Name fetch ? offset ?", this.FetchWebPublications+5, this.FetchWebPublications);
             }
         }
 
@@ -24,8 +23,31 @@ namespace OneKey.Server.Partials
         {
             get
             {
-                var asdf = Db.SQL<OneKey.Database.WebPublication>("SELECT i FROM OneKey.Database.WebPublication i where i.Obid = ?", this.SelectedWebPublicationID).First;
-                return asdf;
+                return Db.SQL<OneKey.Database.WebPublication>("SELECT i FROM OneKey.Database.WebPublication i where i.Obid = ?", this.SelectedWebPublicationID).First;
+            }
+        }
+
+        public OneKey.Database.ExternalFeature SelectedFeature_
+        {
+            get
+            {
+                return Db.SQL<OneKey.Database.ExternalFeature>("SELECT i FROM OneKey.Database.ExternalFeature i where i.Obid = ?", this.SelectedFeatureID).First;
+            }
+        }
+
+        public OneKey.Database.ExternalAction SelectedAction_
+        {
+            get
+            {
+                return Db.SQL<OneKey.Database.ExternalAction>("SELECT i FROM OneKey.Database.ExternalAction i where i.Obid = ?", this.SelectedActionID).First;
+            }
+        }
+
+        public OneKey.Database.ExternalVariable SelectedVariable_
+        {
+            get
+            {
+                return Db.SQL<OneKey.Database.ExternalVariable>("SELECT i FROM OneKey.Database.ExternalVariable i where i.Obid = ?", this.SelectedVariableID).First;
             }
         }
 
@@ -80,8 +102,7 @@ namespace OneKey.Server.Partials
             {
                 try
                 {
-                    var asdf =  Db.SQL<ExternalVariable>("SELECT ev FROM ExternalVariable ev ORDER BY ev.VariableType").GroupBy(x => x.VariableType).Select(x => x.First());
-                    return asdf;
+                    return Db.SQL<ExternalVariable>("SELECT ev FROM ExternalVariable ev ORDER BY ev.VariableType").GroupBy(x => x.VariableType).Select(x => x.First());
                 }
                 catch
                 {
@@ -119,9 +140,6 @@ namespace OneKey.Server.Partials
                     _wp.Url = this.NewWebPublicationUrl;
                     _wp.Description = this.NewWebPublicationDescription;
                 });
-                //this.SelectedWebPublication.Name = "";
-                //this.SelectedWebPublication.Url = "";
-                //this.SelectedWebPublication.Description = "";
             }
         }
 
@@ -147,7 +165,7 @@ namespace OneKey.Server.Partials
         void Handle(Input.AddFeature action)
         {
             //Add New
-            if (this.SelectedWebPublication.SelectedFeatureID == "")
+            if (this.SelectedFeatureID == "")
             {
                 var WP_Result = Db.SQL<OneKey.Database.WebPublication>("SELECT wp FROM OneKey.Database.WebPublication wp WHERE wp.Obid=?", this.SelectedWebPublicationID).First;
                 if (WP_Result != null)
@@ -171,7 +189,7 @@ namespace OneKey.Server.Partials
             //Update
             else
             {
-                ExternalFeature ef = Db.SQL<OneKey.Database.ExternalFeature>("SELECT ef FROM OneKey.Database.ExternalFeature ef WHERE ef.Obid=?", this.SelectedWebPublication.SelectedFeatureID).First;
+                ExternalFeature ef = Db.SQL<OneKey.Database.ExternalFeature>("SELECT ef FROM OneKey.Database.ExternalFeature ef WHERE ef.Obid=?", this.SelectedFeatureID).First;
 
                 if (ef != null)
                 {
@@ -187,23 +205,22 @@ namespace OneKey.Server.Partials
                         }
                     });
                 }
-                //this.NewFeatureName = "";
             }
         }
 
         void Handle(Input.DeleteFeature action)
         {
             //Add New
-            if (!string.IsNullOrEmpty(this.SelectedWebPublication.SelectedFeatureID ))
+            if (!string.IsNullOrEmpty(this.SelectedFeatureID ))
             {
-                ExternalFeature ef = Db.SQL<OneKey.Database.ExternalFeature>("SELECT ef FROM OneKey.Database.ExternalFeature ef WHERE ef.Obid=?", this.SelectedWebPublication.SelectedFeatureID).First;
+                ExternalFeature ef = Db.SQL<OneKey.Database.ExternalFeature>("SELECT ef FROM OneKey.Database.ExternalFeature ef WHERE ef.Obid=?", this.SelectedFeatureID).First;
                 if (ef != null)
                 {
                     Db.Transact(() =>
                     {
-                        Db.SlowSQL("DELETE FROM OneKey.Database.ExternalVariable WHERE Action.Feature.Obid=?", this.SelectedWebPublication.SelectedFeatureID);
-                        Db.SlowSQL("DELETE FROM OneKey.Database.ExternalAction WHERE Feature.Obid=?", this.SelectedWebPublication.SelectedFeatureID);
-                        Db.SlowSQL("DELETE FROM OneKey.Database.ExternalFeature WHERE Obid=?", this.SelectedWebPublication.SelectedFeatureID);
+                        Db.SlowSQL("DELETE FROM OneKey.Database.ExternalVariable WHERE Action.Feature.Obid=?", this.SelectedFeatureID);
+                        Db.SlowSQL("DELETE FROM OneKey.Database.ExternalAction WHERE Feature.Obid=?", this.SelectedFeatureID);
+                        Db.SlowSQL("DELETE FROM OneKey.Database.ExternalFeature WHERE Obid=?", this.SelectedFeatureID);
                     });
                 }
             }
@@ -211,10 +228,10 @@ namespace OneKey.Server.Partials
         void Handle(Input.AddAction action)
         {
             //Add new
-            if (this.SelectedWebPublication.SelectedFeature.SelectedActionID == "")
+            if (this.SelectedActionID == "")
             {
                 var page = this;
-                var EAResult = Db.SQL<OneKey.Database.ExternalFeature>("SELECT ef FROM OneKey.Database.ExternalFeature ef WHERE ef.Obid=?", this.SelectedWebPublication.SelectedFeatureID).First;
+                var EAResult = Db.SQL<OneKey.Database.ExternalFeature>("SELECT ef FROM OneKey.Database.ExternalFeature ef WHERE ef.Obid=?", this.SelectedFeatureID).First;
                 if (EAResult != null)
                 {
                     Db.Transact(() =>
@@ -247,7 +264,7 @@ namespace OneKey.Server.Partials
             else
             {
                 var page = this;
-                var EAResult = Db.SQL<OneKey.Database.ExternalAction>("SELECT ef FROM OneKey.Database.ExternalAction ef WHERE ef.Obid=?", this.SelectedWebPublication.SelectedFeature.SelectedActionID).First;
+                var EAResult = Db.SQL<OneKey.Database.ExternalAction>("SELECT ef FROM OneKey.Database.ExternalAction ef WHERE ef.Obid=?", this.SelectedActionID).First;
                 if (EAResult != null)
                 {
                     Db.Transact(() =>
@@ -268,25 +285,20 @@ namespace OneKey.Server.Partials
                         EAResult.PaggingUrlParameters = page.PaggingUrlParameters;
                     });
                 }
-                //page.NewActionName = "";
-                //page.NewActionUrl = "";
-                //page.NewActionHttpType = "";
-                //page.NewActionHttpBody = "";
-                //page.NewActionOrderInFeature = 0;
             }
         }
         void Handle(Input.DeleteAction action)
         {
             //Add new
-            if (!string.IsNullOrEmpty(this.SelectedWebPublication.SelectedFeature.SelectedActionID ))
+            if (!string.IsNullOrEmpty(this.SelectedActionID ))
             {
-                var EAResult = Db.SQL<OneKey.Database.ExternalAction>("SELECT ef FROM OneKey.Database.ExternalAction ef WHERE ef.Obid=?", this.SelectedWebPublication.SelectedFeature.SelectedActionID).First;
+                var EAResult = Db.SQL<OneKey.Database.ExternalAction>("SELECT ef FROM OneKey.Database.ExternalAction ef WHERE ef.Obid=?", this.SelectedActionID).First;
                 if (EAResult != null)
                 {
                     Db.Transact(() =>
                     {
-                        Db.SlowSQL("DELETE FROM OneKey.Database.ExternalVariable WHERE Action.Obid=?", this.SelectedWebPublication.SelectedFeature.SelectedActionID);
-                        Db.SlowSQL("DELETE FROM OneKey.Database.ExternalAction WHERE Obid=?", this.SelectedWebPublication.SelectedFeature.SelectedActionID);
+                        Db.SlowSQL("DELETE FROM OneKey.Database.ExternalVariable WHERE Action.Obid=?", this.SelectedActionID);
+                        Db.SlowSQL("DELETE FROM OneKey.Database.ExternalAction WHERE Obid=?", this.SelectedActionID);
                     });
                 }
             }
@@ -295,10 +307,10 @@ namespace OneKey.Server.Partials
         void Handle(Input.AddVariable action)
         {
             //Add New
-            if (this.SelectedWebPublication.SelectedFeature.SelectedAction.SelectedVariableId == "")
+            if (this.SelectedVariableID == "")
             {
                 var page = this;
-                var AVResult = Db.SQL<OneKey.Database.ExternalAction>("SELECT ea FROM OneKey.Database.ExternalAction ea WHERE ea.Obid=?", this.SelectedWebPublication.SelectedFeature.SelectedActionID).First;
+                var AVResult = Db.SQL<OneKey.Database.ExternalAction>("SELECT ea FROM OneKey.Database.ExternalAction ea WHERE ea.Obid=?", this.SelectedActionID).First;
 
                 if (AVResult != null)
                 {
@@ -339,7 +351,7 @@ namespace OneKey.Server.Partials
             else
             {
                 var page = this;
-                var EVResult = Db.SQL<OneKey.Database.ExternalVariable>("SELECT ev FROM OneKey.Database.ExternalVariable ev WHERE ev.Obid=?", this.SelectedWebPublication.SelectedFeature.SelectedAction.SelectedVariableId).First;
+                var EVResult = Db.SQL<OneKey.Database.ExternalVariable>("SELECT ev FROM OneKey.Database.ExternalVariable ev WHERE ev.Obid=?", this.SelectedVariableID).First;
 
                 if (EVResult != null)
                 {
@@ -371,116 +383,113 @@ namespace OneKey.Server.Partials
         void Handle(Input.DeleteVariable action)
         {
             //Add New
-            if (!string.IsNullOrEmpty(this.SelectedWebPublication.SelectedFeature.SelectedAction.SelectedVariableId))
+            if (!string.IsNullOrEmpty(this.SelectedVariableID))
             {
-                var EVResult = Db.SQL<OneKey.Database.ExternalVariable>("SELECT ev FROM OneKey.Database.ExternalVariable ev WHERE ev.Obid=?", this.SelectedWebPublication.SelectedFeature.SelectedAction.SelectedVariableId).First;
+                var EVResult = Db.SQL<OneKey.Database.ExternalVariable>("SELECT ev FROM OneKey.Database.ExternalVariable ev WHERE ev.Obid=?", this.SelectedVariableID).First;
 
                 if (EVResult != null)
                 {
                     Db.Transact(() =>
                     {
-                        Db.SlowSQL("DELETE FROM OneKey.Database.ExternalVariable WHERE Obid=?", this.SelectedWebPublication.SelectedFeature.SelectedAction.SelectedVariableId);
+                        Db.SlowSQL("DELETE FROM OneKey.Database.ExternalVariable WHERE Obid=?", this.SelectedVariableID);
                     });
                 }
             }
         }
-
     }
 
-    //sub main page for 1 publication details
-    [WebPublicationsView_json.SelectedWebPublication]
-    partial class SelectedWebPublicationView : Json 
-    {
-    }
-
-    //sub publication for all features
-    [WebPublicationsView_json.SelectedWebPublication.Features]
-    partial class FeaturesView : Json
-    {
-        public string SelectedWebPublicationName_
-        {
-            get
-            {
-                SelectedWebPublicationView webPublicationName = this.Parent.Parent as SelectedWebPublicationView;
-                return webPublicationName.Name;
-            }
-        }
-    }
-
-    //sub publication for 1 feature
-    [WebPublicationsView_json.SelectedWebPublication.SelectedFeature]
-    partial class SelectedFeatureView : Json 
-    {
-
-    }
-    
-
-    //Sub publication for All actions
-    [WebPublicationsView_json.SelectedWebPublication.SelectedFeature.Actions]
-    partial class ActionsView : Json
-    {
-        public string SelectedWebPublicationName_
-        {
-            get
-            {
-                SelectedWebPublicationView webPublicationName = this.Parent.Parent.Parent as SelectedWebPublicationView;
-                return webPublicationName.Name;
-            }
-        }
-        public string SelectedFeatureName_
-        {
-            get
-            {
-                SelectedFeatureView featureName = this.Parent.Parent as SelectedFeatureView;
-                return featureName.Name;
-            }
-        }
-    }
-
-    //Sub publication for 1 action Details
-    [WebPublicationsView_json.SelectedWebPublication.SelectedFeature.SelectedAction]
-    partial class SelectedActionView : Json
-    {
-    }
-
-    //Sub publication for all Variables
-    [WebPublicationsView_json.SelectedWebPublication.SelectedFeature.SelectedAction.Variables]
-    partial class VariablesView : Json
-    {
-        public string SelectedWebPublicationName_
-        {
-            get
-            {
-                SelectedWebPublicationView webPublication = this.Parent.Parent.Parent.Parent as SelectedWebPublicationView;
-                return webPublication.Name;
-            }
-        }
-        public string SelectedFeatureName_
-        {
-            get
-            {
-                SelectedFeatureView feature = this.Parent.Parent.Parent as SelectedFeatureView;
-                return feature.Name;
-            }
-        }
-        public string SelectedActionName_
-        {
-            get
-            {
-                SelectedActionView action = this.Parent.Parent as SelectedActionView;
-                return action.Name;
-            }
-        }
-    }
-
-    [WebPublicationsView_json.WebPublications]
+    [WebPublicationsViewNew_json.WebPublications]
     partial class WebPublicationObject : Json
     {
         void Handle(Input.Update Action)
         {
-            WebPublicationsView page = this.Parent.Parent as WebPublicationsView;
+            WebPublicationsViewNew page = this.Parent.Parent as WebPublicationsViewNew;
+            page.SelectedVariableID = "";
+            page.NewVariableName = "";
+            page.NewVariableType = "";
+            page.NewVariableRegex = "";
+            page.NewVariableValue = "";
+
+            page.SelectedActionID = "";
+            page.NewActionName = "";
+            page.NewActionUrl = "";
+            page.NewActionHttpBody = "";
+            page.NewActionHttpType = "";
+            page.NewActionOrderInFeature = 0;
+            page.Pagging = false;
+            page.PaggingUrlParameters = "";
+
+            page.SelectedFeatureID = "";
+            page.NewFeatureName = "";
+
             page.SelectedWebPublicationID = Action.App.ObId;
+            page.NewWebPublicationName = Action.App.Name;
+            page.NewWebPublicationUrl = Action.App.Url;
+            page.NewWebPublicationDescription = Action.App.Description;
         }
     }
 
+    [WebPublicationsViewNew_json.WebPublication.Features]
+    partial class FeatureObject : Json
+    {
+        void Handle(Input.Update Action)
+        {
+
+            WebPublicationsViewNew page = this.Parent.Parent.Parent as WebPublicationsViewNew;
+            page.SelectedVariableID = "";
+            page.NewVariableName = "";
+            page.NewVariableType = "";
+            page.NewVariableRegex = "";
+            page.NewVariableValue = "";
+
+            page.SelectedActionID = "";
+            page.NewActionName = "";
+            page.NewActionUrl = "";
+            page.NewActionHttpBody = "";
+            page.NewActionHttpType = "";
+            page.NewActionOrderInFeature = 0;
+            page.Pagging = false;
+            page.PaggingUrlParameters = "";
+
+            page.SelectedFeatureID = Action.App.ObId;
+            page.NewFeatureName = Action.App.Name;
+        }
+    }
+
+    [WebPublicationsViewNew_json.Feature.Actions]
+    partial class ActionObject : Json
+    {
+        void Handle(Input.Update Action)
+        {
+            WebPublicationsViewNew page = this.Parent.Parent.Parent as WebPublicationsViewNew;
+            page.SelectedVariableID = "";
+            page.NewVariableName = "";
+            page.NewVariableType = "";
+            page.NewVariableRegex = "";
+            page.NewVariableValue = "";
+
+            page.SelectedActionID = Action.App.ObId;
+            page.NewActionName = Action.App.Name;
+            page.NewActionUrl = Action.App.ActionUrl;
+            page.NewActionHttpBody = Action.App.HttpBody;
+            page.NewActionHttpType = Action.App.HttpType;
+            page.NewActionOrderInFeature = Action.App.OrderInFeature;
+            page.Pagging = Action.App.Pagging;
+            page.PaggingUrlParameters = Action.App.PaggingUrlParameters;
+        }
+    }
+
+    [WebPublicationsViewNew_json.Action.Variables]
+    partial class VariableObject : Json
+    {
+        void Handle(Input.Update Action)
+        {
+            WebPublicationsViewNew page = this.Parent.Parent.Parent as WebPublicationsViewNew;
+            page.SelectedVariableID = Action.App.ObId;
+            page.NewVariableName = Action.App.Name;
+            page.NewVariableType = Action.App.VariableType;
+            page.NewVariableRegex = Action.App.Regex;
+            page.NewVariableValue = Action.App.VariableValue;
+        }
+    }
 }

@@ -1,0 +1,226 @@
+﻿<title>HTML Reference</title>
+<template id="onekey" bind="{{OneKey}}">
+    <div auto-vertical="" layout="" horizontal="">
+        <div class="WebSitelist" style="border: 1px solid; border-color: black; display: block; padding: 5px 5px 5px 5px; ">
+            <h3>WebSite List</h3>
+            <table>
+                <!--<caption>Website List</caption>-->
+                <colgroup span="1" />
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- iterate over WebPublication array elements to render the list of WebPublications -->
+                    <template repeat="{{ WebPublications$ }}">
+                        <!-- Display item properties and bind them for editing -->
+                        <tr>
+                            <td>
+                                <a onclick="getModel(this).Update$++">{{Name$}}</a>
+                                <button style="float:right" onclick="getModel(this).Update$++">View Data</button>
+                            </td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </div>
+        <div class="AddWebSite" style="width: 100%; border: 0px solid; border-color: black; display: block; padding: 5px 5px 0px 5px; ">
+            <h3>WebSite Details</h3>
+            <div class="AddWebsite" style="width: 100%; border: 1px solid; border-color: black; display: block; padding: 5px 5px 5px 5px; ">
+                <!-- Display Name$ and bind it for editing -->
+                <label>Name : </label>
+                <input type="text" value="{{ NewWebPublicationName$ }}" />
+                <label>Url : </label>
+                <input type="text" value="{{ NewWebPublicationUrl$ }}" />
+                <label>Description : </label>
+                <input type="text" value="{{ NewWebPublicationDescription$ }}" />
+                <button onclick="getModel(this).AddWebSite$++">Add/Update WebPublication</button>
+                <button onclick="getModel(this).DeleteWebSite$++">Delete WebPublication</button>
+            </div>
+            <template if="{{SelectedWebPublicationID$}}">
+                <h3>Website Features</h3>
+                <div class="FeatureList" auto-vertical="" layout="" horizontal="">
+                    <div class="WebPublicationFeatureList" style="border: 1px solid; border-color: black; display: block; padding: 5px 5px 5px 5px;">
+                        <h3>Feature List</h3>
+                        <table>
+                            <!--<caption>Feature List</caption>-->
+                            <colgroup span="1" />
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template repeat="{{ WebPublication$.Features$ }}">
+                                    <tr>
+                                        <td><a onclick="getModel(this).Update$++">{{Name$}}</a></td>
+                                        <td><button href="/OneKeyDemo/Get/{{WebPublicationName$}}/{{Name$}}">Perform Feature</button></td>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                        <!-- Trigger button handlers on click -->
+                    </div>
+
+                    <div class="AddWebPublicationFeatureList" style="width: 100%; border: 0px solid; border-color: black; display: block; padding: 5px 5px 0px 5px;">
+                        <h3>Feature Details</h3>
+                        <div class="AddFeature" style="width: 100%; border: 1px solid; border-color: black; display: block; padding: 5px 5px 5px 5px;">
+
+                            <label>Name : </label>
+                            <select value="{{NewFeatureName$}}">
+                                <option value="0">Select a Feature Name...</option>
+                                <template repeat="{{ FeatureNameList$}}">
+                                    <option value="{{Name$}}">{{Name$}}</option>
+                                </template>
+                                <option value="Other">Other</option>
+                            </select>
+                            <template if={{NewFeatureName$=="Other"}}>
+                                Name : 
+                                <input type="text" value="{{ NewFeatureNameOther$ }}" />
+                            </template>
+                            <button onclick="getModel(this).AddFeature$++">Add/Update Feature</button>
+                            <button onclick="getModel(this).DeleteFeature$++">Delete Feature</button>
+                        </div>
+                        </section>
+                        <template if="{{SelectedFeatureID$}}">
+                            <h3>Feature Actions </h3>
+                            <div class="FeatureActionDetails" auto-vertical="" layout="" horizontal="">
+
+                                <div class="ActionList" style="border: 1px solid; border-color: black; display: block; padding: 5px 5px 5px 5px;">
+                                    <h3>Action List</h3>
+                                    <table>
+                                        <!--<caption>Action List</caption>-->
+                                        <colgroup span="1" />
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <!--<th>Url</th>
+                            <th>HttpBody</th>
+                            <th>HttpType</th>
+                            <th>OrderInFeature</th>-->
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <template repeat="{{ Feature$.Actions$ }}">
+                                                <tr>
+                                                    <td><a onclick="getModel(this).Update$++">{{Name$}}</a></td>
+                                                </tr>
+                                            </template>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="AddActionList" style="width: 100%; border: 0px solid; border-color: black; display: block; padding: 5px 5px 0px 5px;" flex>
+                                    <h3>Action Details</h3>
+                                    <div class="WebPublicationFeatureActions" style="width:100%; border: 1px solid; border-color: black; display: block; padding: 5px 5px 5px 5px;">
+                                        <label>Name : </label>
+                                        <select value="{{NewActionName$}}">
+                                            <option value="0">Select an Action Name...</option>
+                                            <template repeat="{{ ActionNameList$}}">
+                                                <option value="{{Name$}}">{{Name$}}</option>
+                                            </template>
+                                            <option value="1">Other</option>
+                                        </select>
+                                        <template if={{NewActionName$==1}}>
+                                            Name :
+                                            <input type="text" value="{{ NewActionNameOther$ }}" />
+                                        </template>
+                                        Url :
+                                        <input style="float: right; width: 60%; " type="text" value="{{NewActionUrl$}}" />
+                                        <br>Http Body :
+                                        <input type="text" value="{{NewActionHttpBody$}}" />
+
+                                        <br>Request Type :
+                                        <select value="{{NewActionHttpType$}}">
+                                            <option value="">Select http Type</option>
+                                            <option value="POST">POST</option>
+                                            <option value="GET">GET</option>
+                                        </select>
+
+                                        Action Order
+                                        <select value="{{NewActionOrderInFeature$}}" style="width:30px">
+                                            <option value="0">0</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                        </select>
+
+                                        Pagging <input id="Pagging$" type='checkbox' checked='{{Pagging$}}' />
+                                        <template if="{{Pagging$}}">
+                                            Pagging Url Parameter :
+                                            <input type="text" value="{{PaggingUrlParameters$}}" />
+                                        </template>
+
+
+                                        <br><button onclick="getModel(this).AddAction$++">Add/Update Action</button>
+                                        <button onclick="getModel(this).DeleteAction$++">Delete Action</button>
+                                    </div>
+                                    <template if="{{SelectedActionID$}}">
+                                        <h3>Action Variables</h3>
+                                        <div class="FeatureDetails" auto-vertical="" layout="" horizontal="">
+                                            <!--Start FeatureActionVariables-->
+                                            <div class="FeatureActionVariables" style="border: 1px solid; border-color: black; display: block; padding: 5px 5px 5px 5px;">
+                                                <h3>Variable List</h3>
+                                                <table>
+                                                    <colgroup span="2" />
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Name</th>
+                                                        </tr>
+                                                    </thead>
+
+                                                    <tbody>
+                                                        <template repeat="{{Action$.Variables$}}">
+                                                            <tr>
+                                                                <td><a onclick="getModel(this).Update$++">{{Name$}}</a></td>
+                                                            </tr>
+                                                        </template>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="FeatureActionVariables" style="width: 100%; border: 0px solid; border-color: black; display: block; padding: 5px 5px 0px 5px; ">
+                                                <h3>Variable Details</h3>
+                                                <div class="AddFeatureActionVariables" style="width: 100%; border: 1px solid; border-color: black; display: block; padding: 5px 5px 5px 5px;">
+                                                    <label>Name : </label>
+
+                                                    <select value="{{NewVariableName$}}">
+                                                        <option value="0">Select a Variable Name...</option>
+                                                        <template repeat="{{VariableNameList$}}">
+                                                            <option value="{{Name$}}">{{Name$}}</option>
+                                                        </template>
+                                                        <option value="1">Other</option>
+                                                    </select>
+                                                    <template if={{NewVariableName$==1}}>
+                                                        Name :
+                                                        <input type="text" value="{{ NewVariableNameOther$}}" />
+                                                    </template>
+
+                                                    Type : <select value="{{NewVariableType$}}">
+                                                        <option value="0">Select a Variable Type...</option>
+                                                        <template repeat="{{VariableTypeList$}}">
+                                                            <option value="{{VariableType$}}">{{VariableType$}}</option>
+                                                        </template>
+                                                        <option value="1">Other</option>
+                                                    </select>
+                                                    <template if={{NewVariableType$ = =1}}>
+                                                        Name :
+                                                        <input type="text" value="{{ NewVariableTypeOther$}}" />
+                                                    </template>
+
+                                                    Regex : <input type="text" value="{{NewVariableRegex$}}" />
+                                                    Value : <input type="text" value="{{NewVariableValue$}}" />
+                                                    <br><button onclick="getModel(this).AddVariable$++">Add/Update Variables</button>
+                                                    <button onclick="getModel(this).DeleteVariable$++">Delete Variables</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </div>
+</template>

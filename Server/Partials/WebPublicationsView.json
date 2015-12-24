@@ -1,13 +1,27 @@
 {
     "Html": "",
     "$WebPublications$": { "Bind": "WebPublications_" },
-    "WebPublications$": [
+    "WebPublications$":[
         {
-            "Name$": ""
+			"Update$":0,
+            "Name$": "",
+			"ObId": ""
         }
     ],
     "SelectedWebPublicationID$": "",
-
+    "$WebPublication$": { "Bind": "SelectedWebPublication_" },
+	"WebPublication$": 
+    {
+		"Name$": "Facebook.com",
+		"Url$": "www.facebook.com",
+		"Description$" :"DescriptionDescription",
+		"Features$": [
+			{
+				"Name$": ""
+			}
+		]
+    },
+    
     "SelectedWebPublication$": {
         "Name$": "Facebook.com",
 		"Url$": "www.facebook.com",

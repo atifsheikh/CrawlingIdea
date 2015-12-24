@@ -12,6 +12,22 @@ namespace OneKey.Server.Handlers
     {
         internal static void Init()
         {
+            Handle.GET("/OneKeyDemo/AddGarbage", () => 
+            {
+                Db.Transact(() => 
+                {
+                    WebPublication webPublication;
+                    for (int loop = 0; loop < 30000; loop++)
+                    {
+                        webPublication = new WebPublication();
+                        webPublication.Name = "Garbage"+loop;
+                        webPublication.Url = "https://www.garbage"+loop+".com";
+                        webPublication.Description = "Gargabe "+loop;
+                    }
+                });
+                return "Gargabe added";
+            }, new HandlerOptions() { SkipMiddlewareFilters = true });
+
             Handle.GET("/OneKeyDemo/SetupOneKey", () =>
             {
                 Db.Transact(() =>
