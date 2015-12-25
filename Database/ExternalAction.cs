@@ -60,15 +60,18 @@ namespace OneKey.Database
             {
                 bool Pagination = this.Pagging;
                 int PaginationCount = 0;
+                int replaceCount = 0;
+                string ConcatenatedActionUrl = "";
                 do
                 {
                     //Update Pagging Url
-                    string ConcatenatedActionUrl = this.ActionUrl;
+                    ConcatenatedActionUrl = this.ActionUrl;
                     if (Pagination)
                     {
-                        PaginationCount++;
-                        ConcatenatedActionUrl += this.PaggingUrlParameters;
-                        ConcatenatedActionUrl = string.Format(ConcatenatedActionUrl, PaginationCount);
+                        replaceCount = Convert.ToInt32(this.PaggingUrlParameters.Substring(this.PaggingUrlParameters.IndexOf('{') + 1, this.PaggingUrlParameters.IndexOf('}') - (this.PaggingUrlParameters.IndexOf('{') + 1)));
+                        PaginationCount += replaceCount;
+                        ConcatenatedActionUrl += this.PaggingUrlParameters.Replace(replaceCount.ToString(),"0");
+                        ConcatenatedActionUrl = string.Format(ConcatenatedActionUrl, PaginationCount.ToString());
                     }
 
                     //Update HttpBody
@@ -215,6 +218,11 @@ namespace OneKey.Database
                     foreach (var actionVariable in this.Variables)
                     {
                         System.Text.RegularExpressions.MatchCollection RegexResultCollection = CommonHelper.GetAllMatches(responseText, actionVariable.Regex);
+                        if (RegexResultCollection.Count == 0)
+                        {
+                            Pagging = false;
+                        }
+
                         for (int loop = 0 ; loop < RegexResultCollection.Count ; loop++)
                         {
                             System.Text.RegularExpressions.Match RegexResult = RegexResultCollection[loop];
@@ -250,7 +258,7 @@ namespace OneKey.Database
                                     {
                                         return null;// "Regex Count Invalid... Please Contact Admin to recheck the regex for " + actionVariable.Name;
                                     }
-                                    
+
                                     if (actionVariable.Name == "<<WebResource>>")
                                     {
                                         WebResource w = Db.SQL<WebResource>("SELECT W FROM WebResource W WHERE Url=?", ResultValue).First;
@@ -265,70 +273,76 @@ namespace OneKey.Database
                                     else if (!string.IsNullOrEmpty(ResultValue))
                                     {
                                         CrawlDataColumn crawlDataColumn = Db.SQL<CrawlDataColumn>("SELECT w FROM CrawlDataColumn w WHERE listing_url = ?", Listing_Url[loop]).First;
-                                        Db.Transact(() =>
+                                        if (crawlDataColumn == null)
                                         {
-                                            if (crawlDataColumn == null)
+                                            Db.Transact(() =>
                                             {
-                                                crawlDataColumn = new CrawlDataColumn();
-                                                crawlDataColumn.listing_url = Listing_Url[loop];
-                                            }
-                                            switch (actionVariable.Name)
-                                            {
-                                                case "dealer":
-                                                    crawlDataColumn.dealer = ResultValue;
-                                                    break;
-                                                case "vehicles_year":
-                                                    crawlDataColumn.vehicles_year = ResultValue;
-                                                    break;
-                                                case "vehicles_make":
-                                                    crawlDataColumn.vehicles_make = ResultValue;
-                                                    break;
-                                                case "vehicles_model":
-                                                    crawlDataColumn.vehicles_model = ResultValue;
-                                                    break;
-                                                case "vehicles_trim":
-                                                    crawlDataColumn.vehicles_trim = ResultValue;
-                                                    break;
-                                                case "vehicles_msrp":
-                                                    crawlDataColumn.vehicles_msrp = ResultValue;
-                                                    break;
-                                                case "vehicles_drive":
-                                                    crawlDataColumn.vehicles_drive = ResultValue;
-                                                    break;
-                                                case "vehicles_mpg":
-                                                    crawlDataColumn.vehicles_mpg = ResultValue;
-                                                    break;
-                                                case "vehicles_features":
-                                                    crawlDataColumn.vehicles_features = ResultValue;
-                                                    break;
-                                                case "vehicles_miles":
-                                                    crawlDataColumn.vehicles_miles = ResultValue;
-                                                    break;
-                                                case "vehicles_intcolor":
-                                                    crawlDataColumn.vehicles_intcolor = ResultValue;
-                                                    break;
-                                                case "vehicles_extcolor":
-                                                    crawlDataColumn.vehicles_extcolor = ResultValue;
-                                                    break;
-                                                case "Vehicles_VIN":
-                                                    crawlDataColumn.Vehicles_VIN = ResultValue;
-                                                    break;
-                                                case "vehicles_engine":
-                                                    crawlDataColumn.vehicles_engine = ResultValue;
-                                                    break;
-                                                case "vehicles_price":
-                                                    crawlDataColumn.vehicles_price = ResultValue;
-                                                    break;
-                                                case "vehicles_image_url":
-                                                    crawlDataColumn.vehicles_image_url = ResultValue;
-                                                    break;
-                                                case "vehicles_comments":
-                                                    crawlDataColumn.vehicles_comments = ResultValue;
-                                                    break;
-                                            }
-                                        });
+                                                if (crawlDataColumn == null)
+                                                {
+                                                    crawlDataColumn = new CrawlDataColumn();
+                                                    crawlDataColumn.listing_url = Listing_Url[loop];
+                                                }
+                                                switch (actionVariable.Name)
+                                                {
+                                                    case "dealer":
+                                                        crawlDataColumn.dealer = ResultValue;
+                                                        break;
+                                                    case "vehicles_year":
+                                                        crawlDataColumn.vehicles_year = ResultValue;
+                                                        break;
+                                                    case "vehicles_make":
+                                                        crawlDataColumn.vehicles_make = ResultValue;
+                                                        break;
+                                                    case "vehicles_model":
+                                                        crawlDataColumn.vehicles_model = ResultValue;
+                                                        break;
+                                                    case "vehicles_trim":
+                                                        crawlDataColumn.vehicles_trim = ResultValue;
+                                                        break;
+                                                    case "vehicles_msrp":
+                                                        crawlDataColumn.vehicles_msrp = ResultValue;
+                                                        break;
+                                                    case "vehicles_drive":
+                                                        crawlDataColumn.vehicles_drive = ResultValue;
+                                                        break;
+                                                    case "vehicles_mpg":
+                                                        crawlDataColumn.vehicles_mpg = ResultValue;
+                                                        break;
+                                                    case "vehicles_features":
+                                                        crawlDataColumn.vehicles_features = ResultValue;
+                                                        break;
+                                                    case "vehicles_miles":
+                                                        crawlDataColumn.vehicles_miles = ResultValue;
+                                                        break;
+                                                    case "vehicles_intcolor":
+                                                        crawlDataColumn.vehicles_intcolor = ResultValue;
+                                                        break;
+                                                    case "vehicles_extcolor":
+                                                        crawlDataColumn.vehicles_extcolor = ResultValue;
+                                                        break;
+                                                    case "Vehicles_VIN":
+                                                        crawlDataColumn.Vehicles_VIN = ResultValue;
+                                                        break;
+                                                    case "vehicles_engine":
+                                                        crawlDataColumn.vehicles_engine = ResultValue;
+                                                        break;
+                                                    case "vehicles_price":
+                                                        crawlDataColumn.vehicles_price = ResultValue;
+                                                        break;
+                                                    case "vehicles_image_url":
+                                                        crawlDataColumn.vehicles_image_url = ResultValue;
+                                                        break;
+                                                    case "vehicles_comments":
+                                                        crawlDataColumn.vehicles_comments = ResultValue;
+                                                        break;
+                                                }
+                                            });
+                                        }
+                                        else
+                                        {
+                                            Pagging = false;
+                                        }
                                     }
-
                                 }
                             }
                         }

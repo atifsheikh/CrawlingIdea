@@ -15,7 +15,7 @@ namespace OneKey.Server.Partials
         {
             get
             {
-                return Db.SQL<OneKey.Database.WebPublication>("SELECT i FROM OneKey.Database.WebPublication i ORDER BY i.Name fetch ? offset ?", this.FetchWebPublications+5, this.FetchWebPublications);
+                return Db.SQL<OneKey.Database.WebPublication>("SELECT i FROM OneKey.Database.WebPublication i ORDER BY i.Name fetch ? offset ?", this.FetchWebPublications+50, this.FetchWebPublications);
             }
         }
 
@@ -208,6 +208,18 @@ namespace OneKey.Server.Partials
             }
         }
 
+        void Handle(Input.PerformFeature action)
+        {
+            OneKey.Database.ExternalFeature ExternalFeatureResult = Db.SQL<OneKey.Database.ExternalFeature>("SELECT ef FROM OneKey.Database.ExternalFeature ef WHERE ef.ObId=? ", action.App.Feature.ObId).First;
+            if (ExternalFeatureResult != null)
+            {
+                DbSession dbSession = new DbSession();
+                dbSession.RunAsync(() =>
+                {
+                    bool FeatureResult = ExternalFeatureResult.PerformFeature("");
+                });
+            }
+        }
         void Handle(Input.DeleteFeature action)
         {
             //Add New

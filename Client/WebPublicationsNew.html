@@ -55,7 +55,6 @@
                                 <template repeat="{{ WebPublication$.Features$ }}">
                                     <tr>
                                         <td><a onclick="getModel(this).Update$++">{{Name$}}</a></td>
-                                        <td><button href="/OneKey/Get/{{WebPublicationName$}}/{{Name$}}">Perform Feature</button></td>
                                     </tr>
                                 </template>
                             </tbody>
@@ -81,6 +80,7 @@
                             </template>
                             <button onclick="getModel(this).AddFeature$++">Add/Update Feature</button>
                             <button onclick="getModel(this).DeleteFeature$++">Delete Feature</button>
+                            <a onclick="getModel(this).PerformFeature$++">Perform Feature</a>
                         </div>
                         </section>
                         <template if="{{SelectedFeatureID$}}">

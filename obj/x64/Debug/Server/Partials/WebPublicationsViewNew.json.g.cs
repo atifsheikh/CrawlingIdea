@@ -18,36 +18,35 @@ using OneKey.Database;
 #pragma warning disable 0108
 #pragma warning disable 1591
 
-using __WVaSchema2__ = global::OneKey.Server.Partials.WebPublicationsViewNew.VariableTypeListElementJson.JsonByExample.Schema;
-using __WeActionJs2__ = global::OneKey.Server.Partials.WebPublicationsViewNew.ActionJson.Input;
+using __WeVariable4__ = global::OneKey.Server.Partials.WebPublicationsViewNew.VariableTypeListElementJson.JsonByExample;
 using __WAcName1__ = global::OneKey.Server.Partials.WebPublicationsViewNew.ActionJson.Input.Name;
 using __WAcObId__ = global::OneKey.Server.Partials.WebPublicationsViewNew.ActionJson.Input.ObId;
 using __WAcActionUr__ = global::OneKey.Server.Partials.WebPublicationsViewNew.ActionJson.Input.ActionUrl;
 using __WAcHttpBody__ = global::OneKey.Server.Partials.WebPublicationsViewNew.ActionJson.Input.HttpBody;
 using __WAcHttpType__ = global::OneKey.Server.Partials.WebPublicationsViewNew.ActionJson.Input.HttpType;
 using __WAcOrderInF__ = global::OneKey.Server.Partials.WebPublicationsViewNew.ActionJson.Input.OrderInFeature;
-using __Arr3__ = global::Starcounter.Arr<global::OneKey.Server.Partials.VariableObject>;
 using __WAcPagging__ = global::OneKey.Server.Partials.WebPublicationsViewNew.ActionJson.Input.Pagging;
-using __WeVariable6__ = global::OneKey.Server.Partials.WebPublicationsViewNew.VariableJson;
+using __WeActionJs2__ = global::OneKey.Server.Partials.WebPublicationsViewNew.ActionJson.Input;
+using __WAcPaggingU__ = global::OneKey.Server.Partials.WebPublicationsViewNew.ActionJson.Input.PaggingUrlParameters;
 using __WeVariable7__ = global::OneKey.Server.Partials.WebPublicationsViewNew.VariableJson.JsonByExample;
 using __WeVariable8__ = global::OneKey.Server.Partials.WebPublicationsViewNew.VariableJson.Input;
 using __WVaName1__ = global::OneKey.Server.Partials.WebPublicationsViewNew.VariableJson.Input.Name;
 using __WVaObId__ = global::OneKey.Server.Partials.WebPublicationsViewNew.VariableJson.Input.ObId;
 using __WVaVariable1__ = global::OneKey.Server.Partials.WebPublicationsViewNew.VariableJson.Input.VariableType;
 using __WVaRegex__ = global::OneKey.Server.Partials.WebPublicationsViewNew.VariableJson.Input.Regex;
-using __WAcPaggingU__ = global::OneKey.Server.Partials.WebPublicationsViewNew.ActionJson.Input.PaggingUrlParameters;
 using __WVaVariable2__ = global::OneKey.Server.Partials.WebPublicationsViewNew.VariableJson.Input.VariableValue;
+using __WeVariable6__ = global::OneKey.Server.Partials.WebPublicationsViewNew.VariableJson;
+using __Arr3__ = global::Starcounter.Arr<global::OneKey.Server.Partials.VariableObject>;
 using __WeActionJs1__ = global::OneKey.Server.Partials.WebPublicationsViewNew.ActionJson.JsonByExample;
-using __WFeName1__ = global::OneKey.Server.Partials.WebPublicationsViewNew.FeatureJson.Input.Name;
-using __WeVariable5__ = global::OneKey.Server.Partials.WebPublicationsViewNew.VariableTypeListElementJson.Input;
+using __WeActionJs__ = global::OneKey.Server.Partials.WebPublicationsViewNew.ActionJson;
 using __WVaVariable__ = global::OneKey.Server.Partials.WebPublicationsViewNew.VariableTypeListElementJson.Input.VariableType;
 using __TArray7__ = global::Starcounter.Templates.TArray<global::OneKey.Server.Partials.WebPublicationsViewNew.VariableTypeListElementJson>;
 using __WebPubli4__ = global::OneKey.Server.Partials.WebPublicationsViewNew.JsonByExample;
 using __Arr__ = global::Starcounter.Arr<global::OneKey.Server.Partials.WebPublicationObject>;
 using __WeWebPubli__ = global::OneKey.Server.Partials.WebPublicationsViewNew.WebPublicationJson;
 using __WeWebPubli1__ = global::OneKey.Server.Partials.WebPublicationsViewNew.WebPublicationJson.JsonByExample;
-using __WeActionJs__ = global::OneKey.Server.Partials.WebPublicationsViewNew.ActionJson;
 using __Arr1__ = global::Starcounter.Arr<global::OneKey.Server.Partials.FeatureObject>;
+using __WeWebPubli2__ = global::OneKey.Server.Partials.WebPublicationsViewNew.WebPublicationJson.Input;
 using __WWeName__ = global::OneKey.Server.Partials.WebPublicationsViewNew.WebPublicationJson.Input.Name;
 using __WWeUrl__ = global::OneKey.Server.Partials.WebPublicationsViewNew.WebPublicationJson.Input.Url;
 using __WWeDescript__ = global::OneKey.Server.Partials.WebPublicationsViewNew.WebPublicationJson.Input.Description;
@@ -55,31 +54,32 @@ using __WeFeatureJ__ = global::OneKey.Server.Partials.WebPublicationsViewNew.Fea
 using __WeFeatureJ1__ = global::OneKey.Server.Partials.WebPublicationsViewNew.FeatureJson.JsonByExample;
 using __Arr2__ = global::Starcounter.Arr<global::OneKey.Server.Partials.ActionObject>;
 using __WeFeatureJ2__ = global::OneKey.Server.Partials.WebPublicationsViewNew.FeatureJson.Input;
-using __WeWebPubli2__ = global::OneKey.Server.Partials.WebPublicationsViewNew.WebPublicationJson.Input;
+using __WFeObId__ = global::OneKey.Server.Partials.WebPublicationsViewNew.FeatureJson.Input.ObId;
+using __WFeName1__ = global::OneKey.Server.Partials.WebPublicationsViewNew.FeatureJson.Input.Name;
 using __Arr4__ = global::Starcounter.Arr<global::OneKey.Server.Partials.WebPublicationsViewNew.FeatureNameListElementJson>;
+using __WeVariable5__ = global::OneKey.Server.Partials.WebPublicationsViewNew.VariableTypeListElementJson.Input;
 using __Arr5__ = global::Starcounter.Arr<global::OneKey.Server.Partials.WebPublicationsViewNew.ActionNameListElementJson>;
-using __Arr6__ = global::Starcounter.Arr<global::OneKey.Server.Partials.WebPublicationsViewNew.VariableNameListElementJson>;
-using __WeNewVaria1__ = global::OneKey.Server.Partials.WebPublicationsViewNew.Input.NewVariableNameOther;
+using __Arr7__ = global::Starcounter.Arr<global::OneKey.Server.Partials.WebPublicationsViewNew.VariableTypeListElementJson>;
 using __WeNewVaria2__ = global::OneKey.Server.Partials.WebPublicationsViewNew.Input.NewVariableName;
 using __WeNewVaria3__ = global::OneKey.Server.Partials.WebPublicationsViewNew.Input.NewVariableTypeOther;
 using __WeNewVaria4__ = global::OneKey.Server.Partials.WebPublicationsViewNew.Input.NewVariableType;
 using __WeNewVaria5__ = global::OneKey.Server.Partials.WebPublicationsViewNew.Input.NewVariableRegex;
 using __WeAddWebSi__ = global::OneKey.Server.Partials.WebPublicationsViewNew.Input.AddWebSite;
 using __WeDeleteWe__ = global::OneKey.Server.Partials.WebPublicationsViewNew.Input.DeleteWebSite;
-using __WeNewVaria__ = global::OneKey.Server.Partials.WebPublicationsViewNew.Input.NewVariableValue;
 using __WeUpdateWe__ = global::OneKey.Server.Partials.WebPublicationsViewNew.Input.UpdateWebSite;
-using __WeDeleteFe__ = global::OneKey.Server.Partials.WebPublicationsViewNew.Input.DeleteFeature;
+using __WeNewVaria1__ = global::OneKey.Server.Partials.WebPublicationsViewNew.Input.NewVariableNameOther;
+using __WeAddFeatu__ = global::OneKey.Server.Partials.WebPublicationsViewNew.Input.AddFeature;
+using __WePerformF__ = global::OneKey.Server.Partials.WebPublicationsViewNew.Input.PerformFeature;
 using __WeUpdateFe__ = global::OneKey.Server.Partials.WebPublicationsViewNew.Input.UpdateFeature;
 using __WeAddActio__ = global::OneKey.Server.Partials.WebPublicationsViewNew.Input.AddAction;
 using __WeDeleteAc__ = global::OneKey.Server.Partials.WebPublicationsViewNew.Input.DeleteAction;
 using __WeUpdateAc__ = global::OneKey.Server.Partials.WebPublicationsViewNew.Input.UpdateAction;
 using __WeAddVaria__ = global::OneKey.Server.Partials.WebPublicationsViewNew.Input.AddVariable;
 using __WeDeleteVa__ = global::OneKey.Server.Partials.WebPublicationsViewNew.Input.DeleteVariable;
-using __WeAddFeatu__ = global::OneKey.Server.Partials.WebPublicationsViewNew.Input.AddFeature;
+using __WeDeleteFe__ = global::OneKey.Server.Partials.WebPublicationsViewNew.Input.DeleteFeature;
+using __WeNewVaria__ = global::OneKey.Server.Partials.WebPublicationsViewNew.Input.NewVariableValue;
 using __WeNewActio5__ = global::OneKey.Server.Partials.WebPublicationsViewNew.Input.NewActionOrderInFeature;
 using __WeNewActio4__ = global::OneKey.Server.Partials.WebPublicationsViewNew.Input.NewActionHttpBody;
-using __WeNewActio3__ = global::OneKey.Server.Partials.WebPublicationsViewNew.Input.NewActionHttpType;
-using __Arr7__ = global::Starcounter.Arr<global::OneKey.Server.Partials.WebPublicationsViewNew.VariableTypeListElementJson>;
 using __WebPubli5__ = global::OneKey.Server.Partials.WebPublicationsViewNew.Input;
 using __WeHtml__ = global::OneKey.Server.Partials.WebPublicationsViewNew.Input.Html;
 using __WeSelected__ = global::OneKey.Server.Partials.WebPublicationsViewNew.Input.SelectedWebPublicationID;
@@ -96,10 +96,11 @@ using __WePagging__ = global::OneKey.Server.Partials.WebPublicationsViewNew.Inpu
 using __WePaggingU__ = global::OneKey.Server.Partials.WebPublicationsViewNew.Input.PaggingUrlParameters;
 using __WeNewActio1__ = global::OneKey.Server.Partials.WebPublicationsViewNew.Input.NewActionName;
 using __WeNewActio2__ = global::OneKey.Server.Partials.WebPublicationsViewNew.Input.NewActionUrl;
-using __WeVariable4__ = global::OneKey.Server.Partials.WebPublicationsViewNew.VariableTypeListElementJson.JsonByExample;
+using __WeNewActio3__ = global::OneKey.Server.Partials.WebPublicationsViewNew.Input.NewActionHttpType;
+using __Arr6__ = global::Starcounter.Arr<global::OneKey.Server.Partials.WebPublicationsViewNew.VariableNameListElementJson>;
 using __WeUpdateVa__ = global::OneKey.Server.Partials.WebPublicationsViewNew.Input.UpdateVariable;
 using __WeFetchWeb__ = global::OneKey.Server.Partials.WebPublicationsViewNew.Input.FetchWebPublications;
-using __TArray6__ = global::Starcounter.Templates.TArray<global::OneKey.Server.Partials.WebPublicationsViewNew.VariableNameListElementJson>;
+using __WeVariable3__ = global::OneKey.Server.Partials.WebPublicationsViewNew.VariableTypeListElementJson;
 using __FeSchema__ = global::OneKey.Server.Partials.FeatureObject.JsonByExample.Schema;
 using __FeatureO1__ = global::OneKey.Server.Partials.FeatureObject.JsonByExample;
 using __FeatureO2__ = global::OneKey.Server.Partials.FeatureObject.Input;
@@ -114,7 +115,7 @@ using __TBool__ = global::Starcounter.Templates.TBool;
 using __ActionOb1__ = global::OneKey.Server.Partials.ActionObject.JsonByExample;
 using __ActionOb2__ = global::OneKey.Server.Partials.ActionObject.Input;
 using __AcUpdate__ = global::OneKey.Server.Partials.ActionObject.Input.Update;
-using __WeVariable3__ = global::OneKey.Server.Partials.WebPublicationsViewNew.VariableTypeListElementJson;
+using __WVaSchema2__ = global::OneKey.Server.Partials.WebPublicationsViewNew.VariableTypeListElementJson.JsonByExample.Schema;
 using __FeatureO__ = global::OneKey.Server.Partials.FeatureObject;
 using __AcObId__ = global::OneKey.Server.Partials.ActionObject.Input.ObId;
 using __WWeSchema__ = global::OneKey.Server.Partials.WebPublicationsViewNew.WebPublicationJson.JsonByExample.Schema;
@@ -139,7 +140,6 @@ using __AcActionUr__ = global::OneKey.Server.Partials.ActionObject.Input.ActionU
 using __AcName__ = global::OneKey.Server.Partials.ActionObject.Input.Name;
 using __AcHttpType__ = global::OneKey.Server.Partials.ActionObject.Input.HttpType;
 using __AcHttpBody__ = global::OneKey.Server.Partials.ActionObject.Input.HttpBody;
-using __WeFeatureN2__ = global::OneKey.Server.Partials.WebPublicationsViewNew.FeatureNameListElementJson.Input;
 using __WFeName__ = global::OneKey.Server.Partials.WebPublicationsViewNew.FeatureNameListElementJson.Input.Name;
 using __TArray4__ = global::Starcounter.Templates.TArray<global::OneKey.Server.Partials.WebPublicationsViewNew.FeatureNameListElementJson>;
 using __WeActionNa__ = global::OneKey.Server.Partials.WebPublicationsViewNew.ActionNameListElementJson;
@@ -153,26 +153,28 @@ using __WVaSchema1__ = global::OneKey.Server.Partials.WebPublicationsViewNew.Var
 using __WeVariable1__ = global::OneKey.Server.Partials.WebPublicationsViewNew.VariableNameListElementJson.JsonByExample;
 using __WeVariable2__ = global::OneKey.Server.Partials.WebPublicationsViewNew.VariableNameListElementJson.Input;
 using __WVaName__ = global::OneKey.Server.Partials.WebPublicationsViewNew.VariableNameListElementJson.Input.Name;
-using __WFeSchema1__ = global::OneKey.Server.Partials.WebPublicationsViewNew.FeatureNameListElementJson.JsonByExample.Schema;
-using __WeFeatureN__ = global::OneKey.Server.Partials.WebPublicationsViewNew.FeatureNameListElementJson;
+using __TArray6__ = global::Starcounter.Templates.TArray<global::OneKey.Server.Partials.WebPublicationsViewNew.VariableNameListElementJson>;
 using __WeFeatureN1__ = global::OneKey.Server.Partials.WebPublicationsViewNew.FeatureNameListElementJson.JsonByExample;
-using __TArray3__ = global::Starcounter.Templates.TArray<global::OneKey.Server.Partials.VariableObject>;
+using __WFeSchema1__ = global::OneKey.Server.Partials.WebPublicationsViewNew.FeatureNameListElementJson.JsonByExample.Schema;
+using __WeFeatureN2__ = global::OneKey.Server.Partials.WebPublicationsViewNew.FeatureNameListElementJson.Input;
+using __WVaSchema__ = global::OneKey.Server.Partials.WebPublicationsViewNew.VariableJson.JsonByExample.Schema;
 using __AcOrderInF__ = global::OneKey.Server.Partials.ActionObject.Input.OrderInFeature;
 using __AcPagging__ = global::OneKey.Server.Partials.ActionObject.Input.Pagging;
 using __AcPaggingU__ = global::OneKey.Server.Partials.ActionObject.Input.PaggingUrlParameters;
 using __TArray2__ = global::Starcounter.Templates.TArray<global::OneKey.Server.Partials.ActionObject>;
-using __WVaSchema__ = global::OneKey.Server.Partials.WebPublicationsViewNew.VariableJson.JsonByExample.Schema;
-using __Variable__ = global::OneKey.Server.Partials.VariableObject;
-using __VaSchema__ = global::OneKey.Server.Partials.VariableObject.JsonByExample.Schema;
 using __WAcSchema__ = global::OneKey.Server.Partials.WebPublicationsViewNew.ActionJson.JsonByExample.Schema;
-using __Variable2__ = global::OneKey.Server.Partials.VariableObject.Input;
+using __WeFeatureN__ = global::OneKey.Server.Partials.WebPublicationsViewNew.FeatureNameListElementJson;
+using __VaSchema__ = global::OneKey.Server.Partials.VariableObject.JsonByExample.Schema;
+using __Variable1__ = global::OneKey.Server.Partials.VariableObject.JsonByExample;
+using __Variable__ = global::OneKey.Server.Partials.VariableObject;
 using __VaUpdate__ = global::OneKey.Server.Partials.VariableObject.Input.Update;
 using __VaName__ = global::OneKey.Server.Partials.VariableObject.Input.Name;
 using __VaObId__ = global::OneKey.Server.Partials.VariableObject.Input.ObId;
 using __VaVariable__ = global::OneKey.Server.Partials.VariableObject.Input.VariableType;
 using __VaRegex__ = global::OneKey.Server.Partials.VariableObject.Input.Regex;
 using __VaVariable1__ = global::OneKey.Server.Partials.VariableObject.Input.VariableValue;
-using __Variable1__ = global::OneKey.Server.Partials.VariableObject.JsonByExample;
+using __TArray3__ = global::Starcounter.Templates.TArray<global::OneKey.Server.Partials.VariableObject>;
+using __Variable2__ = global::OneKey.Server.Partials.VariableObject.Input;
 
 #line hidden
 [_GEN1_][_GEN2_("Starcounter","2.0")]
@@ -316,11 +318,11 @@ public partial class VariableObject : __Json__ {
     #line default
     [_GEN1_][_GEN2_("Starcounter","2.0")]
     public System.Int64 Update {
-#line 69 "Server\Partials\WebPublicationsViewNew.json"
+#line 70 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.Update.Getter(this); }
-#line 69 "Server\Partials\WebPublicationsViewNew.json"
+#line 70 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.Update.Setter(this, value); } }
@@ -328,11 +330,11 @@ public partial class VariableObject : __Json__ {
 
     [_GEN1_][_GEN2_("Starcounter","2.0")]
     public System.String Name {
-#line 70 "Server\Partials\WebPublicationsViewNew.json"
+#line 71 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.Name.Getter(this); }
-#line 70 "Server\Partials\WebPublicationsViewNew.json"
+#line 71 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.Name.Setter(this, value); } }
@@ -340,11 +342,11 @@ public partial class VariableObject : __Json__ {
 
     [_GEN1_][_GEN2_("Starcounter","2.0")]
     public System.String ObId {
-#line 71 "Server\Partials\WebPublicationsViewNew.json"
+#line 72 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.ObId.Getter(this); }
-#line 71 "Server\Partials\WebPublicationsViewNew.json"
+#line 72 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.ObId.Setter(this, value); } }
@@ -352,11 +354,11 @@ public partial class VariableObject : __Json__ {
 
     [_GEN1_][_GEN2_("Starcounter","2.0")]
     public System.String VariableType {
-#line 72 "Server\Partials\WebPublicationsViewNew.json"
+#line 73 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.VariableType.Getter(this); }
-#line 72 "Server\Partials\WebPublicationsViewNew.json"
+#line 73 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.VariableType.Setter(this, value); } }
@@ -364,11 +366,11 @@ public partial class VariableObject : __Json__ {
 
     [_GEN1_][_GEN2_("Starcounter","2.0")]
     public System.String Regex {
-#line 73 "Server\Partials\WebPublicationsViewNew.json"
+#line 74 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.Regex.Getter(this); }
-#line 73 "Server\Partials\WebPublicationsViewNew.json"
+#line 74 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.Regex.Setter(this, value); } }
@@ -376,11 +378,11 @@ public partial class VariableObject : __Json__ {
 
     [_GEN1_][_GEN2_("Starcounter","2.0")]
     public System.String VariableValue {
-#line 75 "Server\Partials\WebPublicationsViewNew.json"
+#line 76 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.VariableValue.Getter(this); }
-#line 75 "Server\Partials\WebPublicationsViewNew.json"
+#line 76 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.VariableValue.Setter(this, value); } }
@@ -514,11 +516,11 @@ public partial class ActionObject : __Json__ {
     #line default
     [_GEN1_][_GEN2_("Starcounter","2.0")]
     public System.Int64 Update {
-#line 42 "Server\Partials\WebPublicationsViewNew.json"
+#line 43 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.Update.Getter(this); }
-#line 42 "Server\Partials\WebPublicationsViewNew.json"
+#line 43 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.Update.Setter(this, value); } }
@@ -526,11 +528,11 @@ public partial class ActionObject : __Json__ {
 
     [_GEN1_][_GEN2_("Starcounter","2.0")]
     public System.String Name {
-#line 43 "Server\Partials\WebPublicationsViewNew.json"
+#line 44 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.Name.Getter(this); }
-#line 43 "Server\Partials\WebPublicationsViewNew.json"
+#line 44 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.Name.Setter(this, value); } }
@@ -538,11 +540,11 @@ public partial class ActionObject : __Json__ {
 
     [_GEN1_][_GEN2_("Starcounter","2.0")]
     public System.String ObId {
-#line 44 "Server\Partials\WebPublicationsViewNew.json"
+#line 45 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.ObId.Getter(this); }
-#line 44 "Server\Partials\WebPublicationsViewNew.json"
+#line 45 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.ObId.Setter(this, value); } }
@@ -550,11 +552,11 @@ public partial class ActionObject : __Json__ {
 
     [_GEN1_][_GEN2_("Starcounter","2.0")]
     public System.String ActionUrl {
-#line 45 "Server\Partials\WebPublicationsViewNew.json"
+#line 46 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.ActionUrl.Getter(this); }
-#line 45 "Server\Partials\WebPublicationsViewNew.json"
+#line 46 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.ActionUrl.Setter(this, value); } }
@@ -562,11 +564,11 @@ public partial class ActionObject : __Json__ {
 
     [_GEN1_][_GEN2_("Starcounter","2.0")]
     public System.String HttpBody {
-#line 46 "Server\Partials\WebPublicationsViewNew.json"
+#line 47 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.HttpBody.Getter(this); }
-#line 46 "Server\Partials\WebPublicationsViewNew.json"
+#line 47 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.HttpBody.Setter(this, value); } }
@@ -574,11 +576,11 @@ public partial class ActionObject : __Json__ {
 
     [_GEN1_][_GEN2_("Starcounter","2.0")]
     public System.String HttpType {
-#line 47 "Server\Partials\WebPublicationsViewNew.json"
+#line 48 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.HttpType.Getter(this); }
-#line 47 "Server\Partials\WebPublicationsViewNew.json"
+#line 48 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.HttpType.Setter(this, value); } }
@@ -586,11 +588,11 @@ public partial class ActionObject : __Json__ {
 
     [_GEN1_][_GEN2_("Starcounter","2.0")]
     public System.Int64 OrderInFeature {
-#line 48 "Server\Partials\WebPublicationsViewNew.json"
+#line 49 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.OrderInFeature.Getter(this); }
-#line 48 "Server\Partials\WebPublicationsViewNew.json"
+#line 49 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.OrderInFeature.Setter(this, value); } }
@@ -610,11 +612,11 @@ public partial class ActionObject : __Json__ {
 
     [_GEN1_][_GEN2_("Starcounter","2.0")]
     public System.String PaggingUrlParameters {
-#line 51 "Server\Partials\WebPublicationsViewNew.json"
+#line 52 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.PaggingUrlParameters.Getter(this); }
-#line 51 "Server\Partials\WebPublicationsViewNew.json"
+#line 52 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.PaggingUrlParameters.Setter(this, value); } }
@@ -994,6 +996,7 @@ public partial class WebPublicationsViewNew : Page {
     private System.Int64 __bf__UpdateWebSite__;
     private System.Int64 __bf__AddFeature__;
     private System.Int64 __bf__DeleteFeature__;
+    private System.Int64 __bf__PerformFeature__;
     private System.Int64 __bf__UpdateFeature__;
     private System.Int64 __bf__AddAction__;
     private System.Int64 __bf__DeleteAction__;
@@ -1161,6 +1164,11 @@ public partial class WebPublicationsViewNew : Page {
                 DeleteFeature.Editable = true;
                 DeleteFeature.SetCustomAccessors((_p_) => { return ((__WebPubli__)_p_).__bf__DeleteFeature__; }, (_p_, _v_) => { ((__WebPubli__)_p_).__bf__DeleteFeature__ = (System.Int64)_v_; }, false);
                 DeleteFeature.AddHandler((Json pup, Property<Int64> prop, Int64 value) => { return (new Input.DeleteFeature() { App = (WebPublicationsViewNew)pup, Template = (TLong)prop, Value = value }); }, (Json pup, Starcounter.Input<Int64> input) => { ((WebPublicationsViewNew)pup).Handle((Input.DeleteFeature)input); });
+                PerformFeature = Add<__TLong__>("PerformFeature$");
+                PerformFeature.DefaultValue = 0L;
+                PerformFeature.Editable = true;
+                PerformFeature.SetCustomAccessors((_p_) => { return ((__WebPubli__)_p_).__bf__PerformFeature__; }, (_p_, _v_) => { ((__WebPubli__)_p_).__bf__PerformFeature__ = (System.Int64)_v_; }, false);
+                PerformFeature.AddHandler((Json pup, Property<Int64> prop, Int64 value) => { return (new Input.PerformFeature() { App = (WebPublicationsViewNew)pup, Template = (TLong)prop, Value = value }); }, (Json pup, Starcounter.Input<Int64> input) => { ((WebPublicationsViewNew)pup).Handle((Input.PerformFeature)input); });
                 UpdateFeature = Add<__TLong__>("UpdateFeature$");
                 UpdateFeature.DefaultValue = 0L;
                 UpdateFeature.Editable = true;
@@ -1237,6 +1245,7 @@ public partial class WebPublicationsViewNew : Page {
             public __TLong__ UpdateWebSite;
             public __TLong__ AddFeature;
             public __TLong__ DeleteFeature;
+            public __TLong__ PerformFeature;
             public __TLong__ UpdateFeature;
             public __TLong__ AddAction;
             public __TLong__ DeleteAction;
@@ -1311,11 +1320,11 @@ public partial class WebPublicationsViewNew : Page {
 
     [_GEN1_][_GEN2_("Starcounter","2.0")]
     public __WeFeatureJ__ Feature {
-#line 53 "Server\Partials\WebPublicationsViewNew.json"
+#line 54 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return (__WeFeatureJ__)Template.Feature.Getter(this); }
-#line 53 "Server\Partials\WebPublicationsViewNew.json"
+#line 54 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.Feature.Setter(this, value); } }
@@ -1323,11 +1332,11 @@ public partial class WebPublicationsViewNew : Page {
 
     [_GEN1_][_GEN2_("Starcounter","2.0")]
     public System.String SelectedActionID {
-#line 55 "Server\Partials\WebPublicationsViewNew.json"
+#line 56 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.SelectedActionID.Getter(this); }
-#line 55 "Server\Partials\WebPublicationsViewNew.json"
+#line 56 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.SelectedActionID.Setter(this, value); } }
@@ -1335,11 +1344,11 @@ public partial class WebPublicationsViewNew : Page {
 
     [_GEN1_][_GEN2_("Starcounter","2.0")]
     public __WeActionJs__ Action {
-#line 77 "Server\Partials\WebPublicationsViewNew.json"
+#line 78 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return (__WeActionJs__)Template.Action.Getter(this); }
-#line 77 "Server\Partials\WebPublicationsViewNew.json"
+#line 78 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.Action.Setter(this, value); } }
@@ -1347,11 +1356,11 @@ public partial class WebPublicationsViewNew : Page {
 
     [_GEN1_][_GEN2_("Starcounter","2.0")]
     public System.String SelectedVariableID {
-#line 79 "Server\Partials\WebPublicationsViewNew.json"
+#line 80 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.SelectedVariableID.Getter(this); }
-#line 79 "Server\Partials\WebPublicationsViewNew.json"
+#line 80 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.SelectedVariableID.Setter(this, value); } }
@@ -1359,11 +1368,11 @@ public partial class WebPublicationsViewNew : Page {
 
     [_GEN1_][_GEN2_("Starcounter","2.0")]
     public __WeVariable6__ Variable {
-#line 88 "Server\Partials\WebPublicationsViewNew.json"
+#line 89 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return (__WeVariable6__)Template.Variable.Getter(this); }
-#line 88 "Server\Partials\WebPublicationsViewNew.json"
+#line 89 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.Variable.Setter(this, value); } }
@@ -1371,11 +1380,11 @@ public partial class WebPublicationsViewNew : Page {
 
     [_GEN1_][_GEN2_("Starcounter","2.0")]
     public __Arr4__ FeatureNameList {
-#line 93 "Server\Partials\WebPublicationsViewNew.json"
+#line 94 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.FeatureNameList.Getter(this); }
-#line 93 "Server\Partials\WebPublicationsViewNew.json"
+#line 94 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.FeatureNameList.Setter(this, value); } }
@@ -1383,11 +1392,11 @@ public partial class WebPublicationsViewNew : Page {
 
     [_GEN1_][_GEN2_("Starcounter","2.0")]
     public __Arr5__ ActionNameList {
-#line 98 "Server\Partials\WebPublicationsViewNew.json"
+#line 99 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.ActionNameList.Getter(this); }
-#line 98 "Server\Partials\WebPublicationsViewNew.json"
+#line 99 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.ActionNameList.Setter(this, value); } }
@@ -1395,11 +1404,11 @@ public partial class WebPublicationsViewNew : Page {
 
     [_GEN1_][_GEN2_("Starcounter","2.0")]
     public __Arr6__ VariableNameList {
-#line 103 "Server\Partials\WebPublicationsViewNew.json"
+#line 104 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.VariableNameList.Getter(this); }
-#line 103 "Server\Partials\WebPublicationsViewNew.json"
+#line 104 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.VariableNameList.Setter(this, value); } }
@@ -1407,11 +1416,11 @@ public partial class WebPublicationsViewNew : Page {
 
     [_GEN1_][_GEN2_("Starcounter","2.0")]
     public __Arr7__ VariableTypeList {
-#line 108 "Server\Partials\WebPublicationsViewNew.json"
+#line 109 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.VariableTypeList.Getter(this); }
-#line 108 "Server\Partials\WebPublicationsViewNew.json"
+#line 109 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.VariableTypeList.Setter(this, value); } }
@@ -1419,11 +1428,11 @@ public partial class WebPublicationsViewNew : Page {
 
     [_GEN1_][_GEN2_("Starcounter","2.0")]
     public System.String NewWebPublicationName {
-#line 110 "Server\Partials\WebPublicationsViewNew.json"
+#line 111 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.NewWebPublicationName.Getter(this); }
-#line 110 "Server\Partials\WebPublicationsViewNew.json"
+#line 111 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.NewWebPublicationName.Setter(this, value); } }
@@ -1431,11 +1440,11 @@ public partial class WebPublicationsViewNew : Page {
 
     [_GEN1_][_GEN2_("Starcounter","2.0")]
     public System.String NewWebPublicationUrl {
-#line 111 "Server\Partials\WebPublicationsViewNew.json"
+#line 112 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.NewWebPublicationUrl.Getter(this); }
-#line 111 "Server\Partials\WebPublicationsViewNew.json"
+#line 112 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.NewWebPublicationUrl.Setter(this, value); } }
@@ -1443,11 +1452,11 @@ public partial class WebPublicationsViewNew : Page {
 
     [_GEN1_][_GEN2_("Starcounter","2.0")]
     public System.String NewWebPublicationDescription {
-#line 112 "Server\Partials\WebPublicationsViewNew.json"
+#line 113 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.NewWebPublicationDescription.Getter(this); }
-#line 112 "Server\Partials\WebPublicationsViewNew.json"
+#line 113 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.NewWebPublicationDescription.Setter(this, value); } }
@@ -1455,11 +1464,11 @@ public partial class WebPublicationsViewNew : Page {
 
     [_GEN1_][_GEN2_("Starcounter","2.0")]
     public System.String NewFeatureNameOther {
-#line 113 "Server\Partials\WebPublicationsViewNew.json"
+#line 114 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.NewFeatureNameOther.Getter(this); }
-#line 113 "Server\Partials\WebPublicationsViewNew.json"
+#line 114 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.NewFeatureNameOther.Setter(this, value); } }
@@ -1467,11 +1476,11 @@ public partial class WebPublicationsViewNew : Page {
 
     [_GEN1_][_GEN2_("Starcounter","2.0")]
     public System.String NewFeatureName {
-#line 114 "Server\Partials\WebPublicationsViewNew.json"
+#line 115 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.NewFeatureName.Getter(this); }
-#line 114 "Server\Partials\WebPublicationsViewNew.json"
+#line 115 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.NewFeatureName.Setter(this, value); } }
@@ -1479,11 +1488,11 @@ public partial class WebPublicationsViewNew : Page {
 
     [_GEN1_][_GEN2_("Starcounter","2.0")]
     public System.String NewActionNameOther {
-#line 115 "Server\Partials\WebPublicationsViewNew.json"
+#line 116 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.NewActionNameOther.Getter(this); }
-#line 115 "Server\Partials\WebPublicationsViewNew.json"
+#line 116 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.NewActionNameOther.Setter(this, value); } }
@@ -1503,11 +1512,11 @@ public partial class WebPublicationsViewNew : Page {
 
     [_GEN1_][_GEN2_("Starcounter","2.0")]
     public System.String PaggingUrlParameters {
-#line 117 "Server\Partials\WebPublicationsViewNew.json"
+#line 118 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.PaggingUrlParameters.Getter(this); }
-#line 117 "Server\Partials\WebPublicationsViewNew.json"
+#line 118 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.PaggingUrlParameters.Setter(this, value); } }
@@ -1515,11 +1524,11 @@ public partial class WebPublicationsViewNew : Page {
 
     [_GEN1_][_GEN2_("Starcounter","2.0")]
     public System.String NewActionName {
-#line 118 "Server\Partials\WebPublicationsViewNew.json"
+#line 119 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.NewActionName.Getter(this); }
-#line 118 "Server\Partials\WebPublicationsViewNew.json"
+#line 119 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.NewActionName.Setter(this, value); } }
@@ -1527,11 +1536,11 @@ public partial class WebPublicationsViewNew : Page {
 
     [_GEN1_][_GEN2_("Starcounter","2.0")]
     public System.String NewActionUrl {
-#line 119 "Server\Partials\WebPublicationsViewNew.json"
+#line 120 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.NewActionUrl.Getter(this); }
-#line 119 "Server\Partials\WebPublicationsViewNew.json"
+#line 120 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.NewActionUrl.Setter(this, value); } }
@@ -1539,11 +1548,11 @@ public partial class WebPublicationsViewNew : Page {
 
     [_GEN1_][_GEN2_("Starcounter","2.0")]
     public System.String NewActionHttpType {
-#line 120 "Server\Partials\WebPublicationsViewNew.json"
+#line 121 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.NewActionHttpType.Getter(this); }
-#line 120 "Server\Partials\WebPublicationsViewNew.json"
+#line 121 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.NewActionHttpType.Setter(this, value); } }
@@ -1551,11 +1560,11 @@ public partial class WebPublicationsViewNew : Page {
 
     [_GEN1_][_GEN2_("Starcounter","2.0")]
     public System.String NewActionHttpBody {
-#line 121 "Server\Partials\WebPublicationsViewNew.json"
+#line 122 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.NewActionHttpBody.Getter(this); }
-#line 121 "Server\Partials\WebPublicationsViewNew.json"
+#line 122 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.NewActionHttpBody.Setter(this, value); } }
@@ -1563,11 +1572,11 @@ public partial class WebPublicationsViewNew : Page {
 
     [_GEN1_][_GEN2_("Starcounter","2.0")]
     public System.Int64 NewActionOrderInFeature {
-#line 122 "Server\Partials\WebPublicationsViewNew.json"
+#line 123 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.NewActionOrderInFeature.Getter(this); }
-#line 122 "Server\Partials\WebPublicationsViewNew.json"
+#line 123 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.NewActionOrderInFeature.Setter(this, value); } }
@@ -1575,11 +1584,11 @@ public partial class WebPublicationsViewNew : Page {
 
     [_GEN1_][_GEN2_("Starcounter","2.0")]
     public System.String NewVariableValue {
-#line 123 "Server\Partials\WebPublicationsViewNew.json"
+#line 124 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.NewVariableValue.Getter(this); }
-#line 123 "Server\Partials\WebPublicationsViewNew.json"
+#line 124 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.NewVariableValue.Setter(this, value); } }
@@ -1587,11 +1596,11 @@ public partial class WebPublicationsViewNew : Page {
 
     [_GEN1_][_GEN2_("Starcounter","2.0")]
     public System.String NewVariableNameOther {
-#line 124 "Server\Partials\WebPublicationsViewNew.json"
+#line 125 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.NewVariableNameOther.Getter(this); }
-#line 124 "Server\Partials\WebPublicationsViewNew.json"
+#line 125 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.NewVariableNameOther.Setter(this, value); } }
@@ -1599,11 +1608,11 @@ public partial class WebPublicationsViewNew : Page {
 
     [_GEN1_][_GEN2_("Starcounter","2.0")]
     public System.String NewVariableName {
-#line 125 "Server\Partials\WebPublicationsViewNew.json"
+#line 126 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.NewVariableName.Getter(this); }
-#line 125 "Server\Partials\WebPublicationsViewNew.json"
+#line 126 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.NewVariableName.Setter(this, value); } }
@@ -1611,11 +1620,11 @@ public partial class WebPublicationsViewNew : Page {
 
     [_GEN1_][_GEN2_("Starcounter","2.0")]
     public System.String NewVariableTypeOther {
-#line 126 "Server\Partials\WebPublicationsViewNew.json"
+#line 127 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.NewVariableTypeOther.Getter(this); }
-#line 126 "Server\Partials\WebPublicationsViewNew.json"
+#line 127 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.NewVariableTypeOther.Setter(this, value); } }
@@ -1623,11 +1632,11 @@ public partial class WebPublicationsViewNew : Page {
 
     [_GEN1_][_GEN2_("Starcounter","2.0")]
     public System.String NewVariableType {
-#line 127 "Server\Partials\WebPublicationsViewNew.json"
+#line 128 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.NewVariableType.Getter(this); }
-#line 127 "Server\Partials\WebPublicationsViewNew.json"
+#line 128 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.NewVariableType.Setter(this, value); } }
@@ -1635,11 +1644,11 @@ public partial class WebPublicationsViewNew : Page {
 
     [_GEN1_][_GEN2_("Starcounter","2.0")]
     public System.String NewVariableRegex {
-#line 128 "Server\Partials\WebPublicationsViewNew.json"
+#line 129 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.NewVariableRegex.Getter(this); }
-#line 128 "Server\Partials\WebPublicationsViewNew.json"
+#line 129 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.NewVariableRegex.Setter(this, value); } }
@@ -1647,11 +1656,11 @@ public partial class WebPublicationsViewNew : Page {
 
     [_GEN1_][_GEN2_("Starcounter","2.0")]
     public System.Int64 AddWebSite {
-#line 129 "Server\Partials\WebPublicationsViewNew.json"
+#line 130 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.AddWebSite.Getter(this); }
-#line 129 "Server\Partials\WebPublicationsViewNew.json"
+#line 130 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.AddWebSite.Setter(this, value); } }
@@ -1659,11 +1668,11 @@ public partial class WebPublicationsViewNew : Page {
 
     [_GEN1_][_GEN2_("Starcounter","2.0")]
     public System.Int64 DeleteWebSite {
-#line 130 "Server\Partials\WebPublicationsViewNew.json"
+#line 131 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.DeleteWebSite.Getter(this); }
-#line 130 "Server\Partials\WebPublicationsViewNew.json"
+#line 131 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.DeleteWebSite.Setter(this, value); } }
@@ -1671,11 +1680,11 @@ public partial class WebPublicationsViewNew : Page {
 
     [_GEN1_][_GEN2_("Starcounter","2.0")]
     public System.Int64 UpdateWebSite {
-#line 131 "Server\Partials\WebPublicationsViewNew.json"
+#line 132 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.UpdateWebSite.Getter(this); }
-#line 131 "Server\Partials\WebPublicationsViewNew.json"
+#line 132 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.UpdateWebSite.Setter(this, value); } }
@@ -1683,11 +1692,11 @@ public partial class WebPublicationsViewNew : Page {
 
     [_GEN1_][_GEN2_("Starcounter","2.0")]
     public System.Int64 AddFeature {
-#line 132 "Server\Partials\WebPublicationsViewNew.json"
+#line 133 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.AddFeature.Getter(this); }
-#line 132 "Server\Partials\WebPublicationsViewNew.json"
+#line 133 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.AddFeature.Setter(this, value); } }
@@ -1695,23 +1704,35 @@ public partial class WebPublicationsViewNew : Page {
 
     [_GEN1_][_GEN2_("Starcounter","2.0")]
     public System.Int64 DeleteFeature {
-#line 133 "Server\Partials\WebPublicationsViewNew.json"
+#line 134 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.DeleteFeature.Getter(this); }
-#line 133 "Server\Partials\WebPublicationsViewNew.json"
+#line 134 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.DeleteFeature.Setter(this, value); } }
 #line default
 
     [_GEN1_][_GEN2_("Starcounter","2.0")]
+    public System.Int64 PerformFeature {
+#line 135 "Server\Partials\WebPublicationsViewNew.json"
+    get {
+#line hidden
+        return Template.PerformFeature.Getter(this); }
+#line 135 "Server\Partials\WebPublicationsViewNew.json"
+    set {
+#line hidden
+        Template.PerformFeature.Setter(this, value); } }
+#line default
+
+    [_GEN1_][_GEN2_("Starcounter","2.0")]
     public System.Int64 UpdateFeature {
-#line 134 "Server\Partials\WebPublicationsViewNew.json"
+#line 136 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.UpdateFeature.Getter(this); }
-#line 134 "Server\Partials\WebPublicationsViewNew.json"
+#line 136 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.UpdateFeature.Setter(this, value); } }
@@ -1719,11 +1740,11 @@ public partial class WebPublicationsViewNew : Page {
 
     [_GEN1_][_GEN2_("Starcounter","2.0")]
     public System.Int64 AddAction {
-#line 135 "Server\Partials\WebPublicationsViewNew.json"
+#line 137 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.AddAction.Getter(this); }
-#line 135 "Server\Partials\WebPublicationsViewNew.json"
+#line 137 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.AddAction.Setter(this, value); } }
@@ -1731,11 +1752,11 @@ public partial class WebPublicationsViewNew : Page {
 
     [_GEN1_][_GEN2_("Starcounter","2.0")]
     public System.Int64 DeleteAction {
-#line 136 "Server\Partials\WebPublicationsViewNew.json"
+#line 138 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.DeleteAction.Getter(this); }
-#line 136 "Server\Partials\WebPublicationsViewNew.json"
+#line 138 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.DeleteAction.Setter(this, value); } }
@@ -1743,11 +1764,11 @@ public partial class WebPublicationsViewNew : Page {
 
     [_GEN1_][_GEN2_("Starcounter","2.0")]
     public System.Int64 UpdateAction {
-#line 137 "Server\Partials\WebPublicationsViewNew.json"
+#line 139 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.UpdateAction.Getter(this); }
-#line 137 "Server\Partials\WebPublicationsViewNew.json"
+#line 139 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.UpdateAction.Setter(this, value); } }
@@ -1755,11 +1776,11 @@ public partial class WebPublicationsViewNew : Page {
 
     [_GEN1_][_GEN2_("Starcounter","2.0")]
     public System.Int64 AddVariable {
-#line 138 "Server\Partials\WebPublicationsViewNew.json"
+#line 140 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.AddVariable.Getter(this); }
-#line 138 "Server\Partials\WebPublicationsViewNew.json"
+#line 140 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.AddVariable.Setter(this, value); } }
@@ -1767,11 +1788,11 @@ public partial class WebPublicationsViewNew : Page {
 
     [_GEN1_][_GEN2_("Starcounter","2.0")]
     public System.Int64 DeleteVariable {
-#line 139 "Server\Partials\WebPublicationsViewNew.json"
+#line 141 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.DeleteVariable.Getter(this); }
-#line 139 "Server\Partials\WebPublicationsViewNew.json"
+#line 141 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.DeleteVariable.Setter(this, value); } }
@@ -1779,11 +1800,11 @@ public partial class WebPublicationsViewNew : Page {
 
     [_GEN1_][_GEN2_("Starcounter","2.0")]
     public System.Int64 UpdateVariable {
-#line 140 "Server\Partials\WebPublicationsViewNew.json"
+#line 142 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.UpdateVariable.Getter(this); }
-#line 140 "Server\Partials\WebPublicationsViewNew.json"
+#line 142 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.UpdateVariable.Setter(this, value); } }
@@ -1791,11 +1812,11 @@ public partial class WebPublicationsViewNew : Page {
 
     [_GEN1_][_GEN2_("Starcounter","2.0")]
     public System.Int64 FetchWebPublications {
-#line 142 "Server\Partials\WebPublicationsViewNew.json"
+#line 144 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.FetchWebPublications.Getter(this); }
-#line 142 "Server\Partials\WebPublicationsViewNew.json"
+#line 144 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.FetchWebPublications.Setter(this, value); } }
@@ -1948,6 +1969,7 @@ public partial class WebPublicationsViewNew : Page {
         [_GEN1_][_GEN2_("Starcounter","2.0")]
         public new __WFeSchema__ Template { get { return (__WFeSchema__)base.Template; } set { base.Template = value; } }
         public override bool IsCodegenerated { get { return true; } }
+        private System.String __bf__ObId__;
         private System.String __bf__Name__;
         private __Arr2__ __bf__Actions__;
         #line default
@@ -1963,6 +1985,9 @@ public partial class WebPublicationsViewNew : Page {
                     InstanceType = typeof(__WeFeatureJ__);
                     ClassName = "FeatureJson";
                     Properties.ClearExposed();
+                    ObId = Add<__TString__>("ObId");
+                    ObId.DefaultValue = "";
+                    ObId.SetCustomAccessors((_p_) => { return ((__WeFeatureJ__)_p_).__bf__ObId__; }, (_p_, _v_) => { ((__WeFeatureJ__)_p_).__bf__ObId__ = (System.String)_v_; }, false);
                     Name = Add<__TString__>("Name$");
                     Name.DefaultValue = "";
                     Name.Editable = true;
@@ -1972,6 +1997,7 @@ public partial class WebPublicationsViewNew : Page {
                     Actions.SetCustomAccessors((_p_) => { return ((__WeFeatureJ__)_p_).__bf__Actions__; }, (_p_, _v_) => { ((__WeFeatureJ__)_p_).__bf__Actions__ = (__Arr2__)_v_; }, false);
                 }
                 public override object CreateInstance(s.Json parent) { return new __WeFeatureJ__(this) { Parent = parent }; }
+                public __TString__ ObId;
                 public __TString__ Name;
                 public __TArray2__ Actions;
             }
@@ -1979,12 +2005,24 @@ public partial class WebPublicationsViewNew : Page {
         }
         #line default
         [_GEN1_][_GEN2_("Starcounter","2.0")]
-        public System.String Name {
+        public System.String ObId {
 #line 39 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
-        return Template.Name.Getter(this); }
+        return Template.ObId.Getter(this); }
 #line 39 "Server\Partials\WebPublicationsViewNew.json"
+    set {
+#line hidden
+        Template.ObId.Setter(this, value); } }
+#line default
+
+        [_GEN1_][_GEN2_("Starcounter","2.0")]
+        public System.String Name {
+#line 40 "Server\Partials\WebPublicationsViewNew.json"
+    get {
+#line hidden
+        return Template.Name.Getter(this); }
+#line 40 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.Name.Setter(this, value); } }
@@ -1992,11 +2030,11 @@ public partial class WebPublicationsViewNew : Page {
 
         [_GEN1_][_GEN2_("Starcounter","2.0")]
         public __Arr2__ Actions {
-#line 53 "Server\Partials\WebPublicationsViewNew.json"
+#line 54 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.Actions.Getter(this); }
-#line 53 "Server\Partials\WebPublicationsViewNew.json"
+#line 54 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.Actions.Setter(this, value); } }
@@ -2005,6 +2043,12 @@ public partial class WebPublicationsViewNew : Page {
         
         #line hidden
         public static class Input {
+            
+            #line hidden
+            [_GEN1_][_GEN2_("Starcounter","2.0")]
+            public class ObId : Input<__WeFeatureJ__, __TString__, string> {
+            }
+            #line default
             
             #line hidden
             [_GEN1_][_GEN2_("Starcounter","2.0")]
@@ -2104,11 +2148,11 @@ public partial class WebPublicationsViewNew : Page {
         #line default
         [_GEN1_][_GEN2_("Starcounter","2.0")]
         public System.String Name {
-#line 59 "Server\Partials\WebPublicationsViewNew.json"
+#line 60 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.Name.Getter(this); }
-#line 59 "Server\Partials\WebPublicationsViewNew.json"
+#line 60 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.Name.Setter(this, value); } }
@@ -2116,11 +2160,11 @@ public partial class WebPublicationsViewNew : Page {
 
         [_GEN1_][_GEN2_("Starcounter","2.0")]
         public System.String ObId {
-#line 60 "Server\Partials\WebPublicationsViewNew.json"
+#line 61 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.ObId.Getter(this); }
-#line 60 "Server\Partials\WebPublicationsViewNew.json"
+#line 61 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.ObId.Setter(this, value); } }
@@ -2128,11 +2172,11 @@ public partial class WebPublicationsViewNew : Page {
 
         [_GEN1_][_GEN2_("Starcounter","2.0")]
         public System.String ActionUrl {
-#line 61 "Server\Partials\WebPublicationsViewNew.json"
+#line 62 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.ActionUrl.Getter(this); }
-#line 61 "Server\Partials\WebPublicationsViewNew.json"
+#line 62 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.ActionUrl.Setter(this, value); } }
@@ -2140,11 +2184,11 @@ public partial class WebPublicationsViewNew : Page {
 
         [_GEN1_][_GEN2_("Starcounter","2.0")]
         public System.String HttpBody {
-#line 62 "Server\Partials\WebPublicationsViewNew.json"
+#line 63 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.HttpBody.Getter(this); }
-#line 62 "Server\Partials\WebPublicationsViewNew.json"
+#line 63 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.HttpBody.Setter(this, value); } }
@@ -2152,11 +2196,11 @@ public partial class WebPublicationsViewNew : Page {
 
         [_GEN1_][_GEN2_("Starcounter","2.0")]
         public System.String HttpType {
-#line 63 "Server\Partials\WebPublicationsViewNew.json"
+#line 64 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.HttpType.Getter(this); }
-#line 63 "Server\Partials\WebPublicationsViewNew.json"
+#line 64 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.HttpType.Setter(this, value); } }
@@ -2164,11 +2208,11 @@ public partial class WebPublicationsViewNew : Page {
 
         [_GEN1_][_GEN2_("Starcounter","2.0")]
         public System.Int64 OrderInFeature {
-#line 64 "Server\Partials\WebPublicationsViewNew.json"
+#line 65 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.OrderInFeature.Getter(this); }
-#line 64 "Server\Partials\WebPublicationsViewNew.json"
+#line 65 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.OrderInFeature.Setter(this, value); } }
@@ -2188,11 +2232,11 @@ public partial class WebPublicationsViewNew : Page {
 
         [_GEN1_][_GEN2_("Starcounter","2.0")]
         public System.String PaggingUrlParameters {
-#line 66 "Server\Partials\WebPublicationsViewNew.json"
+#line 67 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.PaggingUrlParameters.Getter(this); }
-#line 66 "Server\Partials\WebPublicationsViewNew.json"
+#line 67 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.PaggingUrlParameters.Setter(this, value); } }
@@ -2200,11 +2244,11 @@ public partial class WebPublicationsViewNew : Page {
 
         [_GEN1_][_GEN2_("Starcounter","2.0")]
         public __Arr3__ Variables {
-#line 77 "Server\Partials\WebPublicationsViewNew.json"
+#line 78 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.Variables.Getter(this); }
-#line 77 "Server\Partials\WebPublicationsViewNew.json"
+#line 78 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.Variables.Setter(this, value); } }
@@ -2331,11 +2375,11 @@ public partial class WebPublicationsViewNew : Page {
         #line default
         [_GEN1_][_GEN2_("Starcounter","2.0")]
         public System.String Name {
-#line 83 "Server\Partials\WebPublicationsViewNew.json"
+#line 84 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.Name.Getter(this); }
-#line 83 "Server\Partials\WebPublicationsViewNew.json"
+#line 84 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.Name.Setter(this, value); } }
@@ -2343,11 +2387,11 @@ public partial class WebPublicationsViewNew : Page {
 
         [_GEN1_][_GEN2_("Starcounter","2.0")]
         public System.String ObId {
-#line 84 "Server\Partials\WebPublicationsViewNew.json"
+#line 85 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.ObId.Getter(this); }
-#line 84 "Server\Partials\WebPublicationsViewNew.json"
+#line 85 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.ObId.Setter(this, value); } }
@@ -2355,11 +2399,11 @@ public partial class WebPublicationsViewNew : Page {
 
         [_GEN1_][_GEN2_("Starcounter","2.0")]
         public System.String VariableType {
-#line 85 "Server\Partials\WebPublicationsViewNew.json"
+#line 86 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.VariableType.Getter(this); }
-#line 85 "Server\Partials\WebPublicationsViewNew.json"
+#line 86 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.VariableType.Setter(this, value); } }
@@ -2367,11 +2411,11 @@ public partial class WebPublicationsViewNew : Page {
 
         [_GEN1_][_GEN2_("Starcounter","2.0")]
         public System.String Regex {
-#line 86 "Server\Partials\WebPublicationsViewNew.json"
+#line 87 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.Regex.Getter(this); }
-#line 86 "Server\Partials\WebPublicationsViewNew.json"
+#line 87 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.Regex.Setter(this, value); } }
@@ -2379,11 +2423,11 @@ public partial class WebPublicationsViewNew : Page {
 
         [_GEN1_][_GEN2_("Starcounter","2.0")]
         public System.String VariableValue {
-#line 88 "Server\Partials\WebPublicationsViewNew.json"
+#line 89 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.VariableValue.Getter(this); }
-#line 88 "Server\Partials\WebPublicationsViewNew.json"
+#line 89 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.VariableValue.Setter(this, value); } }
@@ -2469,11 +2513,11 @@ public partial class WebPublicationsViewNew : Page {
         #line default
         [_GEN1_][_GEN2_("Starcounter","2.0")]
         public System.String Name {
-#line 92 "Server\Partials\WebPublicationsViewNew.json"
+#line 93 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.Name.Getter(this); }
-#line 92 "Server\Partials\WebPublicationsViewNew.json"
+#line 93 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.Name.Setter(this, value); } }
@@ -2535,11 +2579,11 @@ public partial class WebPublicationsViewNew : Page {
         #line default
         [_GEN1_][_GEN2_("Starcounter","2.0")]
         public System.String Name {
-#line 97 "Server\Partials\WebPublicationsViewNew.json"
+#line 98 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.Name.Getter(this); }
-#line 97 "Server\Partials\WebPublicationsViewNew.json"
+#line 98 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.Name.Setter(this, value); } }
@@ -2601,11 +2645,11 @@ public partial class WebPublicationsViewNew : Page {
         #line default
         [_GEN1_][_GEN2_("Starcounter","2.0")]
         public System.String Name {
-#line 102 "Server\Partials\WebPublicationsViewNew.json"
+#line 103 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.Name.Getter(this); }
-#line 102 "Server\Partials\WebPublicationsViewNew.json"
+#line 103 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.Name.Setter(this, value); } }
@@ -2667,11 +2711,11 @@ public partial class WebPublicationsViewNew : Page {
         #line default
         [_GEN1_][_GEN2_("Starcounter","2.0")]
         public System.String VariableType {
-#line 107 "Server\Partials\WebPublicationsViewNew.json"
+#line 108 "Server\Partials\WebPublicationsViewNew.json"
     get {
 #line hidden
         return Template.VariableType.Getter(this); }
-#line 107 "Server\Partials\WebPublicationsViewNew.json"
+#line 108 "Server\Partials\WebPublicationsViewNew.json"
     set {
 #line hidden
         Template.VariableType.Setter(this, value); } }
@@ -2837,6 +2881,11 @@ public partial class WebPublicationsViewNew : Page {
         
         #line hidden
         public class DeleteFeature : Input<__WebPubli__, __TLong__, long> {
+        }
+        #line default
+        
+        #line hidden
+        public class PerformFeature : Input<__WebPubli__, __TLong__, long> {
         }
         #line default
         

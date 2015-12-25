@@ -20,7 +20,7 @@ namespace OneKey.Server.Handlers
             {
                 WebPublicationsViewNew _WebPublicationsView = new WebPublicationsViewNew()
                 {
-                    WebPublications = Db.SQL("SELECT i FROM OneKey.Database.WebPublication i"),
+                    //WebPublications = Db.SQL("SELECT i FROM OneKey.Database.WebPublication i"),
                     Html = "/Client/WebPublicationsNew.html"
                 };
                 return _WebPublicationsView;

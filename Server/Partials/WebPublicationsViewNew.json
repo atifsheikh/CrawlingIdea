@@ -36,6 +36,7 @@
     "$Feature$": { "Bind": "SelectedFeature_" },
 	"Feature$":
 	{
+		"ObId":"",
 		"Name$": "",
 		"Actions$" : [
 			{
@@ -131,6 +132,7 @@
 	"UpdateWebSite$": 0,
     "AddFeature$": 0,
 	"DeleteFeature$": 0,
+	"PerformFeature$": 0,
 	"UpdateFeature$": 0,
 	"AddAction$": 0,
 	"DeleteAction$": 0,

@@ -12,20 +12,56 @@ namespace OneKey.Server.Handlers
     {
         internal static void Init()
         {
-            Handle.GET("/OneKey/AddGarbage", () => 
+            Handle.GET("/OneKey/HandleGarbage?Action={?}&Count={?}", (string Action,int ActionCount) => 
             {
-                Db.Transact(() => 
+                string LoopAction = Action; 
+                string ReturnString = "";
+                WebPublication webPublication;
+
+                DbSession dbSession = new DbSession();
+                ReturnString = "Data " + Action.ToLower() + " process initiated...";
+                dbSession.RunAsync(() =>
                 {
-                    WebPublication webPublication;
-                    for (int loop = 0; loop < 30000; loop++)
+
+                for (int loop = 0; loop < ActionCount; loop++)
+                {
+                    LoopAction = Action;
+                    string Name = "Garbage" + loop;
+                    webPublication = Db.SQL<WebPublication>("SELECT w FROM WebPublication w WHERE w.Name = ?", Name).First;
+                    if ((webPublication == null && LoopAction.ToLower() == "delete") || (webPublication != null && LoopAction.ToLower() == "add"))
                     {
-                        webPublication = new WebPublication();
-                        webPublication.Name = "Garbage"+loop;
-                        webPublication.Url = "https://www.garbage"+loop+".com";
-                        webPublication.Description = "Gargabe "+loop;
+                        LoopAction = "";
                     }
+
+                    switch (LoopAction.ToLower())
+                    {
+                        case "delete":
+                            {
+                                Db.Transact(() =>
+                                {
+                                    Db.SlowSQL("DELETE FROM OneKey.Database.WebPublication WHERE Name=?", Name);
+                                    ReturnString = "Demo data removed From DB...";
+                                });
+                                break;
+                            }
+                        case "add":
+                            {
+                                Db.Transact(() =>
+                                {
+                                    webPublication = new WebPublication();
+                                    webPublication.Name = Name;
+                                    webPublication.Url = "https://www.garbage" + loop + ".com";
+                                    webPublication.Description = "Gargabe " + loop;
+                                    ReturnString = "Demo data added in DB...";
+                                });
+                                break;
+                            }
+                    }
+
+                }
                 });
-                return "Gargabe added";
+
+                return ReturnString;
             }, new HandlerOptions() { SkipMiddlewareFilters = true });
 
             Handle.GET("/OneKey/SetupOneKey", () =>
