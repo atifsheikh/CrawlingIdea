@@ -79,6 +79,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Database\CrawlData\CrawlDataColumn.cs" />
+    <Compile Include="Database\CrawlData\CrawlDataRow.cs" />
     <Compile Include="Database\DownloadQueue.cs" />
     <Compile Include="Database\ExternalAction.cs">
       <SubType>Code</SubType>
