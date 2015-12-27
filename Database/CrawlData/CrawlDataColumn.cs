@@ -4,7 +4,7 @@
     {
         public string PageUrl;
         public string dealer;
-        public string listing_url;
+        public string UniqueID;
         public string vehicles_year;
         public string vehicles_make;
         public string vehicles_model;

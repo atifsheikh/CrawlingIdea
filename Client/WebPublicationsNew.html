@@ -1,5 +1,4 @@
-﻿<title>HTML Reference</title>
-<template id="onekey" bind="{{OneKey}}">
+﻿<template id="onekey" bind="{{OneKey}}">
     <div auto-vertical="" layout="" horizontal="">
         <div class="WebSitelist" style="border: 1px solid; border-color: black; display: block; padding: 5px 5px 5px 5px; ">
             <h3>WebSite List</h3>
@@ -18,7 +17,7 @@
                         <tr>
                             <td>
                                 <a onclick="getModel(this).Update$++">{{Name$}}</a>
-                                <button style="float:right" onclick="getModel(this).Update$++">View Data</button>
+                                <button style="float:right" href="/OneKey/DataView?SiteID={{ObId}}" target="_blank">View Data</button>
                             </td>
                         </tr>
                     </template>
@@ -80,7 +79,7 @@
                             </template>
                             <button onclick="getModel(this).AddFeature$++">Add/Update Feature</button>
                             <button onclick="getModel(this).DeleteFeature$++">Delete Feature</button>
-                            <a onclick="getModel(this).PerformFeature$++">Perform Feature</a>
+                            <button onclick="getModel(this).PerformFeature$++">Perform Feature</button>
                         </div>
                         </section>
                         <template if="{{SelectedFeatureID$}}">

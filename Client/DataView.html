@@ -1,0 +1,23 @@
+﻿<template id="onekey" bind="{{OneKey}}">
+    <div auto-vertical="" layout="" horizontal="">
+
+        <section class="Columns" style="width: 100%; border: 1px solid; border-color: black; display: block; padding: 5px 5px 5px 5px; ">
+            <table style="width:100%">
+                <template repeat="{{ ColumnsList$ }}">
+                    <tr style="border: 1px solid; background-color:black;color:white;">
+                        <template repeat="{{ RowList$ }}">
+                            <td style="border: 1px solid">{{Value$}}</td>
+                        </template>
+                    </tr>
+                </template>
+                <template repeat="{{ RowsList$ }}">
+                    <tr style="border: 1px solid">
+                        <template repeat="{{ RowList$ }}">
+                            <td style="border: 1px solid">{{Value$}}</td>
+                        </template>
+                    </tr>
+                </template>
+            </table>
+        </section>
+    </div>
+</template>

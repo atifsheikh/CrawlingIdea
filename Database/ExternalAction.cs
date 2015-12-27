@@ -18,6 +18,7 @@ namespace OneKey.Database
         public string HttpType; //E.g. GET / POST / DELETE / PUT
         public int OrderInFeature; // E.g. 1 (if this is the first action needed to perform feature)
         public bool Pagging;
+        public int lastCrawledPage;
         public string PaggingUrlParameters;
         public QueryResultRows<ExternalVariable> Variables
         {
@@ -70,7 +71,7 @@ namespace OneKey.Database
                     {
                         replaceCount = Convert.ToInt32(this.PaggingUrlParameters.Substring(this.PaggingUrlParameters.IndexOf('{') + 1, this.PaggingUrlParameters.IndexOf('}') - (this.PaggingUrlParameters.IndexOf('{') + 1)));
                         PaginationCount += replaceCount;
-                        ConcatenatedActionUrl += this.PaggingUrlParameters.Replace(replaceCount.ToString(),"0");
+                        ConcatenatedActionUrl += this.PaggingUrlParameters.Replace(replaceCount.ToString(), "0");
                         ConcatenatedActionUrl = string.Format(ConcatenatedActionUrl, PaginationCount.ToString());
                     }
 
@@ -83,8 +84,8 @@ namespace OneKey.Database
                     ConcatenatedHttpBody = ConcatenateVariables(ref SessionVariableContainer, ref ReceivedHttpBody, ConcatenatedHttpBody);
 
                     //for getting Redirect pages data and cookies
-                    HttpWebResponse response = GetParseRequest(ref SessionVariableContainer, ref SessionCookieContainer, ConcatenatedActionUrl, ConcatenatedHttpBody);
-                    if (response == null ||(response.StatusCode != HttpStatusCode.OK && Pagination == true))
+                    HttpWebResponse response = GetParseRequest(ref SessionVariableContainer, ref SessionCookieContainer, ConcatenatedActionUrl, ConcatenatedHttpBody, PaginationCount);
+                    if (response == null || (response.StatusCode != HttpStatusCode.OK && Pagination == true))
                     {
                         Pagination = false;
                         break;
@@ -94,7 +95,7 @@ namespace OneKey.Database
                         response.Close();
                         foreach (System.Net.Cookie c in response.Cookies)
                             SessionCookieContainer.Add(c);
-                        response = GetParseRequest(ref SessionVariableContainer, ref SessionCookieContainer, response.Headers["Location"], ConcatenatedHttpBody);
+                        response = GetParseRequest(ref SessionVariableContainer, ref SessionCookieContainer, response.Headers["Location"], ConcatenatedHttpBody, PaginationCount);
                     }
                 }
                 while (Pagination);
@@ -183,7 +184,7 @@ namespace OneKey.Database
             return VariableConcatenatedString;
         }
 
-        public HttpWebResponse GetParseRequest(ref Dictionary<string, string> SessionVariableContainer, ref CookieContainer SessionCookieContainer, string ConcatenatedActionUrl, string ConcatenatedHttpBody)
+        public HttpWebResponse GetParseRequest(ref Dictionary<string, string> SessionVariableContainer, ref CookieContainer SessionCookieContainer, string ConcatenatedActionUrl, string ConcatenatedHttpBody, int PaginationCount)
         {
             HttpWebResponse response = null;
             QueryResultRows<Database.DownloadQueue> downloadQueueObject = null;
@@ -214,20 +215,17 @@ namespace OneKey.Database
                 using (var reader = new System.IO.StreamReader(response.GetResponseStream(), encoding))
                 {
                     string responseText = reader.ReadToEnd();
-                    List<string> Listing_Url = new List<string>();
+                    List<string> UniqueID = new List<string>();
+                    int newlyAddedDataRow = 0;
                     foreach (var actionVariable in this.Variables)
                     {
                         System.Text.RegularExpressions.MatchCollection RegexResultCollection = CommonHelper.GetAllMatches(responseText, actionVariable.Regex);
-                        if (RegexResultCollection.Count == 0)
-                        {
-                            Pagging = false;
-                        }
 
-                        for (int loop = 0 ; loop < RegexResultCollection.Count ; loop++)
+                        for (int loop = 0; loop < RegexResultCollection.Count; loop++)
                         {
                             System.Text.RegularExpressions.Match RegexResult = RegexResultCollection[loop];
                             string ResultValue = RegexResult.Groups[1].Value;
-                            if (ResultValue != null && ResultValue != "")
+                            if (!string.IsNullOrEmpty(ResultValue))
                             {
                                 if (actionVariable.VariableType == "Session")
                                 {
@@ -239,117 +237,73 @@ namespace OneKey.Database
                                 }
                                 else if (actionVariable.VariableType == "Content")
                                 {
-                                    if (actionVariable.Name == "<<WebResource>>" || actionVariable.Name == "listing_url")
-                                    {
-                                        if (!ResultValue.Contains(this.Feature.Site.Name))
-                                        {
-                                            if (!ResultValue.StartsWith("/"))
-                                            {
-                                                ResultValue = "/" + ResultValue;
-                                            }
-                                            ResultValue = this.Feature.Site.Url + ResultValue;
-                                            if (actionVariable.Name == "listing_url")
-                                            {
-                                                Listing_Url.Add(ResultValue);
-                                            }
-                                        }
-                                    }
-                                    else if (RegexResultCollection.Count != Listing_Url.Count)
-                                    {
-                                        return null;// "Regex Count Invalid... Please Contact Admin to recheck the regex for " + actionVariable.Name;
-                                    }
-
-                                    if (actionVariable.Name == "<<WebResource>>")
-                                    {
-                                        WebResource w = Db.SQL<WebResource>("SELECT W FROM WebResource W WHERE Url=?", ResultValue).First;
-                                        if (w == null)
-                                        {
-                                            Db.Transact(() =>
-                                            {
-                                                w = new WebResource(ResultValue, DateTime.Now, this);
-                                            });
-                                        }
-                                    }
-                                    else if (!string.IsNullOrEmpty(ResultValue))
-                                    {
-                                        CrawlDataColumn crawlDataColumn = Db.SQL<CrawlDataColumn>("SELECT w FROM CrawlDataColumn w WHERE listing_url = ?", Listing_Url[loop]).First;
-                                        if (crawlDataColumn == null)
-                                        {
-                                            Db.Transact(() =>
-                                            {
-                                                if (crawlDataColumn == null)
-                                                {
-                                                    crawlDataColumn = new CrawlDataColumn();
-                                                    crawlDataColumn.listing_url = Listing_Url[loop];
-                                                }
-                                                switch (actionVariable.Name)
-                                                {
-                                                    case "dealer":
-                                                        crawlDataColumn.dealer = ResultValue;
-                                                        break;
-                                                    case "vehicles_year":
-                                                        crawlDataColumn.vehicles_year = ResultValue;
-                                                        break;
-                                                    case "vehicles_make":
-                                                        crawlDataColumn.vehicles_make = ResultValue;
-                                                        break;
-                                                    case "vehicles_model":
-                                                        crawlDataColumn.vehicles_model = ResultValue;
-                                                        break;
-                                                    case "vehicles_trim":
-                                                        crawlDataColumn.vehicles_trim = ResultValue;
-                                                        break;
-                                                    case "vehicles_msrp":
-                                                        crawlDataColumn.vehicles_msrp = ResultValue;
-                                                        break;
-                                                    case "vehicles_drive":
-                                                        crawlDataColumn.vehicles_drive = ResultValue;
-                                                        break;
-                                                    case "vehicles_mpg":
-                                                        crawlDataColumn.vehicles_mpg = ResultValue;
-                                                        break;
-                                                    case "vehicles_features":
-                                                        crawlDataColumn.vehicles_features = ResultValue;
-                                                        break;
-                                                    case "vehicles_miles":
-                                                        crawlDataColumn.vehicles_miles = ResultValue;
-                                                        break;
-                                                    case "vehicles_intcolor":
-                                                        crawlDataColumn.vehicles_intcolor = ResultValue;
-                                                        break;
-                                                    case "vehicles_extcolor":
-                                                        crawlDataColumn.vehicles_extcolor = ResultValue;
-                                                        break;
-                                                    case "Vehicles_VIN":
-                                                        crawlDataColumn.Vehicles_VIN = ResultValue;
-                                                        break;
-                                                    case "vehicles_engine":
-                                                        crawlDataColumn.vehicles_engine = ResultValue;
-                                                        break;
-                                                    case "vehicles_price":
-                                                        crawlDataColumn.vehicles_price = ResultValue;
-                                                        break;
-                                                    case "vehicles_image_url":
-                                                        crawlDataColumn.vehicles_image_url = ResultValue;
-                                                        break;
-                                                    case "vehicles_comments":
-                                                        crawlDataColumn.vehicles_comments = ResultValue;
-                                                        break;
-                                                }
-                                            });
-                                        }
-                                        else
-                                        {
-                                            Pagging = false;
-                                        }
-                                    }
+                                    newlyAddedDataRow = ParseContent(actionVariable, ResultValue, UniqueID, RegexResultCollection, loop, newlyAddedDataRow);
                                 }
                             }
                         }
                     }
+                    if (newlyAddedDataRow == 0)
+                    {
+                        Db.Transact(() => {
+                            lastCrawledPage = PaginationCount;
+                        });
+                        this.Pagging = false ;
+                    }
                 }
             } while (downloadQueue != null && downloadQueue.Count > 0);
             return response;
+        }
+
+
+        private int ParseContent(ExternalVariable actionVariable, string ResultValue, List<string> UniqueID, System.Text.RegularExpressions.MatchCollection RegexResultCollection, int loop, int newlyAddedDataRow)
+        {
+            if (actionVariable.Name == "<<WebResource>>" || actionVariable.Name == "UniqueID")
+            {
+                if (!ResultValue.Contains(this.Feature.Site.Name))
+                {
+                    if (!ResultValue.StartsWith("/"))
+                    {
+                        ResultValue = "/" + ResultValue;
+                    }
+                    ResultValue = this.Feature.Site.Url + ResultValue;
+                    if (actionVariable.Name == "UniqueID")
+                    {
+                        UniqueID.Add(ResultValue);
+                    }
+                }
+            }
+            else if (RegexResultCollection.Count != UniqueID.Count)
+            {
+                return newlyAddedDataRow;// "Regex Count Invalid... Please Contact Admin to recheck the regex for " + actionVariable.Name;
+            }
+
+            if (actionVariable.Name == "<<WebResource>>")
+            {
+                WebResource w = Db.SQL<WebResource>("SELECT W FROM WebResource W WHERE Url=?", ResultValue).First;
+                if (w == null)
+                {
+                    Db.Transact(() =>
+                    {
+                        w = new WebResource(ResultValue, DateTime.Now, this);
+                    });
+                }
+            }
+            else if (!string.IsNullOrEmpty(ResultValue))
+            {
+                CrawlDataRow cdr = Db.SQL<CrawlDataRow>("SELECT w FROM CrawlDataRow w WHERE UniqueID = ? and ColumnName = ?", UniqueID[loop], actionVariable.Name).First;
+                //CrawlDataColumn crawlDataColumn = Db.SQL<CrawlDataColumn>("SELECT w FROM CrawlDataColumn w WHERE UniqueID = ?", UniqueID[loop]).First;
+                if (cdr == null)
+                {
+                    Db.Transact(() =>
+                    {
+                        cdr = new CrawlDataRow(UniqueID[loop], actionVariable.Name, ResultValue, this.Feature.Site);
+                        newlyAddedDataRow++;
+                        //crawlDataColumn = new CrawlDataColumn();
+                        //crawlDataColumn.UniqueID = UniqueID[loop];
+                    });
+                }
+            }
+            return newlyAddedDataRow;
         }
     }
 }

@@ -57,7 +57,8 @@ namespace OneKey.Server.Partials
             {
                 try
                 {
-                    return Db.SQL<ExternalFeature>("SELECT ef FROM ExternalFeature ef").GroupBy(x => x.Name).Select(x => x.First());
+                    var asdf =  Db.SQL<ExternalFeature>("SELECT ef FROM ExternalFeature ef").GroupBy(x => x.Name).Select(x => x.First());
+                    return asdf;
                 }
                 catch
                 {

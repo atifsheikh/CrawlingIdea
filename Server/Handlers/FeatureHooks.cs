@@ -58,7 +58,7 @@ namespace OneKey.Server.Handlers
                 {
                     Dictionary<string, string> SessionVariableContainer = null ;
                     CookieContainer SessionCookieContainer = null;
-                    downloadQueue.Action.GetParseRequest(ref SessionVariableContainer, ref SessionCookieContainer, downloadQueue.Url, "");
+                    downloadQueue.Action.GetParseRequest(ref SessionVariableContainer, ref SessionCookieContainer, downloadQueue.Url, "",0);
                 }
                 return 200;
             }, new HandlerOptions() { SkipMiddlewareFilters = true });

@@ -95,7 +95,7 @@ namespace OneKey.Server.Handlers
                     externalVariable.Action = externalAction;
 
                     externalVariable = new ExternalVariable();
-                    externalVariable.Name = "listing_url";
+                    externalVariable.Name = "UniqueID";
                     externalVariable.VariableType = "Content";
                     externalVariable.Regex = "<a data-window-pixel=\"vsr_title\"  href=\"(.*?)\" itemprop=\"url";
                     externalVariable.VariableValue = "";
