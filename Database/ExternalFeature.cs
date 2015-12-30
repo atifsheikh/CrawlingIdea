@@ -32,15 +32,15 @@ namespace OneKey.Database
             }
 
             //for running session actions
-            ExternalFeature externalFeature = Db.SQL<OneKey.Database.ExternalFeature>("SELECT ef FROM OneKey.Database.ExternalFeature ef WHERE ef.Site = ? AND ef.Name = ?", this.Site, "Session").First;
-            if (externalFeature != null)
-            {
-                foreach (var action in externalFeature.Actions)
-                {
-                    if (!action.PerformAction(ref SessionCookieContainer, ref SessionVariableContainer, ref ReceivedHttpBody))
-                        return false;
-                }
-            }
+            //ExternalFeature externalFeature = Db.SQL<OneKey.Database.ExternalFeature>("SELECT ef FROM OneKey.Database.ExternalFeature ef WHERE ef.Site = ? AND ef.Name = ?", this.Site, "Session").First;
+            //if (externalFeature != null)
+            //{
+            //    foreach (var action in externalFeature.Actions)
+            //    {
+            //        if (!action.PerformAction(ref SessionCookieContainer, ref SessionVariableContainer, ref ReceivedHttpBody))
+            //            return false;
+            //    }
+            //}
 
 
 

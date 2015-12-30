@@ -1,5 +1,6 @@
 {
 	"Html":"",
+	"WebPublication$":"",
 	"ColumnsList$": [
 		{ "RowList$": [
 			{ "Value$":"" }
@@ -9,5 +10,6 @@
 		{ "RowList$": [
 			{ "Value$":"" }
 		]}	
-	]
+	],
+	"DeleteData$":0
 }

@@ -63,6 +63,7 @@ namespace OneKey.Database
                 int PaginationCount = 0;
                 int replaceCount = 0;
                 string ConcatenatedActionUrl = "";
+                string PaggingStringUrl = "";
                 do
                 {
                     //Update Pagging Url
@@ -71,8 +72,10 @@ namespace OneKey.Database
                     {
                         replaceCount = Convert.ToInt32(this.PaggingUrlParameters.Substring(this.PaggingUrlParameters.IndexOf('{') + 1, this.PaggingUrlParameters.IndexOf('}') - (this.PaggingUrlParameters.IndexOf('{') + 1)));
                         PaginationCount += replaceCount;
-                        ConcatenatedActionUrl += this.PaggingUrlParameters.Replace(replaceCount.ToString(), "0");
-                        ConcatenatedActionUrl = string.Format(ConcatenatedActionUrl, PaginationCount.ToString());
+                        PaggingStringUrl = this.PaggingUrlParameters.Replace(replaceCount.ToString(), "0");
+                        PaggingStringUrl = string.Format(PaggingStringUrl, PaginationCount.ToString());
+                        ConcatenatedActionUrl += PaggingStringUrl;                            
+                        //ConcatenatedActionUrl = string.Format(ConcatenatedActionUrl, PaginationCount.ToString());
                     }
 
                     //Update HttpBody
@@ -84,7 +87,7 @@ namespace OneKey.Database
                     ConcatenatedHttpBody = ConcatenateVariables(ref SessionVariableContainer, ref ReceivedHttpBody, ConcatenatedHttpBody);
 
                     //for getting Redirect pages data and cookies
-                    HttpWebResponse response = GetParseRequest(ref SessionVariableContainer, ref SessionCookieContainer, ConcatenatedActionUrl, ConcatenatedHttpBody, PaginationCount);
+                    HttpWebResponse response = GetParseRequest(ref SessionVariableContainer, ref SessionCookieContainer, ConcatenatedActionUrl, ConcatenatedHttpBody, PaginationCount, ref Pagination);
                     if (response == null || (response.StatusCode != HttpStatusCode.OK && Pagination == true))
                     {
                         Pagination = false;
@@ -95,7 +98,7 @@ namespace OneKey.Database
                         response.Close();
                         foreach (System.Net.Cookie c in response.Cookies)
                             SessionCookieContainer.Add(c);
-                        response = GetParseRequest(ref SessionVariableContainer, ref SessionCookieContainer, response.Headers["Location"], ConcatenatedHttpBody, PaginationCount);
+                        response = GetParseRequest(ref SessionVariableContainer, ref SessionCookieContainer, response.Headers["Location"], ConcatenatedHttpBody, PaginationCount, ref Pagination);
                     }
                 }
                 while (Pagination);
@@ -184,7 +187,7 @@ namespace OneKey.Database
             return VariableConcatenatedString;
         }
 
-        public HttpWebResponse GetParseRequest(ref Dictionary<string, string> SessionVariableContainer, ref CookieContainer SessionCookieContainer, string ConcatenatedActionUrl, string ConcatenatedHttpBody, int PaginationCount)
+        public HttpWebResponse GetParseRequest(ref Dictionary<string, string> SessionVariableContainer, ref CookieContainer SessionCookieContainer, string ConcatenatedActionUrl, string ConcatenatedHttpBody, int PaginationCount, ref bool Pagination)
         {
             HttpWebResponse response = null;
             QueryResultRows<Database.DownloadQueue> downloadQueueObject = null;
@@ -247,7 +250,7 @@ namespace OneKey.Database
                         Db.Transact(() => {
                             lastCrawledPage = PaginationCount;
                         });
-                        this.Pagging = false ;
+                        Pagination = false;
                     }
                 }
             } while (downloadQueue != null && downloadQueue.Count > 0);

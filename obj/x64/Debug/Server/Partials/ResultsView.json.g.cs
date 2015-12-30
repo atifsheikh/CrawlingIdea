@@ -16,9 +16,7 @@ using _ScTemplate_=Starcounter.Templates.Template;
 #pragma warning disable 0108
 #pragma warning disable 1591
 
-using __ReColumnsL2__ = global::OneKey.Server.Partials.ResultsView.ColumnsListElementJson.Input;
-using __ReRowsList__ = global::OneKey.Server.Partials.ResultsView.RowsListElementJson;
-using __RRoSchema__ = global::OneKey.Server.Partials.ResultsView.RowsListElementJson.JsonByExample.Schema;
+using __TArray1__ = global::Starcounter.Templates.TArray<global::OneKey.Server.Partials.ResultsView.ColumnsListElementJson>;
 using __RRoRowListE__ = global::OneKey.Server.Partials.ResultsView.RowsListElementJson.RowListElementJson;
 using __RRRoSchema__ = global::OneKey.Server.Partials.ResultsView.RowsListElementJson.RowListElementJson.JsonByExample.Schema;
 using __RRoRowListE1__ = global::OneKey.Server.Partials.ResultsView.RowsListElementJson.RowListElementJson.JsonByExample;
@@ -26,31 +24,36 @@ using __RRoRowListE2__ = global::OneKey.Server.Partials.ResultsView.RowsListElem
 using __RRRoValue__ = global::OneKey.Server.Partials.ResultsView.RowsListElementJson.RowListElementJson.Input.Value;
 using __TArray2__ = global::Starcounter.Templates.TArray<global::OneKey.Server.Partials.ResultsView.RowsListElementJson.RowListElementJson>;
 using __ReRowsList1__ = global::OneKey.Server.Partials.ResultsView.RowsListElementJson.JsonByExample;
+using __RRoSchema__ = global::OneKey.Server.Partials.ResultsView.RowsListElementJson.JsonByExample.Schema;
 using __Arr1__ = global::Starcounter.Arr<global::OneKey.Server.Partials.ResultsView.RowsListElementJson.RowListElementJson>;
-using __ReRowsList2__ = global::OneKey.Server.Partials.ResultsView.RowsListElementJson.Input;
 using __TArray3__ = global::Starcounter.Templates.TArray<global::OneKey.Server.Partials.ResultsView.RowsListElementJson>;
+using __TLong__ = global::Starcounter.Templates.TLong;
 using __ResultsV1__ = global::OneKey.Server.Partials.ResultsView.JsonByExample;
 using __Arr2__ = global::Starcounter.Arr<global::OneKey.Server.Partials.ResultsView.ColumnsListElementJson>;
 using __Arr3__ = global::Starcounter.Arr<global::OneKey.Server.Partials.ResultsView.RowsListElementJson>;
-using __TArray1__ = global::Starcounter.Templates.TArray<global::OneKey.Server.Partials.ResultsView.ColumnsListElementJson>;
 using __ResultsV2__ = global::OneKey.Server.Partials.ResultsView.Input;
 using __ReHtml__ = global::OneKey.Server.Partials.ResultsView.Input.Html;
-using __ReColumnsL1__ = global::OneKey.Server.Partials.ResultsView.ColumnsListElementJson.JsonByExample;
+using __ReRowsList2__ = global::OneKey.Server.Partials.ResultsView.RowsListElementJson.Input;
+using __ReRowsList__ = global::OneKey.Server.Partials.ResultsView.RowsListElementJson;
+using __ReDeleteDa__ = global::OneKey.Server.Partials.ResultsView.Input.DeleteData;
+using __ReColumnsL2__ = global::OneKey.Server.Partials.ResultsView.ColumnsListElementJson.Input;
 using __ResultsV__ = global::OneKey.Server.Partials.ResultsView;
 using __ReSchema__ = global::OneKey.Server.Partials.ResultsView.JsonByExample.Schema;
 using __TString__ = global::Starcounter.Templates.TString;
 using __ReColumnsL__ = global::OneKey.Server.Partials.ResultsView.ColumnsListElementJson;
 using __Json__ = global::Starcounter.Json;
 using __TObject__ = global::Starcounter.Templates.TObject;
-using __Arr__ = global::Starcounter.Arr<global::OneKey.Server.Partials.ResultsView.ColumnsListElementJson.RowListElementJson>;
 using __Json1__ = global::Starcounter.Json.JsonByExample;
-using __RCoRowListE__ = global::OneKey.Server.Partials.ResultsView.ColumnsListElementJson.RowListElementJson;
+using __ReWebPubli__ = global::OneKey.Server.Partials.ResultsView.Input.WebPublication;
+using __RCoSchema__ = global::OneKey.Server.Partials.ResultsView.ColumnsListElementJson.JsonByExample.Schema;
 using __RCRoSchema__ = global::OneKey.Server.Partials.ResultsView.ColumnsListElementJson.RowListElementJson.JsonByExample.Schema;
 using __RCoRowListE1__ = global::OneKey.Server.Partials.ResultsView.ColumnsListElementJson.RowListElementJson.JsonByExample;
 using __RCoRowListE2__ = global::OneKey.Server.Partials.ResultsView.ColumnsListElementJson.RowListElementJson.Input;
 using __RCRoValue__ = global::OneKey.Server.Partials.ResultsView.ColumnsListElementJson.RowListElementJson.Input.Value;
 using __TArray__ = global::Starcounter.Templates.TArray<global::OneKey.Server.Partials.ResultsView.ColumnsListElementJson.RowListElementJson>;
-using __RCoSchema__ = global::OneKey.Server.Partials.ResultsView.ColumnsListElementJson.JsonByExample.Schema;
+using __ReColumnsL1__ = global::OneKey.Server.Partials.ResultsView.ColumnsListElementJson.JsonByExample;
+using __Arr__ = global::Starcounter.Arr<global::OneKey.Server.Partials.ResultsView.ColumnsListElementJson.RowListElementJson>;
+using __RCoRowListE__ = global::OneKey.Server.Partials.ResultsView.ColumnsListElementJson.RowListElementJson;
 
 #line hidden
 [_GEN1_][_GEN2_("Starcounter","2.0")]
@@ -97,8 +100,10 @@ public partial class ResultsView : Page {
     public new __ReSchema__ Template { get { return (__ReSchema__)base.Template; } set { base.Template = value; } }
     public override bool IsCodegenerated { get { return true; } }
     private System.String __bf__Html__;
+    private System.String __bf__WebPublication__;
     private __Arr2__ __bf__ColumnsList__;
     private __Arr3__ __bf__RowsList__;
+    private System.Int64 __bf__DeleteData__;
     #line default
     
     #line hidden
@@ -115,17 +120,28 @@ public partial class ResultsView : Page {
                 Html = Add<__TString__>("Html");
                 Html.DefaultValue = "";
                 Html.SetCustomAccessors((_p_) => { return ((__ResultsV__)_p_).__bf__Html__; }, (_p_, _v_) => { ((__ResultsV__)_p_).__bf__Html__ = (System.String)_v_; }, false);
+                WebPublication = Add<__TString__>("WebPublication$");
+                WebPublication.DefaultValue = "";
+                WebPublication.Editable = true;
+                WebPublication.SetCustomAccessors((_p_) => { return ((__ResultsV__)_p_).__bf__WebPublication__; }, (_p_, _v_) => { ((__ResultsV__)_p_).__bf__WebPublication__ = (System.String)_v_; }, false);
                 ColumnsList = Add<__TArray1__>("ColumnsList$");
                 ColumnsList.SetCustomGetElementType((arr) => { return __ReColumnsL__.DefaultTemplate;});
                 ColumnsList.SetCustomAccessors((_p_) => { return ((__ResultsV__)_p_).__bf__ColumnsList__; }, (_p_, _v_) => { ((__ResultsV__)_p_).__bf__ColumnsList__ = (__Arr2__)_v_; }, false);
                 RowsList = Add<__TArray3__>("RowsList$");
                 RowsList.SetCustomGetElementType((arr) => { return __ReRowsList__.DefaultTemplate;});
                 RowsList.SetCustomAccessors((_p_) => { return ((__ResultsV__)_p_).__bf__RowsList__; }, (_p_, _v_) => { ((__ResultsV__)_p_).__bf__RowsList__ = (__Arr3__)_v_; }, false);
+                DeleteData = Add<__TLong__>("DeleteData$");
+                DeleteData.DefaultValue = 0L;
+                DeleteData.Editable = true;
+                DeleteData.SetCustomAccessors((_p_) => { return ((__ResultsV__)_p_).__bf__DeleteData__; }, (_p_, _v_) => { ((__ResultsV__)_p_).__bf__DeleteData__ = (System.Int64)_v_; }, false);
+                DeleteData.AddHandler((Json pup, Property<Int64> prop, Int64 value) => { return (new Input.DeleteData() { App = (ResultsView)pup, Template = (TLong)prop, Value = value }); }, (Json pup, Starcounter.Input<Int64> input) => { ((ResultsView)pup).Handle((Input.DeleteData)input); });
             }
             public override object CreateInstance(s.Json parent) { return new __ResultsV__(this) { Parent = parent }; }
             public __TString__ Html;
+            public __TString__ WebPublication;
             public __TArray1__ ColumnsList;
             public __TArray3__ RowsList;
+            public __TLong__ DeleteData;
         }
         #line default
     }
@@ -143,12 +159,24 @@ public partial class ResultsView : Page {
 #line default
 
     [_GEN1_][_GEN2_("Starcounter","2.0")]
+    public System.String WebPublication {
+#line 3 "Server\Partials\ResultsView.json"
+    get {
+#line hidden
+        return Template.WebPublication.Getter(this); }
+#line 3 "Server\Partials\ResultsView.json"
+    set {
+#line hidden
+        Template.WebPublication.Setter(this, value); } }
+#line default
+
+    [_GEN1_][_GEN2_("Starcounter","2.0")]
     public __Arr2__ ColumnsList {
-#line 7 "Server\Partials\ResultsView.json"
+#line 8 "Server\Partials\ResultsView.json"
     get {
 #line hidden
         return Template.ColumnsList.Getter(this); }
-#line 7 "Server\Partials\ResultsView.json"
+#line 8 "Server\Partials\ResultsView.json"
     set {
 #line hidden
         Template.ColumnsList.Setter(this, value); } }
@@ -164,6 +192,18 @@ public partial class ResultsView : Page {
     set {
 #line hidden
         Template.RowsList.Setter(this, value); } }
+#line default
+
+    [_GEN1_][_GEN2_("Starcounter","2.0")]
+    public System.Int64 DeleteData {
+#line 15 "Server\Partials\ResultsView.json"
+    get {
+#line hidden
+        return Template.DeleteData.Getter(this); }
+#line 15 "Server\Partials\ResultsView.json"
+    set {
+#line hidden
+        Template.DeleteData.Setter(this, value); } }
 #line default
 
     
@@ -208,11 +248,11 @@ public partial class ResultsView : Page {
         #line default
         [_GEN1_][_GEN2_("Starcounter","2.0")]
         public __Arr__ RowList {
-#line 6 "Server\Partials\ResultsView.json"
+#line 7 "Server\Partials\ResultsView.json"
     get {
 #line hidden
         return Template.RowList.Getter(this); }
-#line 6 "Server\Partials\ResultsView.json"
+#line 7 "Server\Partials\ResultsView.json"
     set {
 #line hidden
         Template.RowList.Setter(this, value); } }
@@ -260,11 +300,11 @@ public partial class ResultsView : Page {
             #line default
             [_GEN1_][_GEN2_("Starcounter","2.0")]
             public System.String Value {
-#line 5 "Server\Partials\ResultsView.json"
+#line 6 "Server\Partials\ResultsView.json"
     get {
 #line hidden
         return Template.Value.Getter(this); }
-#line 5 "Server\Partials\ResultsView.json"
+#line 6 "Server\Partials\ResultsView.json"
     set {
 #line hidden
         Template.Value.Setter(this, value); } }
@@ -332,11 +372,11 @@ public partial class ResultsView : Page {
         #line default
         [_GEN1_][_GEN2_("Starcounter","2.0")]
         public __Arr1__ RowList {
-#line 11 "Server\Partials\ResultsView.json"
+#line 12 "Server\Partials\ResultsView.json"
     get {
 #line hidden
         return Template.RowList.Getter(this); }
-#line 11 "Server\Partials\ResultsView.json"
+#line 12 "Server\Partials\ResultsView.json"
     set {
 #line hidden
         Template.RowList.Setter(this, value); } }
@@ -384,11 +424,11 @@ public partial class ResultsView : Page {
             #line default
             [_GEN1_][_GEN2_("Starcounter","2.0")]
             public System.String Value {
-#line 10 "Server\Partials\ResultsView.json"
+#line 11 "Server\Partials\ResultsView.json"
     get {
 #line hidden
         return Template.Value.Getter(this); }
-#line 10 "Server\Partials\ResultsView.json"
+#line 11 "Server\Partials\ResultsView.json"
     set {
 #line hidden
         Template.Value.Setter(this, value); } }
@@ -421,6 +461,16 @@ public partial class ResultsView : Page {
         
         #line hidden
         public class Html : Input<__ResultsV__, __TString__, string> {
+        }
+        #line default
+        
+        #line hidden
+        public class WebPublication : Input<__ResultsV__, __TString__, string> {
+        }
+        #line default
+        
+        #line hidden
+        public class DeleteData : Input<__ResultsV__, __TLong__, long> {
         }
         #line default
     }

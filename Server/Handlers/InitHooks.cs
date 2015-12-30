@@ -25,8 +25,10 @@ namespace OneKey.Server.Handlers
                 List<DataRows> DataGrid = GetDataRows(ref DataGridColumns, webPublication);
 
                 ResultsView resultsView = new ResultsView();
+                resultsView.WebPublication = webPublication.Name;
                 resultsView.RowsList.Data = DataGrid;
                 resultsView.ColumnsList.Data = DataGridColumns;
+
                 resultsView.Html = "/Client/DataView.html";
                 return resultsView;
             });

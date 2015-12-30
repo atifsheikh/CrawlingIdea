@@ -54,11 +54,12 @@ namespace OneKey.Server.Handlers
             Handle.GET("/OneKey/Start-DownloadQueue", () =>
             {
                 QueryResultRows<OneKey.Database.DownloadQueue> downloadQueueList = Db.SQL<OneKey.Database.DownloadQueue>("SELECT dq FROM OneKey.Database.DownloadQueue dq");
+                bool Pagination = false;
                 foreach (OneKey.Database.DownloadQueue downloadQueue in downloadQueueList)
                 {
                     Dictionary<string, string> SessionVariableContainer = null ;
                     CookieContainer SessionCookieContainer = null;
-                    downloadQueue.Action.GetParseRequest(ref SessionVariableContainer, ref SessionCookieContainer, downloadQueue.Url, "",0);
+                    downloadQueue.Action.GetParseRequest(ref SessionVariableContainer, ref SessionCookieContainer, downloadQueue.Url, "",0,ref Pagination);
                 }
                 return 200;
             }, new HandlerOptions() { SkipMiddlewareFilters = true });

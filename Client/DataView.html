@@ -1,6 +1,7 @@
 ﻿<template id="onekey" bind="{{OneKey}}">
+    <h2>{{WebPublication$}}</h2>
+    <button onclick="getModel(this).DeleteData$++">Delete Data</button>
     <div auto-vertical="" layout="" horizontal="">
-
         <section class="Columns" style="width: 100%; border: 1px solid; border-color: black; display: block; padding: 5px 5px 5px 5px; ">
             <table style="width:100%">
                 <template repeat="{{ ColumnsList$ }}">
