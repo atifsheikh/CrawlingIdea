@@ -1,10 +1,13 @@
-﻿using OneKey.Database;
+﻿using HtmlAgilityPack;
+using OneKey.Database;
+using OneKey.Server.Partials;
 using Starcounter;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace OneKey.Server.Handlers
 {
@@ -12,6 +15,36 @@ namespace OneKey.Server.Handlers
     {
         internal static void Init()
         {
+
+            string HtmlStringMain = Functions.HttpRequest.GET("https://www.google.com");
+            
+            Handle.GET("/OneKey/Test", () => 
+            {
+                string HtmlString = HtmlStringMain;
+                ResultsView resultsView = new ResultsView();
+                
+                
+                HtmlDocument doc = new HtmlDocument();
+                doc.LoadHtml(HtmlString);
+
+                HtmlNode headNode = doc.DocumentNode.SelectSingleNode("/html/head");
+                HtmlNode bodyNode = doc.DocumentNode.SelectSingleNode("/html/body");
+
+                if (bodyNode != null)
+                {
+                    string HtmlConc = "<h2>Hello</h2>";
+                    HtmlConc += headNode.OuterHtml;
+                    HtmlConc += bodyNode.OuterHtml;
+                   
+                    resultsView.Html = "/Client/DataView.html";//"<template id=\"onekey\" bind=\"{{OneKey}}\">"+HtmlConc + "</template>";
+                }
+                else 
+                {
+                    resultsView.Html = "Fail";
+                }
+                return resultsView;
+            });
+
             Handle.GET("/OneKey/HandleGarbage?Action={?}&Count={?}", (string Action,int ActionCount) => 
             {
                 string LoopAction = Action; 

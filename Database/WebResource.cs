@@ -1,4 +1,5 @@
-﻿using Starcounter;
+﻿using OneKey.Database.CrawlData;
+using Starcounter;
 using System;
 namespace OneKey.Database
 {
@@ -8,12 +9,12 @@ namespace OneKey.Database
         public DateTime Updated;
         public ExternalAction Action;
 
-        public WebResource(string ResultValue, DateTime dateTime, ExternalAction action)
+        public WebResource(string ResultValue, DateTime dateTime, ExternalAction action,Run run)
         {
             this.Url = ResultValue;
             this.Updated = dateTime;
             this.Action = action;
-            DownloadQueue w = new DownloadQueue(ResultValue,action);
+            DownloadQueue w = new DownloadQueue(ResultValue,action,run);
         }
     }
 }

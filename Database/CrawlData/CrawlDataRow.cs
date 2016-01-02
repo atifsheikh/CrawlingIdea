@@ -9,17 +9,19 @@ namespace OneKey.Database.CrawlData
 {
     public class CrawlDataRow : Concept
     {
+        public Run Run;
         public string ColumnName;
         public string Value;
         public string UniqueID;
         public WebPublication WebPublication;
 
-        public CrawlDataRow(string p1, string p2, string ResultValue, WebPublication webPublication)
+        public CrawlDataRow(string uniqueid, string columnname, string resultValue, WebPublication webPublication,Run run)
         {
             this.WebPublication = webPublication;
-            this.UniqueID = p1;
-            this.ColumnName = p2;
-            this.Value = ResultValue;
+            this.UniqueID = uniqueid;
+            this.ColumnName = columnname;
+            this.Value = resultValue;
+            this.Run = run;
         }
     }
 }

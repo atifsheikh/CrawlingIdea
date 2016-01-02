@@ -217,7 +217,7 @@ namespace OneKey.Server.Partials
                 DbSession dbSession = new DbSession();
                 dbSession.RunAsync(() =>
                 {
-                    bool FeatureResult = ExternalFeatureResult.PerformFeature("");
+                    bool FeatureResult = ExternalFeatureResult.PerformFeature("", "OnDemand");
                 });
             }
         }

@@ -4,7 +4,10 @@ E:\Development\CyberKryptos\OneKey\obj\x64\Debug\OneKey.exe
 E:\Development\CyberKryptos\OneKey\obj\x64\Debug\OneKey.pdb
 E:\Development\CyberKryptos\CrawlingIdea\bin\Debug\OneKey.exe
 E:\Development\CyberKryptos\CrawlingIdea\bin\Debug\OneKey.pdb
+E:\Development\CyberKryptos\CrawlingIdea\bin\Debug\HtmlAgilityPack.dll
 E:\Development\CyberKryptos\CrawlingIdea\bin\Debug\Newtonsoft.Json.dll
+E:\Development\CyberKryptos\CrawlingIdea\bin\Debug\HtmlAgilityPack.pdb
+E:\Development\CyberKryptos\CrawlingIdea\bin\Debug\HtmlAgilityPack.xml
 E:\Development\CyberKryptos\CrawlingIdea\bin\Debug\Newtonsoft.Json.xml
 E:\Development\CyberKryptos\CrawlingIdea\obj\x64\Debug\OneKey.exe
 E:\Development\CyberKryptos\CrawlingIdea\obj\x64\Debug\OneKey.pdb

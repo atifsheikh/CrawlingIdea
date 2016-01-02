@@ -55,7 +55,7 @@ namespace OneKey.Database
         }
 
 
-        public bool PerformAction(ref CookieContainer SessionCookieContainer, ref Dictionary<string, string> SessionVariableContainer, ref Dictionary<string, string> ReceivedHttpBody)
+        public bool PerformAction(ref CookieContainer SessionCookieContainer, ref Dictionary<string, string> SessionVariableContainer, ref Dictionary<string, string> ReceivedHttpBody,Run run)
         {
             try
             {
@@ -87,7 +87,7 @@ namespace OneKey.Database
                     ConcatenatedHttpBody = ConcatenateVariables(ref SessionVariableContainer, ref ReceivedHttpBody, ConcatenatedHttpBody);
 
                     //for getting Redirect pages data and cookies
-                    HttpWebResponse response = GetParseRequest(ref SessionVariableContainer, ref SessionCookieContainer, ConcatenatedActionUrl, ConcatenatedHttpBody, PaginationCount, ref Pagination);
+                    HttpWebResponse response = GetParseRequest(ref SessionVariableContainer, ref SessionCookieContainer, ConcatenatedActionUrl, ConcatenatedHttpBody, PaginationCount, ref Pagination,run);
                     if (response == null || (response.StatusCode != HttpStatusCode.OK && Pagination == true))
                     {
                         Pagination = false;
@@ -98,7 +98,7 @@ namespace OneKey.Database
                         response.Close();
                         foreach (System.Net.Cookie c in response.Cookies)
                             SessionCookieContainer.Add(c);
-                        response = GetParseRequest(ref SessionVariableContainer, ref SessionCookieContainer, response.Headers["Location"], ConcatenatedHttpBody, PaginationCount, ref Pagination);
+                        response = GetParseRequest(ref SessionVariableContainer, ref SessionCookieContainer, response.Headers["Location"], ConcatenatedHttpBody, PaginationCount, ref Pagination, run);
                     }
                 }
                 while (Pagination);
@@ -187,15 +187,15 @@ namespace OneKey.Database
             return VariableConcatenatedString;
         }
 
-        public HttpWebResponse GetParseRequest(ref Dictionary<string, string> SessionVariableContainer, ref CookieContainer SessionCookieContainer, string ConcatenatedActionUrl, string ConcatenatedHttpBody, int PaginationCount, ref bool Pagination)
+        public HttpWebResponse GetParseRequest(ref Dictionary<string, string> SessionVariableContainer, ref CookieContainer SessionCookieContainer, string ConcatenatedActionUrl, string ConcatenatedHttpBody, int PaginationCount, ref bool Pagination,Run run)
         {
             HttpWebResponse response = null;
-            QueryResultRows<Database.DownloadQueue> downloadQueueObject = null;
+            QueryResultRows<Database.DownloadQueue> downloadQueueResults = null;
             List<Database.DownloadQueue> downloadQueue = new List<DownloadQueue>();
             if (ConcatenatedActionUrl == "<<DownloadQueue>>")
             {
-                downloadQueueObject = Db.SQL<Database.DownloadQueue>("SELECT dq FROM OneKey.Database.DownloadQueue dq WHERE Action.Feature = ?", this.Feature);
-                foreach (Database.DownloadQueue dq in downloadQueueObject)
+                downloadQueueResults = Db.SQL<Database.DownloadQueue>("SELECT dq FROM OneKey.Database.DownloadQueue dq WHERE Action.Feature = ?", this.Feature);
+                foreach (Database.DownloadQueue dq in downloadQueueResults)
                 {
                     downloadQueue.Add(dq);
                 }
@@ -208,105 +208,22 @@ namespace OneKey.Database
                     ConcatenatedActionUrl = downloadQueue[0].Url;
                     downloadQueue.RemoveAt(0);
                 }
-                else if (ConcatenatedActionUrl == null || !ConcatenatedActionUrl.Contains("http"))
+                else if (string.IsNullOrEmpty(ConcatenatedActionUrl) || !ConcatenatedActionUrl.Contains("http"))
                 {
                     break;
                 }
+
+                ///////////////
+                //Send Page Request
                 HttpWebRequest request = GetNewRequest(ref SessionCookieContainer, ConcatenatedActionUrl, this.HttpType, ConcatenatedHttpBody);
                 response = (HttpWebResponse)request.GetResponse();
-                var encoding = ASCIIEncoding.ASCII;
-                using (var reader = new System.IO.StreamReader(response.GetResponseStream(), encoding))
-                {
-                    string responseText = reader.ReadToEnd();
-                    List<string> UniqueID = new List<string>();
-                    int newlyAddedDataRow = 0;
-                    foreach (var actionVariable in this.Variables)
-                    {
-                        System.Text.RegularExpressions.MatchCollection RegexResultCollection = CommonHelper.GetAllMatches(responseText, actionVariable.Regex);
 
-                        for (int loop = 0; loop < RegexResultCollection.Count; loop++)
-                        {
-                            System.Text.RegularExpressions.Match RegexResult = RegexResultCollection[loop];
-                            string ResultValue = RegexResult.Groups[1].Value;
-                            if (!string.IsNullOrEmpty(ResultValue))
-                            {
-                                if (actionVariable.VariableType == "Session")
-                                {
-                                    if (SessionVariableContainer.ContainsKey(actionVariable.Name))
-                                    {
-                                        SessionVariableContainer.Remove(actionVariable.Name);//, ResultValue);
-                                    }
-                                    SessionVariableContainer.Add(actionVariable.Name, ResultValue);
-                                }
-                                else if (actionVariable.VariableType == "Content")
-                                {
-                                    newlyAddedDataRow = ParseContent(actionVariable, ResultValue, UniqueID, RegexResultCollection, loop, newlyAddedDataRow);
-                                }
-                            }
-                        }
-                    }
-                    if (newlyAddedDataRow == 0)
-                    {
-                        Db.Transact(() => {
-                            lastCrawledPage = PaginationCount;
-                        });
-                        Pagination = false;
-                    }
-                }
+                //////////////
+                //Scrap Data
+                Functions.ScrapData.Start(response, this, ref SessionVariableContainer, PaginationCount, Pagination,run);
             } while (downloadQueue != null && downloadQueue.Count > 0);
+
             return response;
-        }
-
-
-        private int ParseContent(ExternalVariable actionVariable, string ResultValue, List<string> UniqueID, System.Text.RegularExpressions.MatchCollection RegexResultCollection, int loop, int newlyAddedDataRow)
-        {
-            if (actionVariable.Name == "<<WebResource>>" || actionVariable.Name == "UniqueID")
-            {
-                if (!ResultValue.Contains(this.Feature.Site.Name))
-                {
-                    if (!ResultValue.StartsWith("/"))
-                    {
-                        ResultValue = "/" + ResultValue;
-                    }
-                    ResultValue = this.Feature.Site.Url + ResultValue;
-                    if (actionVariable.Name == "UniqueID")
-                    {
-                        UniqueID.Add(ResultValue);
-                    }
-                }
-            }
-            else if (RegexResultCollection.Count != UniqueID.Count)
-            {
-                return newlyAddedDataRow;// "Regex Count Invalid... Please Contact Admin to recheck the regex for " + actionVariable.Name;
-            }
-
-            if (actionVariable.Name == "<<WebResource>>")
-            {
-                WebResource w = Db.SQL<WebResource>("SELECT W FROM WebResource W WHERE Url=?", ResultValue).First;
-                if (w == null)
-                {
-                    Db.Transact(() =>
-                    {
-                        w = new WebResource(ResultValue, DateTime.Now, this);
-                    });
-                }
-            }
-            else if (!string.IsNullOrEmpty(ResultValue))
-            {
-                CrawlDataRow cdr = Db.SQL<CrawlDataRow>("SELECT w FROM CrawlDataRow w WHERE UniqueID = ? and ColumnName = ?", UniqueID[loop], actionVariable.Name).First;
-                //CrawlDataColumn crawlDataColumn = Db.SQL<CrawlDataColumn>("SELECT w FROM CrawlDataColumn w WHERE UniqueID = ?", UniqueID[loop]).First;
-                if (cdr == null)
-                {
-                    Db.Transact(() =>
-                    {
-                        cdr = new CrawlDataRow(UniqueID[loop], actionVariable.Name, ResultValue, this.Feature.Site);
-                        newlyAddedDataRow++;
-                        //crawlDataColumn = new CrawlDataColumn();
-                        //crawlDataColumn.UniqueID = UniqueID[loop];
-                    });
-                }
-            }
-            return newlyAddedDataRow;
         }
     }
 }
