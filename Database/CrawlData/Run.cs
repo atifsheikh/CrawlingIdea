@@ -28,12 +28,11 @@ namespace OneKey.Database.CrawlData
         /// 2. OnDemand
         /// </summary>
         public string RunType;
-        public ExternalFeature externalFeature;
 
-        public Run(ExternalFeature externalFeature, string runtype)
+        public Run(ExternalFeature feature, string runtype)
         {
             // TODO: Complete member initialization
-            this.externalFeature = externalFeature;
+            this.Feature = feature;
             this.StartTime = DateTime.Now;
             this.RunType = runtype;
         }

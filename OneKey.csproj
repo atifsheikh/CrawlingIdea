@@ -85,6 +85,7 @@
     <Compile Include="Database\CrawlData\CrawlDataRow.cs" />
     <Compile Include="Database\CrawlData\DataGrid.cs" />
     <Compile Include="Database\CrawlData\Run.cs" />
+    <Compile Include="Database\DatabaseIndexes.cs" />
     <Compile Include="Database\DownloadQueue.cs" />
     <Compile Include="Database\ExternalAction.cs">
       <SubType>Code</SubType>
